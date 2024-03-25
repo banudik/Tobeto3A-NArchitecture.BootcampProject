@@ -1,6 +1,15 @@
-﻿using System.Reflection;
+using System.Reflection;
+using Application.Services.Applicants;
+using Application.Services.ApplicationInformations;
+using Application.Services.ApplicationStateInformations;
 using Application.Services.AuthenticatorService;
 using Application.Services.AuthService;
+using Application.Services.Blacklists;
+using Application.Services.BootcampImages;
+using Application.Services.Bootcamps;
+using Application.Services.BootcampStates;
+using Application.Services.Employees;
+using Application.Services.Instructors;
 using Application.Services.UsersService;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
@@ -59,6 +68,15 @@ public static class ApplicationServiceRegistration
 
         services.AddSecurityServices<Guid, int>();
 
+        services.AddScoped<IApplicantService, ApplicantManager>();
+        services.AddScoped<IApplicationInformationService, ApplicationInformationManager>();
+        services.AddScoped<IApplicationStateInformationService, ApplicationStateInformationManager>();
+        services.AddScoped<IBlacklistService, BlacklistManager>();
+        services.AddScoped<IBootcampService, BootcampManager>();
+        services.AddScoped<IBootcampImageService, BootcampImageManager>();
+        services.AddScoped<IBootcampStateService, BootcampStateManager>();
+        services.AddScoped<IEmployeeService, EmployeeManager>();
+        services.AddScoped<IInstructorService, InstructorManager>();
         return services;
     }
 
