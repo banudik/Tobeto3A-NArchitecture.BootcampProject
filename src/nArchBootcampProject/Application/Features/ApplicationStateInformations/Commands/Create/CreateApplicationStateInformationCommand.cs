@@ -19,7 +19,7 @@ public class CreateApplicationStateInformationCommand
         ILoggableRequest,
         ITransactionalRequest
 {
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     public string[] Roles => [Admin, Write, ApplicationStateInformationsOperationClaims.Create];
 

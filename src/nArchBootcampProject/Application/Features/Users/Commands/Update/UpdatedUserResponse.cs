@@ -19,6 +19,7 @@ public class UpdatedUserResponse : IResponse
         UserName = string.Empty;
         FirstName = string.Empty;
         LastName = string.Empty;
+        DateOfBirth = DateTime.MinValue;
         NationalIdentity = string.Empty;
         Password = string.Empty;
         Email = string.Empty;

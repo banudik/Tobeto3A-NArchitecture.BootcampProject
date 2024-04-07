@@ -16,10 +16,14 @@ public class CreatedUserResponse : IResponse
 
     public CreatedUserResponse()
     {
-
+        UserName = string.Empty;
         FirstName = string.Empty;
         LastName = string.Empty;
+        DateOfBirth = DateTime.MinValue;
+        NationalIdentity = string.Empty;
         Email = string.Empty;
+        Password = string.Empty;
+
     }
 
     public CreatedUserResponse(Guid ýd, string userName, string firstName, string lastName, DateTime dateOfBirth, string nationalIdentity, string email, string password, bool status)
