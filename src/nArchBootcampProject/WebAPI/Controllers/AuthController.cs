@@ -39,7 +39,6 @@ public class AuthController : BaseController
         return Ok(result.ToHttpResponse());
     }
 
-    
     [HttpPost("RegisterApplicant")]
     public async Task<IActionResult> Register([FromBody] ApplicantRegisterDto userForRegisterDto)
     {

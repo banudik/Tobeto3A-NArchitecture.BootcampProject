@@ -10,7 +10,8 @@ using NArchitecture.Core.Persistence.Paging;
 using static Application.Features.Bootcamps.Constants.BootcampsOperationClaims;
 
 namespace Application.Features.Bootcamps.Queries.GetListByInstructorId;
-public class GetListBootcampByInstructorIdQuery: IRequest<GetListResponse<GetListBootcampListItemDto>> //, ISecuredRequest, ICachableRequest
+
+public class GetListBootcampByInstructorIdQuery : IRequest<GetListResponse<GetListBootcampListItemDto>> //, ISecuredRequest, ICachableRequest
 {
     public PageRequest PageRequest { get; set; }
     public Guid InstructorId { get; set; }
@@ -53,4 +54,3 @@ public class GetListBootcampByInstructorIdQuery: IRequest<GetListResponse<GetLis
         }
     }
 }
-

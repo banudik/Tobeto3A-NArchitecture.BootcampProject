@@ -7,7 +7,8 @@ using NArchitecture.Core.Security.Hashing;
 using NArchitecture.Core.Security.JWT;
 
 namespace Application.Features.Auth.Commands.Register;
-public class InstructorRegisterCommand: IRequest<RegisteredResponse>
+
+public class InstructorRegisterCommand : IRequest<RegisteredResponse>
 {
     public InstructorRegisterDto UserForRegisterDto { get; set; }
     public string IpAddress { get; set; }
@@ -81,4 +82,3 @@ public class InstructorRegisterCommand: IRequest<RegisteredResponse>
         }
     }
 }
-

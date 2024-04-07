@@ -29,7 +29,8 @@ public class Bootcamp : Entity<int>
         Instructor? instructor,
         ICollection<ApplicationInformation> applicationInformations,
         BootcampState bootcampState,
-        BootcampImage bootcampImage,int bootcampImageId
+        BootcampImage bootcampImage,
+        int bootcampImageId
     )
     {
         Name = name;

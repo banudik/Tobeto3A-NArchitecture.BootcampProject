@@ -20,7 +20,6 @@ public class CreateUserCommand : IRequest<CreatedUserResponse>, ISecuredRequest
     public string Email { get; set; }
     public string Password { get; set; }
 
-
     public CreateUserCommand()
     {
         UserName = string.Empty;
@@ -31,7 +30,15 @@ public class CreateUserCommand : IRequest<CreatedUserResponse>, ISecuredRequest
         Email = string.Empty;
     }
 
-    public CreateUserCommand(string userName, string firstName, string lastName, DateTime dateOfBirth, string nationalIdentity, string email, string password)
+    public CreateUserCommand(
+        string userName,
+        string firstName,
+        string lastName,
+        DateTime dateOfBirth,
+        string nationalIdentity,
+        string email,
+        string password
+    )
     {
         UserName = userName;
         FirstName = firstName;

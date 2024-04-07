@@ -11,5 +11,4 @@ public class UpdatedApplicationInformationResponse : IResponse
     public int BootcampId { get; set; }
     public string BootcampName { get; set; }
     public string ApplicationStateName { get; set; }
-    
 }

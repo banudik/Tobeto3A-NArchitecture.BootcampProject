@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Features.Auth.Commands.Register;
-public class InstructorRegisterDto: RegisterDto
+
+public class InstructorRegisterDto : RegisterDto
 {
     public string CompanyName { get; set; }
 }
-

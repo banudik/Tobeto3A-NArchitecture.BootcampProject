@@ -55,7 +55,6 @@ public class RegisterCommand : IRequest<RegisteredResponse>
             User newUser =
                 new()
                 {
-                   
                     Email = request.UserForRegisterDto.Email,
                     PasswordHash = passwordHash,
                     PasswordSalt = passwordSalt,
