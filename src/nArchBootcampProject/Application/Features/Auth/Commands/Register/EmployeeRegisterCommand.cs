@@ -3,47 +3,48 @@ using Application.Services.AuthService;
 using Application.Services.Repositories;
 using Domain.Entities;
 using MediatR;
-using NArchitecture.Core.Application.Dtos;
 using NArchitecture.Core.Security.Hashing;
 using NArchitecture.Core.Security.JWT;
 
 namespace Application.Features.Auth.Commands.Register;
-
-public class RegisterCommand : IRequest<RegisteredResponse>
+public class EmployeeRegisterCommand: IRequest<RegisteredResponse>
 {
-    public UserForRegisterDto UserForRegisterDto { get; set; }
+    public EmployeeRegisterDto UserForRegisterDto { get; set; }
     public string IpAddress { get; set; }
 
-    public RegisterCommand()
+    public EmployeeRegisterCommand()
     {
         UserForRegisterDto = null!;
         IpAddress = string.Empty;
     }
 
-    public RegisterCommand(UserForRegisterDto userForRegisterDto, string ipAddress)
+    public EmployeeRegisterCommand(EmployeeRegisterDto userForRegisterDto, string ipAddress)
     {
         UserForRegisterDto = userForRegisterDto;
         IpAddress = ipAddress;
     }
 
-    public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisteredResponse>
+    public class RegisterCommandHandler : IRequestHandler<EmployeeRegisterCommand, RegisteredResponse>
     {
         private readonly IUserRepository _userRepository;
         private readonly IAuthService _authService;
         private readonly AuthBusinessRules _authBusinessRules;
+        private readonly IEmployeeRepository _employeeRepository;
 
         public RegisterCommandHandler(
             IUserRepository userRepository,
             IAuthService authService,
-            AuthBusinessRules authBusinessRules
+            AuthBusinessRules authBusinessRules,
+            IEmployeeRepository employeeRepository
         )
         {
             _userRepository = userRepository;
             _authService = authService;
             _authBusinessRules = authBusinessRules;
+            _employeeRepository = employeeRepository;
         }
 
-        public async Task<RegisteredResponse> Handle(RegisterCommand request, CancellationToken cancellationToken)
+        public async Task<RegisteredResponse> Handle(EmployeeRegisterCommand request, CancellationToken cancellationToken)
         {
             await _authBusinessRules.UserEmailShouldBeNotExists(request.UserForRegisterDto.Email);
 
@@ -52,15 +53,20 @@ public class RegisterCommand : IRequest<RegisteredResponse>
                 passwordHash: out byte[] passwordHash,
                 passwordSalt: out byte[] passwordSalt
             );
-            User newUser =
+            Employee newUser =
                 new()
                 {
-                   
+                    FirstName = request.UserForRegisterDto.FirstName,
+                    LastName = request.UserForRegisterDto.LastName,
+                    NationalIdentity = request.UserForRegisterDto.NationalIdentity,
+                    DateOfBirth = request.UserForRegisterDto.DateOfBirth,
+                    Position = request.UserForRegisterDto.Position,
+                    UserName = request.UserForRegisterDto.UserName,
                     Email = request.UserForRegisterDto.Email,
                     PasswordHash = passwordHash,
                     PasswordSalt = passwordSalt,
                 };
-            User createdUser = await _userRepository.AddAsync(newUser);
+            Employee createdUser = await _employeeRepository.AddAsync(newUser);
 
             AccessToken createdAccessToken = await _authService.CreateAccessToken(createdUser);
 
@@ -75,3 +81,4 @@ public class RegisterCommand : IRequest<RegisteredResponse>
         }
     }
 }
+

@@ -19,9 +19,9 @@ public class CreateApplicationInformationCommand
         ILoggableRequest,
         ITransactionalRequest
 {
-    public int ApplicantId { get; set; }
+    public Guid ApplicantId { get; set; }
     public int BootcampId { get; set; }
-    public int ApplicationStateId { get; set; }
+    public short ApplicationStateId { get; set; }
 
     public string[] Roles => [Admin, Write, ApplicationInformationsOperationClaims.Create];
 

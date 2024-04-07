@@ -19,6 +19,11 @@ public class CreateInstructorCommand
         ILoggableRequest,
         ITransactionalRequest
 {
+    public string UserName { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public DateTime DateOfBirth { get; set; }
+    public string NationalIdentity { get; set; }
     public string CompanyName { get; set; }
 
     public string[] Roles => [Admin, Write, InstructorsOperationClaims.Create];

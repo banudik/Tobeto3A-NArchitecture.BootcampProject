@@ -20,7 +20,7 @@
     "WebAPI.Console.Development": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": false,
+      "launchBrowser": true,
       "launchUrl": "swagger",
       "applicationUrl": "http://localhost:5278",
       "environmentVariables": {

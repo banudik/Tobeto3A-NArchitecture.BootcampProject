@@ -9,7 +9,7 @@ public class Bootcamp : Entity<int>
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public short BootcampStateId { get; set; }
-    public string BootcampImageId { get; set; }
+    public int BootcampImageId { get; set; }
     public virtual Instructor? Instructor { get; set; }
     public virtual ICollection<ApplicationInformation> ApplicationInformations { get; set; }
     public virtual BootcampState BootcampState { get; set; }
@@ -29,7 +29,7 @@ public class Bootcamp : Entity<int>
         Instructor? instructor,
         ICollection<ApplicationInformation> applicationInformations,
         BootcampState bootcampState,
-        BootcampImage bootcampImage
+        BootcampImage bootcampImage,int bootcampImageId
     )
     {
         Name = name;
@@ -41,5 +41,6 @@ public class Bootcamp : Entity<int>
         ApplicationInformations = applicationInformations;
         BootcampState = bootcampState;
         BootcampImage = bootcampImage;
+        BootcampImageId = bootcampImageId;
     }
 }

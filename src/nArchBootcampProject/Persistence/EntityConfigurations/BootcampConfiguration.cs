@@ -15,6 +15,7 @@ public class BootcampConfiguration : IEntityTypeConfiguration<Bootcamp>
         builder.Property(b => b.InstructorId).HasColumnName("InstructorId");
         builder.Property(b => b.StartDate).HasColumnName("StartDate");
         builder.Property(b => b.EndDate).HasColumnName("EndDate");
+        builder.Property(b => b.BootcampImageId).HasColumnName("BootcampImageId");
         builder.Property(b => b.BootcampStateId).HasColumnName("BootcampStateId");
         builder.Property(b => b.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(b => b.UpdatedDate).HasColumnName("UpdatedDate");
@@ -23,7 +24,9 @@ public class BootcampConfiguration : IEntityTypeConfiguration<Bootcamp>
         builder.HasOne(b => b.Instructor);
         builder.HasOne(p => p.BootcampState);
         builder.HasMany(p => p.ApplicationInformations);
-        builder.HasOne(p => p.BootcampImage);
+        builder.HasOne(p => p.BootcampImage)
+               .WithOne(p => p.Bootcamp)
+               .HasForeignKey<BootcampImage>(p => p.BootcampId);
 
         builder.HasQueryFilter(b => !b.DeletedDate.HasValue);
     }

@@ -3,6 +3,7 @@ using Application.Features.Bootcamps.Commands.Delete;
 using Application.Features.Bootcamps.Commands.Update;
 using Application.Features.Bootcamps.Queries.GetById;
 using Application.Features.Bootcamps.Queries.GetList;
+using Application.Features.Bootcamps.Queries.GetListByInstructorId;
 using Microsoft.AspNetCore.Mvc;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
@@ -50,5 +51,13 @@ public class BootcampsController : BaseController
         GetListBootcampQuery getListBootcampQuery = new() { PageRequest = pageRequest };
         GetListResponse<GetListBootcampListItemDto> response = await Mediator.Send(getListBootcampQuery);
         return Ok(response);
+    }
+
+    [HttpGet("getbootcampbyinstructorid")]
+    public async Task<IActionResult> GetListBootcampByInstructorId([FromQuery] PageRequest pageRequest, Guid instructorId)
+    {
+        GetListBootcampByInstructorIdQuery query = new() { PageRequest = pageRequest, InstructorId = instructorId };
+        var result = await Mediator.Send(query);
+        return Ok(result);
     }
 }
