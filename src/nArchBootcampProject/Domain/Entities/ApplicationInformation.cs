@@ -6,7 +6,7 @@ public class ApplicationInformation : Entity<int>
 {
     public Guid ApplicantId { get; set; }
     public int BootcampId { get; set; }
-    public short ApplicationStateId { get; set; }
+    public short ApplicationStateInformationId { get; set; }
 
     public virtual Applicant? Applicant { get; set; }
     public virtual Bootcamp? Bootcamp { get; set; }
@@ -17,7 +17,7 @@ public class ApplicationInformation : Entity<int>
     public ApplicationInformation(
         Guid applicantId,
         int bootcampId,
-        short applicationStateId,
+        short applicationStateInformationId,
         Applicant? applicant,
         Bootcamp? bootcamp,
         ApplicationStateInformation? applicationStateInformation
@@ -25,7 +25,7 @@ public class ApplicationInformation : Entity<int>
     {
         ApplicantId = applicantId;
         BootcampId = bootcampId;
-        ApplicationStateId = applicationStateId;
+        ApplicationStateInformationId = applicationStateInformationId;
         Applicant = applicant;
         Bootcamp = bootcamp;
         ApplicationStateInformation = applicationStateInformation;
