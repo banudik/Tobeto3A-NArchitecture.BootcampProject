@@ -10,5 +10,5 @@ public class GetByIdApplicationInformationResponse : IResponse
     public string ApplicantLastName { get; set; }
     public int BootcampId { get; set; }
     public string BootcampName { get; set; }
-    public string ApplicationStateName { get; set; }
+    public string ApplicationStateInformationName { get; set; }
 }

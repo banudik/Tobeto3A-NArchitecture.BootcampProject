@@ -77,10 +77,12 @@ public class ApplicantRegisterCommand : IRequest<RegisteredResponse>
             UserOperationClaim userOperationClaim1 = new() { UserId = createdUser.Id, OperationClaimId = 31 };
             UserOperationClaim userOperationClaim2 = new() { UserId = createdUser.Id, OperationClaimId = 33 };
             UserOperationClaim userOperationClaim3 = new() { UserId = createdUser.Id, OperationClaimId = 35 };
+            UserOperationClaim userOperationClaim4 = new() { UserId = createdUser.Id, OperationClaimId = 49 };
 
             await _userOperationClaimRepository.AddAsync(userOperationClaim1);
             await _userOperationClaimRepository.AddAsync(userOperationClaim2);
             await _userOperationClaimRepository.AddAsync(userOperationClaim3);
+            await _userOperationClaimRepository.AddAsync(userOperationClaim4);
 
             AccessToken createdAccessToken = await _authService.CreateAccessToken(createdUser);
 
