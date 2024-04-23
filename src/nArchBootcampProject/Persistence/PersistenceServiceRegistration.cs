@@ -35,6 +35,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IEmployeeRepository, EmployeeRepository>();
         services.AddScoped<IInstructorRepository, InstructorRepository>();
         services.AddScoped<IFAQRepository, FAQRepository>();
+        services.AddScoped<IChapterRepository, ChapterRepository>();
         return services;
     }
 }
