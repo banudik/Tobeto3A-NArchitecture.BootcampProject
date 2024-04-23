@@ -44,7 +44,7 @@ public class GetListBootcampQuery : IRequest<GetListResponse<GetListBootcampList
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize,
                 cancellationToken: cancellationToken,
-                include:x=>x.Include(x=>x.Instructor).Include(x=>x.BootcampState).Include(x=>x.BootcampImage)
+                include:x=>x.Include(x=>x.Instructor).Include(x=>x.BootcampState).Include(x=>x.BootcampImage).Include(x=>x.Description)
 
             );
 

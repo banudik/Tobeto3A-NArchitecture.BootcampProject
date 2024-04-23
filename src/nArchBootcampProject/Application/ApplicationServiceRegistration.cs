@@ -28,6 +28,7 @@ using NArchitecture.Core.Localization.Resource.Yaml.DependencyInjection;
 using NArchitecture.Core.Mailing;
 using NArchitecture.Core.Mailing.MailKit;
 using NArchitecture.Core.Security.DependencyInjection;
+using Application.Services.FAQs;
 
 namespace Application;
 
@@ -77,6 +78,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IBootcampStateService, BootcampStateManager>();
         services.AddScoped<IEmployeeService, EmployeeManager>();
         services.AddScoped<IInstructorService, InstructorManager>();
+        services.AddScoped<IFAQService, FAQManager>();
         return services;
     }
 

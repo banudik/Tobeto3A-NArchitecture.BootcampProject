@@ -38,7 +38,7 @@ public class GetByIdBootcampQuery : IRequest<GetByIdBootcampResponse>, ISecuredR
             Bootcamp? bootcamp = await _bootcampRepository.GetAsync(
                 predicate: b => b.Id == request.Id,
                 cancellationToken: cancellationToken,
-                include: x => x.Include(x => x.Instructor).Include(x => x.BootcampState).Include(x => x.BootcampImage)
+                include: x => x.Include(x => x.Instructor).Include(x => x.BootcampState).Include(x => x.BootcampImage).Include(x=>x.Description)
             );
             await _bootcampBusinessRules.BootcampShouldExistWhenSelected(bootcamp);
 
