@@ -14,4 +14,5 @@ public class CreatedBootcampResponse : IResponse
     public string InstructorLastName { get; set; }
     public string BootcampStateName { get; set; }
     public string BootcampImageImagePath { get; set; }
+    public string Description { get; set; }
 }

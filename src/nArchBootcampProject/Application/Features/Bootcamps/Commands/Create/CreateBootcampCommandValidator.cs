@@ -11,5 +11,6 @@ public class CreateBootcampCommandValidator : AbstractValidator<CreateBootcampCo
         RuleFor(c => c.StartDate).NotEmpty();
         RuleFor(c => c.EndDate).NotEmpty();
         RuleFor(c => c.BootcampStateId).NotEmpty();
+        RuleFor(c => c.Description).NotEmpty();
     }
 }

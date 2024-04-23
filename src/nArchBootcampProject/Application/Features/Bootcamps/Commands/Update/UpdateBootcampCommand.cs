@@ -29,6 +29,7 @@ public class UpdateBootcampCommand
     public string InstructorLastName { get; set; }
     public string BootcampStateName { get; set; }
     public string BootcampImageImagePath { get; set; }
+    public string Description { get; set; }
 
     public string[] Roles => [Admin, Write, BootcampsOperationClaims.Update];
 
