@@ -113,6 +113,7 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         #region Applicants
         featureOperationClaims.AddRange(
             [
+                new() { Id = ++lastId, Name = ApplicantsOperationClaims.ApplicantRole },
                 new() { Id = ++lastId, Name = ApplicantsOperationClaims.Admin },
                 new() { Id = ++lastId, Name = ApplicantsOperationClaims.Read },
                 new() { Id = ++lastId, Name = ApplicantsOperationClaims.Write },
@@ -217,6 +218,7 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = EmployeesOperationClaims.Create },
                 new() { Id = ++lastId, Name = EmployeesOperationClaims.Update },
                 new() { Id = ++lastId, Name = EmployeesOperationClaims.Delete },
+                new() { Id = ++lastId, Name = EmployeesOperationClaims.EmployeeRole },
             ]
         );
         #endregion
@@ -231,6 +233,7 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = InstructorsOperationClaims.Create },
                 new() { Id = ++lastId, Name = InstructorsOperationClaims.Update },
                 new() { Id = ++lastId, Name = InstructorsOperationClaims.Delete },
+                new() { Id = ++lastId, Name = InstructorsOperationClaims.InstructorRole },
             ]
         );
         #endregion

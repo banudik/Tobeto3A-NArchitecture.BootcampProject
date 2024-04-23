@@ -6,6 +6,7 @@ using Domain.Entities;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using MediatR;
 using static Application.Features.Chapters.Constants.ChaptersOperationClaims;
+using Application.Features.Applicants.Constants;
 
 namespace Application.Features.Chapters.Queries.GetById;
 
@@ -13,7 +14,7 @@ public class GetByIdChapterQuery : IRequest<GetByIdChapterResponse>, ISecuredReq
 {
     public int Id { get; set; }
 
-    public string[] Roles => [Admin, Read];
+    public string[] Roles => [Admin, Read, ApplicantsOperationClaims.ApplicantRole];
 
     public class GetByIdChapterQueryHandler : IRequestHandler<GetByIdChapterQuery, GetByIdChapterResponse>
     {
