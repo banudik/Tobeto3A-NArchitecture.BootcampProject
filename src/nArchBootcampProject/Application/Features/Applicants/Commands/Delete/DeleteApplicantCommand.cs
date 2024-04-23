@@ -22,7 +22,7 @@ public class DeleteApplicantCommand
 {
     public Guid Id { get; set; }
 
-    public string[] Roles => [Admin, Write, ApplicantsOperationClaims.Delete];
+    public string[] Roles => [Admin, Write, ApplicantsOperationClaims.Delete, ApplicantRole];
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }

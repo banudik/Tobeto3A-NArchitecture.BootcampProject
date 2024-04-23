@@ -9,6 +9,7 @@ using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Paging;
 using MediatR;
 using static Application.Features.Comments.Constants.CommentsOperationClaims;
+using Application.Features.Applicants.Constants;
 
 namespace Application.Features.Comments.Queries.GetList;
 
@@ -16,7 +17,7 @@ public class GetListCommentQuery : IRequest<GetListResponse<GetListCommentListIt
 {
     public PageRequest PageRequest { get; set; }
 
-    public string[] Roles => [Admin, Read];
+    public string[] Roles => [Admin, Read, ApplicantsOperationClaims.ApplicantRole];
 
     public bool BypassCache { get; }
     public string? CacheKey => $"GetListComments({PageRequest.PageIndex},{PageRequest.PageSize})";

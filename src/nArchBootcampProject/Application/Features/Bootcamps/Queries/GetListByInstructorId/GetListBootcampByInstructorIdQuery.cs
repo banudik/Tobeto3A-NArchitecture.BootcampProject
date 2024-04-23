@@ -1,4 +1,5 @@
-﻿using Application.Features.Bootcamps.Queries.GetList;
+﻿using Application.Features.Applicants.Constants;
+using Application.Features.Bootcamps.Queries.GetList;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -15,7 +16,7 @@ public class GetListBootcampByInstructorIdQuery : IRequest<GetListResponse<GetLi
 {
     public PageRequest PageRequest { get; set; }
     public Guid InstructorId { get; set; }
-    public string[] Roles => [Admin, Read];
+    public string[] Roles => [Admin, Read, ApplicantsOperationClaims.ApplicantRole];
 
     public bool BypassCache { get; }
     public string? CacheKey => $"GetListBootcamps({PageRequest.PageIndex},{PageRequest.PageSize})";
@@ -44,7 +45,7 @@ public class GetListBootcampByInstructorIdQuery : IRequest<GetListResponse<GetLi
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize,
                 cancellationToken: cancellationToken,
-                include: p => p.Include(x => x.Instructor).Include(p => p.BootcampState).Include(p=>p.BootcampImage).Include(x=>x.Description)
+                include: p => p.Include(x => x.Instructor).Include(p => p.BootcampState).Include(p=>p.BootcampImage)
             );
 
             GetListResponse<GetListBootcampListItemDto> response = _mapper.Map<GetListResponse<GetListBootcampListItemDto>>(

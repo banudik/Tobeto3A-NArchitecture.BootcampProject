@@ -74,15 +74,9 @@ public class ApplicantRegisterCommand : IRequest<RegisteredResponse>
                 };
             Applicant createdUser = await _applicantRepository.AddAsync(newUser);
 
-            UserOperationClaim userOperationClaim1 = new() { UserId = createdUser.Id, OperationClaimId = 31 };
-            UserOperationClaim userOperationClaim2 = new() { UserId = createdUser.Id, OperationClaimId = 33 };
-            UserOperationClaim userOperationClaim3 = new() { UserId = createdUser.Id, OperationClaimId = 35 };
-            UserOperationClaim userOperationClaim4 = new() { UserId = createdUser.Id, OperationClaimId = 49 };
+            UserOperationClaim userOperationClaim1 = new() { UserId = createdUser.Id, OperationClaimId = 24 }; // ApplicantsOperationClaims.ApplicantRole yetkisi veriliyor
 
             await _userOperationClaimRepository.AddAsync(userOperationClaim1);
-            await _userOperationClaimRepository.AddAsync(userOperationClaim2);
-            await _userOperationClaimRepository.AddAsync(userOperationClaim3);
-            await _userOperationClaimRepository.AddAsync(userOperationClaim4);
 
             AccessToken createdAccessToken = await _authService.CreateAccessToken(createdUser);
 

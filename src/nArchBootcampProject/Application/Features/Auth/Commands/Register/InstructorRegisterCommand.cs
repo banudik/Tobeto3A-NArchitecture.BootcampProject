@@ -31,18 +31,21 @@ public class InstructorRegisterCommand : IRequest<RegisteredResponse>
         private readonly IAuthService _authService;
         private readonly AuthBusinessRules _authBusinessRules;
         private readonly IInstructorRepository _instructorRepository;
+        private readonly IUserOperationClaimRepository _userOperationClaimRepository;
 
         public RegisterCommandHandler(
             IUserRepository userRepository,
             IAuthService authService,
             AuthBusinessRules authBusinessRules,
             IInstructorRepository ınstructorRepository
-        )
+,
+            IUserOperationClaimRepository userOperationClaimRepository)
         {
             _userRepository = userRepository;
             _authService = authService;
             _authBusinessRules = authBusinessRules;
             _instructorRepository = ınstructorRepository;
+            _userOperationClaimRepository = userOperationClaimRepository;
         }
 
         public async Task<RegisteredResponse> Handle(InstructorRegisterCommand request, CancellationToken cancellationToken)
@@ -68,6 +71,10 @@ public class InstructorRegisterCommand : IRequest<RegisteredResponse>
                     PasswordSalt = passwordSalt,
                 };
             Instructor createdUser = await _instructorRepository.AddAsync(newUser);
+
+            UserOperationClaim userOperationClaim1 = new() { UserId = createdUser.Id, OperationClaimId = 80 }; // InstructorRole yetkisi veriliyor
+
+            await _userOperationClaimRepository.AddAsync(userOperationClaim1);
 
             AccessToken createdAccessToken = await _authService.CreateAccessToken(createdUser);
 

@@ -13,7 +13,7 @@ public class GetByIdInstructorQuery : IRequest<GetByIdInstructorResponse>, ISecu
 {
     public Guid Id { get; set; }
 
-    public string[] Roles => [Admin, Read];
+    public string[] Roles => [Admin, Read, InstructorsOperationClaims.InstructorRole];
 
     public class GetByIdInstructorQueryHandler : IRequestHandler<GetByIdInstructorQuery, GetByIdInstructorResponse>
     {

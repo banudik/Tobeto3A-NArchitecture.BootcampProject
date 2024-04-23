@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -11,9 +12,11 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    partial class BaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240423155050_removedAuthTest")]
+    partial class removedAuthTest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -917,155 +920,143 @@ namespace Persistence.Migrations
                         {
                             Id = 73,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Employees.EmployeeRole"
+                            Name = "Instructors.Admin"
                         },
                         new
                         {
                             Id = 74,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Instructors.Admin"
+                            Name = "Instructors.Read"
                         },
                         new
                         {
                             Id = 75,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Instructors.Read"
+                            Name = "Instructors.Write"
                         },
                         new
                         {
                             Id = 76,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Instructors.Write"
+                            Name = "Instructors.Create"
                         },
                         new
                         {
                             Id = 77,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Instructors.Create"
+                            Name = "Instructors.Update"
                         },
                         new
                         {
                             Id = 78,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Instructors.Update"
+                            Name = "Instructors.Delete"
                         },
                         new
                         {
                             Id = 79,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Instructors.Delete"
+                            Name = "FAQs.Admin"
                         },
                         new
                         {
                             Id = 80,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Instructors.InstructorRole"
+                            Name = "FAQs.Read"
                         },
                         new
                         {
                             Id = 81,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FAQs.Admin"
+                            Name = "FAQs.Write"
                         },
                         new
                         {
                             Id = 82,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FAQs.Read"
+                            Name = "FAQs.Create"
                         },
                         new
                         {
                             Id = 83,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FAQs.Write"
+                            Name = "FAQs.Update"
                         },
                         new
                         {
                             Id = 84,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FAQs.Create"
+                            Name = "FAQs.Delete"
                         },
                         new
                         {
                             Id = 85,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FAQs.Update"
+                            Name = "Chapters.Admin"
                         },
                         new
                         {
                             Id = 86,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FAQs.Delete"
+                            Name = "Chapters.Read"
                         },
                         new
                         {
                             Id = 87,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Chapters.Admin"
+                            Name = "Chapters.Write"
                         },
                         new
                         {
                             Id = 88,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Chapters.Read"
+                            Name = "Chapters.Create"
                         },
                         new
                         {
                             Id = 89,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Chapters.Write"
+                            Name = "Chapters.Update"
                         },
                         new
                         {
                             Id = 90,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Chapters.Create"
+                            Name = "Chapters.Delete"
                         },
                         new
                         {
                             Id = 91,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Chapters.Update"
+                            Name = "Comments.Admin"
                         },
                         new
                         {
                             Id = 92,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Chapters.Delete"
+                            Name = "Comments.Read"
                         },
                         new
                         {
                             Id = 93,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Comments.Admin"
+                            Name = "Comments.Write"
                         },
                         new
                         {
                             Id = 94,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Comments.Read"
+                            Name = "Comments.Create"
                         },
                         new
                         {
                             Id = 95,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Comments.Write"
-                        },
-                        new
-                        {
-                            Id = 96,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Comments.Create"
-                        },
-                        new
-                        {
-                            Id = 97,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Comments.Update"
                         },
                         new
                         {
-                            Id = 98,
+                            Id = 96,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Comments.Delete"
                         });
@@ -1241,16 +1232,16 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3cc39bf4-e2d1-4631-b1ff-8902d51c4a63"),
+                            Id = new Guid("8a14b796-804f-4d77-b8e8-d983dd68b25e"),
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfBirth = new DateTime(2024, 4, 23, 19, 25, 6, 561, DateTimeKind.Local).AddTicks(1863),
+                            DateOfBirth = new DateTime(2024, 4, 23, 18, 50, 49, 651, DateTimeKind.Local).AddTicks(534),
                             Email = "pair6@pair6.com",
                             FirstName = "Banu",
                             LastName = "Dik",
                             NationalIdentity = "TC1246",
-                            PasswordHash = new byte[] { 35, 19, 152, 74, 45, 32, 3, 231, 120, 179, 25, 157, 133, 60, 66, 62, 210, 135, 244, 133, 65, 26, 49, 224, 96, 217, 122, 247, 182, 50, 78, 73, 68, 76, 230, 203, 111, 22, 222, 66, 14, 59, 43, 0, 67, 159, 156, 107, 62, 176, 39, 11, 110, 146, 157, 242, 186, 75, 190, 162, 219, 193, 117, 19 },
-                            PasswordSalt = new byte[] { 165, 49, 98, 195, 122, 26, 196, 47, 95, 225, 220, 38, 14, 114, 66, 198, 44, 107, 153, 74, 123, 140, 245, 136, 22, 178, 25, 74, 77, 50, 89, 241, 239, 90, 154, 166, 20, 122, 195, 12, 205, 175, 131, 11, 134, 186, 4, 119, 98, 99, 85, 203, 98, 41, 17, 165, 5, 186, 63, 140, 31, 33, 224, 83, 54, 232, 164, 194, 155, 55, 167, 80, 136, 145, 6, 231, 243, 58, 201, 201, 195, 169, 35, 46, 9, 127, 31, 129, 238, 253, 62, 54, 170, 44, 159, 50, 159, 20, 97, 105, 65, 165, 2, 99, 14, 177, 194, 104, 220, 77, 169, 176, 243, 154, 212, 59, 236, 156, 166, 229, 166, 230, 212, 5, 56, 114, 191, 255 },
+                            PasswordHash = new byte[] { 88, 243, 131, 128, 33, 4, 242, 90, 146, 167, 222, 222, 232, 196, 59, 110, 128, 215, 69, 197, 66, 86, 8, 181, 173, 82, 89, 163, 133, 2, 134, 141, 44, 228, 213, 86, 252, 197, 139, 58, 116, 245, 119, 239, 237, 215, 166, 148, 206, 12, 204, 247, 38, 4, 107, 73, 163, 212, 134, 63, 12, 53, 225, 38 },
+                            PasswordSalt = new byte[] { 232, 131, 220, 137, 135, 139, 123, 117, 88, 76, 154, 234, 190, 176, 219, 207, 203, 85, 3, 230, 67, 29, 165, 189, 55, 170, 244, 208, 189, 149, 120, 225, 120, 2, 78, 10, 105, 191, 62, 16, 84, 75, 171, 88, 183, 17, 134, 57, 210, 161, 97, 241, 205, 23, 130, 114, 156, 171, 104, 116, 178, 168, 68, 241, 129, 255, 234, 248, 218, 203, 72, 16, 139, 235, 200, 67, 197, 193, 65, 83, 132, 112, 13, 130, 67, 129, 108, 216, 75, 58, 100, 83, 90, 59, 61, 72, 54, 175, 224, 251, 60, 92, 244, 112, 114, 130, 76, 133, 125, 134, 84, 148, 6, 145, 251, 184, 17, 164, 233, 177, 126, 228, 48, 48, 234, 91, 6, 7 },
                             UserName = "banudik"
                         });
                 });
@@ -1293,10 +1284,10 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9e203bce-750a-405c-91d7-bf6d8cac8ce5"),
+                            Id = new Guid("a5af3fb6-8e3c-49bd-98a0-bb99dd3a96e4"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OperationClaimId = 1,
-                            UserId = new Guid("3cc39bf4-e2d1-4631-b1ff-8902d51c4a63")
+                            UserId = new Guid("8a14b796-804f-4d77-b8e8-d983dd68b25e")
                         });
                 });
 

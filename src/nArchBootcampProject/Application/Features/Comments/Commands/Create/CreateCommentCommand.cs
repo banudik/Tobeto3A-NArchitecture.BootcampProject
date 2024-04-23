@@ -9,6 +9,8 @@ using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.Comments.Constants.CommentsOperationClaims;
+using Application.Features.Applicants.Constants;
+using Application.Features.Instructors.Constants;
 
 namespace Application.Features.Comments.Commands.Create;
 
@@ -19,7 +21,7 @@ public class CreateCommentCommand : IRequest<CreatedCommentResponse>, ISecuredRe
     public Guid UserId { get; set; }
     public bool Status { get; set; }
 
-    public string[] Roles => [Admin, Write, CommentsOperationClaims.Create];
+    public string[] Roles => [Admin, Write, CommentsOperationClaims.Create, ApplicantsOperationClaims.ApplicantRole, InstructorsOperationClaims.InstructorRole];
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }

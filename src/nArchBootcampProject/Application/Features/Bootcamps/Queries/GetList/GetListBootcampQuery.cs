@@ -1,3 +1,4 @@
+using Application.Features.Applicants.Constants;
 using Application.Features.Bootcamps.Constants;
 using Application.Services.Repositories;
 using AutoMapper;
@@ -17,7 +18,7 @@ public class GetListBootcampQuery : IRequest<GetListResponse<GetListBootcampList
 {
     public PageRequest PageRequest { get; set; }
 
-    public string[] Roles => [Admin, Read];
+    public string[] Roles => [Admin, Read, ApplicantsOperationClaims.ApplicantRole];
 
     public bool BypassCache { get; }
     public string? CacheKey => $"GetListBootcamps({PageRequest.PageIndex},{PageRequest.PageSize})";
@@ -44,7 +45,7 @@ public class GetListBootcampQuery : IRequest<GetListResponse<GetListBootcampList
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize,
                 cancellationToken: cancellationToken,
-                include:x=>x.Include(x=>x.Instructor).Include(x=>x.BootcampState).Include(x=>x.BootcampImage).Include(x=>x.Description)
+                include:x=>x.Include(x=>x.Instructor).Include(x=>x.BootcampState).Include(x=>x.BootcampImage)
 
             );
 
