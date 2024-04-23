@@ -44,7 +44,7 @@ public class GetListBootcampByInstructorIdQuery : IRequest<GetListResponse<GetLi
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize,
                 cancellationToken: cancellationToken,
-                include: p => p.Include(x => x.Instructor).Include(p => p.BootcampState).Include(p=>p.BootcampImage).Include(x=>x.Description)
+                include: p => p.Include(x => x.Instructor).Include(p => p.BootcampState).Include(p=>p.BootcampImage)
             );
 
             GetListResponse<GetListBootcampListItemDto> response = _mapper.Map<GetListResponse<GetListBootcampListItemDto>>(
