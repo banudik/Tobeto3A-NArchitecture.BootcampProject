@@ -30,6 +30,7 @@ using NArchitecture.Core.Mailing.MailKit;
 using NArchitecture.Core.Security.DependencyInjection;
 using Application.Services.FAQs;
 using Application.Services.Chapters;
+using Application.Services.Comments;
 
 namespace Application;
 
@@ -81,6 +82,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IInstructorService, InstructorManager>();
         services.AddScoped<IFAQService, FAQManager>();
         services.AddScoped<IChapterService, ChapterManager>();
+        services.AddScoped<ICommentService, CommentManager>();
         return services;
     }
 
