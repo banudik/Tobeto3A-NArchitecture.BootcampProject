@@ -24,6 +24,7 @@ public class BaseDbContext : DbContext
     public DbSet<Employee> Employees { get; set; }
     public DbSet<Instructor> Instructors { get; set; }
     public DbSet<FAQ> FAQs { get; set; }
+    public DbSet<Chapter> Chapters { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)
