@@ -17,6 +17,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NArchitecture.Core.Security.Constants;
 using Application.Features.Chapters.Constants;
 using Application.Features.Comments.Constants;
+using Application.Features.Announcements.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -261,6 +262,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = CommentsOperationClaims.Create },
                 new() { Id = ++lastId, Name = CommentsOperationClaims.Update },
                 new() { Id = ++lastId, Name = CommentsOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region Announcements CRUD
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = AnnouncementsOperationClaims.Admin },
+                new() { Id = ++lastId, Name = AnnouncementsOperationClaims.Read },
+                new() { Id = ++lastId, Name = AnnouncementsOperationClaims.Write },
+                new() { Id = ++lastId, Name = AnnouncementsOperationClaims.Create },
+                new() { Id = ++lastId, Name = AnnouncementsOperationClaims.Update },
+                new() { Id = ++lastId, Name = AnnouncementsOperationClaims.Delete },
             ]
         );
         #endregion
