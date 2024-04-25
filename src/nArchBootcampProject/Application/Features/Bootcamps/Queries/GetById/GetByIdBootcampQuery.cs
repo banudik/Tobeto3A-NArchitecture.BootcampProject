@@ -1,3 +1,4 @@
+using Application.Features.Applicants.Constants;
 using Application.Features.Bootcamps.Constants;
 using Application.Features.Bootcamps.Rules;
 using Application.Services.Repositories;
@@ -14,7 +15,7 @@ public class GetByIdBootcampQuery : IRequest<GetByIdBootcampResponse>, ISecuredR
 {
     public int Id { get; set; }
 
-    public string[] Roles => [Admin, Read];
+    public string[] Roles => [Admin, Read, ApplicantsOperationClaims.ApplicantRole];
 
     public class GetByIdBootcampQueryHandler : IRequestHandler<GetByIdBootcampQuery, GetByIdBootcampResponse>
     {

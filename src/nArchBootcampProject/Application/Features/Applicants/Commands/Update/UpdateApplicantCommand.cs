@@ -27,7 +27,7 @@ public class UpdateApplicantCommand
     public string NationalIdentity { get; set; }
     public string About { get; set; }
 
-    public string[] Roles => [Admin, Write, ApplicantsOperationClaims.Update];
+    public string[] Roles => [Admin, Write, ApplicantsOperationClaims.Update, ApplicantRole];
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }

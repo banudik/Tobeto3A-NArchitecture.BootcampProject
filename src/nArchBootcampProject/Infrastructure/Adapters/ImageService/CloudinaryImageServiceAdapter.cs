@@ -12,7 +12,8 @@ public class CloudinaryImageServiceAdapter : ImageServiceBase
 
     public CloudinaryImageServiceAdapter(IConfiguration configuration)
     {
-        Account? account = configuration.GetSection("CloudinaryAccount").Get<Account>();
+        Account? account = configuration.GetSection("Cloudinary").Get<Account>();
+
         _cloudinary = new Cloudinary(account);
     }
 

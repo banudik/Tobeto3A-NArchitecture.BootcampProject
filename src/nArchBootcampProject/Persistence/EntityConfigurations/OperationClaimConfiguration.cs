@@ -15,6 +15,8 @@ using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NArchitecture.Core.Security.Constants;
+using Application.Features.Chapters.Constants;
+using Application.Features.Comments.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -110,6 +112,7 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         #region Applicants
         featureOperationClaims.AddRange(
             [
+                new() { Id = ++lastId, Name = ApplicantsOperationClaims.ApplicantRole },
                 new() { Id = ++lastId, Name = ApplicantsOperationClaims.Admin },
                 new() { Id = ++lastId, Name = ApplicantsOperationClaims.Read },
                 new() { Id = ++lastId, Name = ApplicantsOperationClaims.Write },
@@ -214,6 +217,7 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = EmployeesOperationClaims.Create },
                 new() { Id = ++lastId, Name = EmployeesOperationClaims.Update },
                 new() { Id = ++lastId, Name = EmployeesOperationClaims.Delete },
+                new() { Id = ++lastId, Name = EmployeesOperationClaims.EmployeeRole },
             ]
         );
         #endregion
@@ -228,10 +232,39 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = InstructorsOperationClaims.Create },
                 new() { Id = ++lastId, Name = InstructorsOperationClaims.Update },
                 new() { Id = ++lastId, Name = InstructorsOperationClaims.Delete },
+                new() { Id = ++lastId, Name = InstructorsOperationClaims.InstructorRole },
             ]
         );
         #endregion
-
+        
+        
+        #region Chapters
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = ChaptersOperationClaims.Admin },
+                new() { Id = ++lastId, Name = ChaptersOperationClaims.Read },
+                new() { Id = ++lastId, Name = ChaptersOperationClaims.Write },
+                new() { Id = ++lastId, Name = ChaptersOperationClaims.Create },
+                new() { Id = ++lastId, Name = ChaptersOperationClaims.Update },
+                new() { Id = ++lastId, Name = ChaptersOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region Comments
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = CommentsOperationClaims.Admin },
+                new() { Id = ++lastId, Name = CommentsOperationClaims.Read },
+                new() { Id = ++lastId, Name = CommentsOperationClaims.Write },
+                new() { Id = ++lastId, Name = CommentsOperationClaims.Create },
+                new() { Id = ++lastId, Name = CommentsOperationClaims.Update },
+                new() { Id = ++lastId, Name = CommentsOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
         return featureOperationClaims;
     }
 #pragma warning restore S1854 // Unused assignments should be removed
