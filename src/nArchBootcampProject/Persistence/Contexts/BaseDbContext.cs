@@ -23,7 +23,6 @@ public class BaseDbContext : DbContext
     public DbSet<BootcampState> BootcampStates { get; set; }
     public DbSet<Employee> Employees { get; set; }
     public DbSet<Instructor> Instructors { get; set; }
-    public DbSet<FAQ> FAQs { get; set; }
     public DbSet<Chapter> Chapters { get; set; }
     public DbSet<Comment> Comments { get; set; }
 

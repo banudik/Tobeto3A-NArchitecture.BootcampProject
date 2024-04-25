@@ -7,7 +7,7 @@ public class CreateCommentCommandValidator : AbstractValidator<CreateCommentComm
     public CreateCommentCommandValidator()
     {
         RuleFor(c => c.Context).NotEmpty();
-        RuleFor(c => c.BootcampId).NotEmpty();
+        RuleFor(c => c.BootcampChapterId).NotEmpty();
         RuleFor(c => c.UserId).NotEmpty();
         RuleFor(c => c.Status).NotEmpty();
     }

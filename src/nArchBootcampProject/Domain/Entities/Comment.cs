@@ -4,7 +4,7 @@ namespace Domain.Entities;
 public class Comment:Entity<int>
 {
     public string Context { get; set; }
-    public int BootcampId { get; set; }
+    public int BootcampChapterId { get; set; }
     public virtual Chapter Chapter { get; set; }
     public Guid UserId { get; set; }
     public virtual User User { get; set;}
@@ -15,10 +15,10 @@ public class Comment:Entity<int>
         
     }
 
-    public Comment(string context, int bootcampId, Chapter chapter, Guid userId, User user, bool status)
+    public Comment(string context, int bootcampChapterId, Chapter chapter, Guid userId, User user, bool status)
     {
         Context = context;
-        BootcampId = bootcampId;
+        BootcampChapterId = bootcampChapterId;
         Chapter = chapter;
         UserId = userId;
         User = user;

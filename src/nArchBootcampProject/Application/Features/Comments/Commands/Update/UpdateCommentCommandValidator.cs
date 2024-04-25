@@ -8,7 +8,7 @@ public class UpdateCommentCommandValidator : AbstractValidator<UpdateCommentComm
     {
         RuleFor(c => c.Id).NotEmpty();
         RuleFor(c => c.Context).NotEmpty();
-        RuleFor(c => c.BootcampId).NotEmpty();
+        RuleFor(c => c.BootcampChapterId).NotEmpty();
         RuleFor(c => c.UserId).NotEmpty();
         RuleFor(c => c.Status).NotEmpty();
     }
