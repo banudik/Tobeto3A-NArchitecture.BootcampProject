@@ -83,6 +83,7 @@ public class BootcampImageManager : IBootcampImageService
 
     public async Task<BootcampImage> UpdateAsync(IFormFile file, BootcampImage bootcampImage)
     {
+        bootcampImage.ImagePath = await _imageServiceBase.UpdateAsync(file, bootcampImage.ImagePath);
         BootcampImage updatedBootcampImage = await _bootcampImageRepository.UpdateAsync(bootcampImage);
 
         return updatedBootcampImage;
