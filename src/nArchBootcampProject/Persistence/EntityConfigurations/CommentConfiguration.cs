@@ -12,7 +12,7 @@ public class CommentConfiguration : IEntityTypeConfiguration<Comment>
 
         builder.Property(c => c.Id).HasColumnName("Id").IsRequired();
         builder.Property(c => c.Context).HasColumnName("Context");
-        builder.Property(c => c.BootcampId).HasColumnName("BootcampId");
+        builder.Property(c => c.BootcampChapterId).HasColumnName("BootcampChapterId");
         builder.Property(c => c.UserId).HasColumnName("UserId");
         builder.Property(c => c.Status).HasColumnName("Status");
         builder.Property(c => c.CreatedDate).HasColumnName("CreatedDate").IsRequired();

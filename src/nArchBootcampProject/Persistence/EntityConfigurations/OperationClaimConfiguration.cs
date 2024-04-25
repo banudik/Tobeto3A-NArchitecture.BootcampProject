@@ -15,7 +15,6 @@ using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NArchitecture.Core.Security.Constants;
-using Application.Features.FAQs.Constants;
 using Application.Features.Chapters.Constants;
 using Application.Features.Comments.Constants;
 
@@ -234,20 +233,6 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = InstructorsOperationClaims.Update },
                 new() { Id = ++lastId, Name = InstructorsOperationClaims.Delete },
                 new() { Id = ++lastId, Name = InstructorsOperationClaims.InstructorRole },
-            ]
-        );
-        #endregion
-
-        
-        #region FAQs
-        featureOperationClaims.AddRange(
-            [
-                new() { Id = ++lastId, Name = FAQsOperationClaims.Admin },
-                new() { Id = ++lastId, Name = FAQsOperationClaims.Read },
-                new() { Id = ++lastId, Name = FAQsOperationClaims.Write },
-                new() { Id = ++lastId, Name = FAQsOperationClaims.Create },
-                new() { Id = ++lastId, Name = FAQsOperationClaims.Update },
-                new() { Id = ++lastId, Name = FAQsOperationClaims.Delete },
             ]
         );
         #endregion

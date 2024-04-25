@@ -17,7 +17,7 @@ namespace Application.Features.Comments.Commands.Create;
 public class CreateCommentCommand : IRequest<CreatedCommentResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public string Context { get; set; }
-    public int BootcampId { get; set; }
+    public int BootcampChapterId { get; set; }
     public Guid UserId { get; set; }
     public bool Status { get; set; }
 
