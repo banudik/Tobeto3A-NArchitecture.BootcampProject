@@ -1,9 +1,13 @@
 using Application.Features.Bootcamps.Constants;
 using Application.Features.Bootcamps.Rules;
+using Application.Services.BootcampImages;
+using Application.Services.ImageService;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Pipelines.Caching;
 using NArchitecture.Core.Application.Pipelines.Logging;
@@ -24,11 +28,8 @@ public class UpdateBootcampCommand
     public Guid InstructorId { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
+    public IFormFile? file { get; set; }
     public short BootcampStateId { get; set; }
-    public string InstructorFirstName { get; set; }
-    public string InstructorLastName { get; set; }
-    public string BootcampStateName { get; set; }
-    public string BootcampImageImagePath { get; set; }
     public string Description { get; set; }
 
     public string[] Roles => [Admin, Write, BootcampsOperationClaims.Update];
@@ -42,28 +43,43 @@ public class UpdateBootcampCommand
         private readonly IMapper _mapper;
         private readonly IBootcampRepository _bootcampRepository;
         private readonly BootcampBusinessRules _bootcampBusinessRules;
+        private readonly IBootcampImageService _bootcampImageService;
+        private readonly ImageServiceBase _ýmageServiceBase;
 
         public UpdateBootcampCommandHandler(
             IMapper mapper,
             IBootcampRepository bootcampRepository,
-            BootcampBusinessRules bootcampBusinessRules
-        )
+            BootcampBusinessRules bootcampBusinessRules,
+            ImageServiceBase ýmageServiceBase,
+            IBootcampImageService bootcampImageService)
         {
             _mapper = mapper;
             _bootcampRepository = bootcampRepository;
             _bootcampBusinessRules = bootcampBusinessRules;
+ 
+            _ýmageServiceBase = ýmageServiceBase;
+            _bootcampImageService = bootcampImageService;
         }
 
         public async Task<UpdatedBootcampResponse> Handle(UpdateBootcampCommand request, CancellationToken cancellationToken)
         {
             Bootcamp? bootcamp = await _bootcampRepository.GetAsync(
                 predicate: b => b.Id == request.Id,
-                cancellationToken: cancellationToken
+                cancellationToken: cancellationToken,
+                include:x=>x.Include(p=>p.BootcampImage)
             );
             await _bootcampBusinessRules.BootcampShouldExistWhenSelected(bootcamp);
             bootcamp = _mapper.Map(request, bootcamp);
 
-            await _bootcampRepository.UpdateAsync(bootcamp!);
+            if (request.file != null)
+            {
+                var image = await _bootcampImageService.UpdateAsync(request.file, bootcamp.BootcampImage);
+                
+            }
+
+            var item = await _bootcampRepository.UpdateAsync(bootcamp!);
+
+
 
             UpdatedBootcampResponse response = _mapper.Map<UpdatedBootcampResponse>(bootcamp);
             return response;

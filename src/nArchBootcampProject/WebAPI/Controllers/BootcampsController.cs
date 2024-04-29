@@ -23,7 +23,7 @@ public class BootcampsController : BaseController
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] UpdateBootcampCommand updateBootcampCommand)
+    public async Task<IActionResult> Update([FromForm] UpdateBootcampCommand updateBootcampCommand)
     {
         UpdatedBootcampResponse response = await Mediator.Send(updateBootcampCommand);
 
