@@ -10,6 +10,7 @@ namespace Domain.Entities;
 public class Instructor : User
 {
     public string CompanyName { get; set; }
+    public string Description { get; set; }
 
     //public virtual Bootcamp? Bootcamps { get; set; }
 
