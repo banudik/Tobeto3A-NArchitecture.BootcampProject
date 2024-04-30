@@ -11,14 +11,16 @@ public class ApplicationInformationBusinessRules : BaseBusinessRules
 {
     private readonly IApplicationInformationRepository _applicationInformationRepository;
     private readonly ILocalizationService _localizationService;
+    private readonly IApplicantRepository _applicantRepository;
 
     public ApplicationInformationBusinessRules(
         IApplicationInformationRepository applicationInformationRepository,
-        ILocalizationService localizationService
+        ILocalizationService localizationService, IApplicantRepository applicantRepository
     )
     {
         _applicationInformationRepository = applicationInformationRepository;
         _localizationService = localizationService;
+        _applicantRepository = applicantRepository;
     }
 
     private async Task throwBusinessException(string messageKey)
@@ -44,5 +46,22 @@ public class ApplicationInformationBusinessRules : BaseBusinessRules
             cancellationToken: cancellationToken
         );
         await ApplicationInformationShouldExistWhenSelected(applicationInformation);
+    }
+    public async Task CheckApplicationInformationDuplicate(Guid ApplicantId, int BootcampId)
+    {
+        var item = await _applicationInformationRepository.GetAsync(predicate: p => p.ApplicantId == ApplicantId && p.BootcampId == BootcampId);
+        if (item != null)
+        {
+            throw new BusinessException("You alread applied to this bootcamp!");
+        }
+    }
+
+    public async Task CheckIfApplicantExist(Guid applicantId)
+    {
+        var item = await _applicantRepository.GetAsync(predicate: p => p.Id == applicantId);
+        if (item == null)
+        {
+            throw new BusinessException("You are not an applicant!");
+        }
     }
 }

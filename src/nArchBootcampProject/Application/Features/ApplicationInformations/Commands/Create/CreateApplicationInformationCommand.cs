@@ -1,3 +1,4 @@
+using Application.Features.Applicants.Constants;
 using Application.Features.ApplicationInformations.Constants;
 using Application.Features.ApplicationInformations.Rules;
 using Application.Services.Repositories;
@@ -23,7 +24,7 @@ public class CreateApplicationInformationCommand
     public int BootcampId { get; set; }
     public short ApplicationStateInformationId { get; set; }
 
-    public string[] Roles => [Admin, Write, ApplicationInformationsOperationClaims.Create];
+    public string[] Roles => [Admin, Write, ApplicationInformationsOperationClaims.Create, ApplicantsOperationClaims.ApplicantRole];
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
@@ -53,7 +54,7 @@ public class CreateApplicationInformationCommand
         )
         {
             ApplicationInformation applicationInformation = _mapper.Map<ApplicationInformation>(request);
-
+            await _applicationInformationBusinessRules.CheckApplicationInformationDuplicate(applicationInformation.ApplicantId, applicationInformation.BootcampId);
             await _applicationInformationRepository.AddAsync(applicationInformation);
 
             CreatedApplicationInformationResponse response = _mapper.Map<CreatedApplicationInformationResponse>(

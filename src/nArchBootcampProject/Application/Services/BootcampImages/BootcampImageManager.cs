@@ -69,17 +69,21 @@ public class BootcampImageManager : IBootcampImageService
 
     public async Task<BootcampImage> AddAsync(IFormFile file,BootcampImage bootcampImage)
     {
-        BootcampImage addedBootcampImage = new BootcampImage()
+        BootcampImage Image = new()
         {
-            BootcampId=bootcampImage.Id,
-            ImagePath=bootcampImage.ImagePath
+            BootcampId = bootcampImage.BootcampId,
+            ImagePath = bootcampImage.ImagePath
         };
-        bootcampImage.ImagePath = await _imageServiceBase.UploadAsync(file);
-        return await _bootcampImageRepository.AddAsync(addedBootcampImage);
+        Image.ImagePath = await _imageServiceBase.UploadAsync(file);
+
+        //BootcampImage addedBootcampImage = await _bootcampImageRepository.AddAsync(bootcampImage);
+
+        return await _bootcampImageRepository.AddAsync(Image);
     }
 
     public async Task<BootcampImage> UpdateAsync(IFormFile file, BootcampImage bootcampImage)
     {
+        bootcampImage.ImagePath = await _imageServiceBase.UpdateAsync(file, bootcampImage.ImagePath);
         BootcampImage updatedBootcampImage = await _bootcampImageRepository.UpdateAsync(bootcampImage);
 
         return updatedBootcampImage;

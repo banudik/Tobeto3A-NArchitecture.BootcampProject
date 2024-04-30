@@ -13,7 +13,7 @@ public class GetByIdApplicantQuery : IRequest<GetByIdApplicantResponse>, ISecure
 {
     public Guid Id { get; set; }
 
-    public string[] Roles => [Admin, Read];
+    public string[] Roles => [Admin, Read, ApplicantRole];
 
     public class GetByIdApplicantQueryHandler : IRequestHandler<GetByIdApplicantQuery, GetByIdApplicantResponse>
     {

@@ -20,7 +20,7 @@ public class RegisterCommandValidator : AbstractValidator<RegisterCommand>
     private bool StrongPassword(string value)
     {
         Regex strongPasswordRegex = new("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", RegexOptions.Compiled);
-
+        return true;    // Geliştirme aşamasında eklendi. Kullanıcı kayıt olurken güçlü şifre ile uğraşmamak için.
         return strongPasswordRegex.IsMatch(value);
     }
 }

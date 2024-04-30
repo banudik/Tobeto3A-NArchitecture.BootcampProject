@@ -31,18 +31,20 @@ public class EmployeeRegisterCommand : IRequest<RegisteredResponse>
         private readonly IAuthService _authService;
         private readonly AuthBusinessRules _authBusinessRules;
         private readonly IEmployeeRepository _employeeRepository;
+        private readonly IUserOperationClaimRepository _userOperationClaimRepository;
 
         public RegisterCommandHandler(
             IUserRepository userRepository,
             IAuthService authService,
             AuthBusinessRules authBusinessRules,
-            IEmployeeRepository employeeRepository
-        )
+            IEmployeeRepository employeeRepository,
+            IUserOperationClaimRepository userOperationClaimRepository)
         {
             _userRepository = userRepository;
             _authService = authService;
             _authBusinessRules = authBusinessRules;
             _employeeRepository = employeeRepository;
+            _userOperationClaimRepository = userOperationClaimRepository;
         }
 
         public async Task<RegisteredResponse> Handle(EmployeeRegisterCommand request, CancellationToken cancellationToken)
@@ -68,6 +70,10 @@ public class EmployeeRegisterCommand : IRequest<RegisteredResponse>
                     PasswordSalt = passwordSalt,
                 };
             Employee createdUser = await _employeeRepository.AddAsync(newUser);
+
+            UserOperationClaim userOperationClaim1 = new() { UserId = createdUser.Id, OperationClaimId = 73 }; // EmployeeRole yetkisi veriliyor
+
+            await _userOperationClaimRepository.AddAsync(userOperationClaim1);
 
             AccessToken createdAccessToken = await _authService.CreateAccessToken(createdUser);
 
