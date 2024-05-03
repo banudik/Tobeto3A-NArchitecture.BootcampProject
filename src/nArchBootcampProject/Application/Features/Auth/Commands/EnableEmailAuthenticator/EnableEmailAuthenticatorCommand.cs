@@ -74,9 +74,9 @@ public class EnableEmailAuthenticatorCommand : IRequest, ISecuredRequest
                 new Mail
                 {
                     ToList = toEmailList,
-                    Subject = "Verify Your Email - NArchitecture",
+                    Subject = "Hesabınızı Onaylayın - CodeStorm",
                     TextBody =
-                        $"Click on the link to verify your email: {request.VerifyEmailUrlPrefix}?ActivationKey={HttpUtility.UrlEncode(addedEmailAuthenticator.ActivationKey)}"
+                        $"Link üzerinden hesabınızı doğrulayabilirsiniz: <a href=\"{request.VerifyEmailUrlPrefix}?ActivationKey={HttpUtility.UrlEncode(addedEmailAuthenticator.ActivationKey)}\">Doğrulama Linki</a>"
                 }
             );
         }
