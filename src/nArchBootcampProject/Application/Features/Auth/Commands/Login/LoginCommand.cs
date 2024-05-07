@@ -78,21 +78,23 @@ public class LoginCommand : IRequest<LoggedResponse>
                     await _authenticatorService.SendAuthenticatorCode(user);
                     loggedResponse.RequiredAuthenticatorType = user.AuthenticatorType;
 
-                    EmailAuthenticator emailAuthenticator = await _emailAuthenticatorRepository.GetAsync(
-                    predicate: e => e.UserId == user.Id,
-                    cancellationToken: cancellationToken);
+                    //EmailAuthenticator emailAuthenticator = await _emailAuthenticatorRepository.GetAsync(
+                    //predicate: e => e.UserId == user.Id,
+                    //cancellationToken: cancellationToken);
 
                     var toEmailList = new List<MailboxAddress> { new(name: user.Email, user.Email) };
 
-                    _mailService.SendMail(
-                        new Mail
-                        {
-                            ToList = toEmailList,
-                            Subject = "İki faktörlü kimlik doğrulama kodunuz - CodeStorm",
-                            TextBody =
-                                $"Kodunuz: {emailAuthenticator.ActivationKey}"
-                        }
-                    );
+                    //_mailService.SendMail(
+                    //    new Mail
+                    //    {
+                    //        ToList = toEmailList,
+                    //        Subject = "İki faktörlü kimlik doğrulama kodunuz - CodeStorm",
+                    //        TextBody =
+                    //            $"Kodunuz: {emailAuthenticator.ActivationKey}",
+                    //        HtmlBody =
+                    //            $"Kodunuz: {emailAuthenticator.ActivationKey}"
+                    //    }
+                    //);
 
                     return loggedResponse;
                 }
