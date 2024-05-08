@@ -74,6 +74,7 @@ public class LoginTests
         );
         UserBusinessRules _userBusinessRules = new(_userRepository, localizationService);
         IUserService _userService = new UserManager(_userRepository, _userBusinessRules);
+        //IMailService _mailService;
         IAuthenticatorService _authententicatorService = new AuthenticatorManager(
             emailAuthenticatorHelper,
             _userEmailAuthenticatorRepository,
@@ -83,7 +84,7 @@ public class LoginTests
         );
         _validator = new LoginCommandValidator();
         _loginCommand = new LoginCommand();
-        _loginCommandHandler = new LoginCommandHandler(_userService, _authService, authBusinessRules, _authententicatorService);
+        //_loginCommandHandler = new LoginCommandHandler(_userService, _authService, authBusinessRules, _authententicatorService,_mailService);
     }
 
     [Fact]

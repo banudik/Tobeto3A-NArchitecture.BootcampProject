@@ -16,6 +16,7 @@ public class AuthenticatorManager : IAuthenticatorService
     private readonly IMailService _mailService;
     private readonly IOtpAuthenticatorHelper _otpAuthenticatorHelper;
     private readonly IOtpAuthenticatorRepository _otpAuthenticatorRepository;
+    private readonly string _htmlFilePath;
 
     public AuthenticatorManager(
         IEmailAuthenticatorHelper emailAuthenticatorHelper,
@@ -30,6 +31,7 @@ public class AuthenticatorManager : IAuthenticatorService
         _mailService = mailService;
         _otpAuthenticatorHelper = otpAuthenticatorHelper;
         _otpAuthenticatorRepository = otpAuthenticatorRepository;
+        _htmlFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wwwroot", "emails", "2FA.html");
     }
 
     public async Task<EmailAuthenticator> CreateEmailAuthenticator(User user)
@@ -82,9 +84,9 @@ public class AuthenticatorManager : IAuthenticatorService
             e.UserId == user.Id
         );
         if (emailAuthenticator is null)
-            throw new NotFoundException("Email Authenticator not found.");
+            throw new NotFoundException("E-posta Kimlik Doğrulayıcı bulunamadı.");
         if (!emailAuthenticator.IsVerified)
-            throw new BusinessException("Email Authenticator must be is verified.");
+            throw new BusinessException("E-posta Kimlik Doğrulayıcının doğrulanmış olması gerekir.");
 
         string authenticatorCode = await _emailAuthenticatorHelper.CreateEmailActivationCode();
         emailAuthenticator.ActivationKey = authenticatorCode;
@@ -92,12 +94,37 @@ public class AuthenticatorManager : IAuthenticatorService
 
         var toEmailList = new List<MailboxAddress> { new(name: user.Email, address: user.Email) };
 
-        _mailService.SendMail(
+        //  html dosyası çok uzun olduğu için replace metodu performansı etkileyebilir yavaş çalışırsa aşağıdaki yapıyı uygula
+        //using (StreamReader sr = new StreamReader(_htmlFilePath))
+        //using (StreamWriter sw = new StreamWriter("path/to/temporary/html/file.html"))
+        //{
+        //    string line;
+        //    while ((line = sr.ReadLine()) != null)
+        //    {
+        //        // Eğer satır içinde "{{ActivationCode}}" varsa, bu kısmı değiştir ve yeni dosyaya yaz
+        //        if (line.Contains("{{ActivationCode}}"))
+        //        {
+        //            line = line.Replace("{{ActivationCode}}", authenticatorCode);
+        //        }
+        //        sw.WriteLine(line);
+        //    }
+        //}
+        //string htmlContent = File.ReadAllText("path/to/temporary/html/file.html");
+
+        string htmlFilePath = Path.Combine("wwwroot", "emails", "2FA.html");
+
+        string htmlContent = File.ReadAllText(htmlFilePath);
+
+        htmlContent = htmlContent.Replace("{{ActivationCode}}", authenticatorCode);
+
+        await _mailService.SendEmailAsync(
             new Mail
             {
                 ToList = toEmailList,
-                Subject = "Authenticator Code - NArchitecture",
-                TextBody = $"Enter your authenticator code: {authenticatorCode}"
+                Subject = "İki faktörlü kimlik doğrulama kodunuz - CodeStorm",
+                TextBody = $"Enter your authenticator code: {authenticatorCode}",
+                HtmlBody = htmlContent
+
             }
         );
     }
