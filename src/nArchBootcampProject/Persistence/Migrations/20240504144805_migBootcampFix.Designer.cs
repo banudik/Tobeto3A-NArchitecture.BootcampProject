@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -11,9 +12,11 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    partial class BaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240504144805_migBootcampFix")]
+    partial class migBootcampFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,42 +24,6 @@ namespace Persistence.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Domain.Entities.Announcement", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("Id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("CreatedDate");
-
-                    b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("DeletedDate");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Description");
-
-                    b.Property<string>("Header")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Header");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("UpdatedDate");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Announcements", (string)null);
-                });
 
             modelBuilder.Entity("Domain.Entities.ApplicationInformation", b =>
                 {
@@ -1027,42 +994,6 @@ namespace Persistence.Migrations
                             Id = 92,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Comments.Delete"
-                        },
-                        new
-                        {
-                            Id = 93,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Announcements.Admin"
-                        },
-                        new
-                        {
-                            Id = 94,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Announcements.Read"
-                        },
-                        new
-                        {
-                            Id = 95,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Announcements.Write"
-                        },
-                        new
-                        {
-                            Id = 96,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Announcements.Create"
-                        },
-                        new
-                        {
-                            Id = 97,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Announcements.Update"
-                        },
-                        new
-                        {
-                            Id = 98,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Announcements.Delete"
                         });
                 });
 
@@ -1236,20 +1167,16 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-
                             Id = new Guid("4125ea7f-e0f3-42ab-b108-29abfa29a412"),
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOfBirth = new DateTime(2024, 5, 4, 17, 48, 4, 915, DateTimeKind.Local).AddTicks(6820),
-
                             Email = "pair6@pair6.com",
                             FirstName = "Banu",
                             LastName = "Dik",
                             NationalIdentity = "TC1246",
-
                             PasswordHash = new byte[] { 220, 82, 103, 74, 66, 220, 114, 184, 32, 189, 132, 82, 41, 100, 212, 186, 177, 215, 122, 119, 129, 187, 97, 14, 56, 210, 247, 35, 36, 238, 124, 34, 171, 30, 151, 197, 96, 172, 43, 27, 207, 34, 89, 37, 74, 247, 185, 189, 90, 40, 127, 111, 19, 72, 62, 120, 234, 237, 176, 41, 43, 207, 249, 52 },
                             PasswordSalt = new byte[] { 75, 109, 95, 134, 79, 136, 16, 253, 121, 110, 182, 210, 116, 116, 158, 38, 206, 0, 4, 165, 86, 93, 55, 75, 155, 190, 226, 119, 87, 202, 8, 130, 156, 146, 228, 32, 88, 50, 21, 66, 145, 96, 65, 215, 232, 55, 52, 239, 56, 83, 201, 11, 52, 71, 106, 79, 216, 145, 223, 22, 122, 173, 213, 83, 234, 16, 111, 133, 201, 121, 122, 120, 130, 90, 9, 134, 85, 126, 20, 118, 230, 56, 33, 172, 150, 48, 222, 254, 253, 228, 169, 234, 21, 33, 104, 152, 1, 182, 190, 72, 14, 87, 48, 129, 36, 27, 250, 86, 111, 58, 191, 173, 58, 17, 81, 38, 55, 26, 233, 175, 133, 94, 211, 211, 113, 250, 184, 119 },
-
                             UserName = "banudik"
                         });
                 });
@@ -1292,7 +1219,6 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-
                             Id = new Guid("9d08c23f-e515-49b2-b896-4ce48fb79bc2"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OperationClaimId = 1,
