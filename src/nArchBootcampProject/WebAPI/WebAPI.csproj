@@ -19,6 +19,7 @@
 	<PackageReference Include="NArchitecture.Core.Localization.WebApi" Version="1.0.0" />
 	<PackageReference Include="NArchitecture.Core.Persistence.WebApi" Version="1.0.0" />
 	<PackageReference Include="NArchitecture.Core.Security.WebApi.Swagger" Version="1.0.0" />
+	  <PackageReference Include="Elastic.Clients.Elasticsearch" Version="8.0.0-alpha.5" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
@@ -26,7 +27,6 @@
     <ProjectReference Include="..\Persistence\Persistence.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\Dtos" />
     <Folder Include="logs\" />
   </ItemGroup>
 </Project>

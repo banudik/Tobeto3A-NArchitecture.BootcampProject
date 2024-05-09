@@ -21,7 +21,6 @@
 	<PackageReference Include="NArchitecture.Core.Security.DependencyInjection" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services\" />
     <Folder Include="Services\Repositories" />
   </ItemGroup>
   <ItemGroup>
