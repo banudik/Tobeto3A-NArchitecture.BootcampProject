@@ -33,16 +33,19 @@ public class DeleteBootcampCommand
         private readonly IMapper _mapper;
         private readonly IBootcampRepository _bootcampRepository;
         private readonly BootcampBusinessRules _bootcampBusinessRules;
+        private readonly IBootcampImageRepository _bootcampImageRepository;
 
         public DeleteBootcampCommandHandler(
             IMapper mapper,
             IBootcampRepository bootcampRepository,
             BootcampBusinessRules bootcampBusinessRules
-        )
+,
+            IBootcampImageRepository bootcampImageRepository)
         {
             _mapper = mapper;
             _bootcampRepository = bootcampRepository;
             _bootcampBusinessRules = bootcampBusinessRules;
+            _bootcampImageRepository = bootcampImageRepository;
         }
 
         public async Task<DeletedBootcampResponse> Handle(DeleteBootcampCommand request, CancellationToken cancellationToken)
@@ -52,8 +55,9 @@ public class DeleteBootcampCommand
                 cancellationToken: cancellationToken
             );
             await _bootcampBusinessRules.BootcampShouldExistWhenSelected(bootcamp);
-
-            await _bootcampRepository.DeleteAsync(bootcamp!);
+            var image = await _bootcampImageRepository.GetAsync(predicate:p=>p.Id == bootcamp!.BootcampImageId);
+            await _bootcampImageRepository.DeleteAsync(image!, permanent: true);
+            await _bootcampRepository.DeleteAsync(bootcamp!,permanent:true);
 
             DeletedBootcampResponse response = _mapper.Map<DeletedBootcampResponse>(bootcamp);
             return response;
