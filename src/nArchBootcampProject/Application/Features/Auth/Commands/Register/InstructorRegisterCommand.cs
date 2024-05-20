@@ -67,6 +67,7 @@ public class InstructorRegisterCommand : IRequest<RegisteredResponse>
                     CompanyName = request.UserForRegisterDto.CompanyName,
                     UserName = request.UserForRegisterDto.UserName,
                     Email = request.UserForRegisterDto.Email,
+                    Description = request.UserForRegisterDto.Description,
                     PasswordHash = passwordHash,
                     PasswordSalt = passwordSalt,
                 };

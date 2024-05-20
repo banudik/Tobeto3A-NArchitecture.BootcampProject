@@ -26,6 +26,7 @@ public class BaseDbContext : DbContext
     public DbSet<Chapter> Chapters { get; set; }
     public DbSet<Comment> Comments { get; set; }
     public DbSet<Announcement> Announcements { get; set; }
+    public DbSet<Certificate> Certificates { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)

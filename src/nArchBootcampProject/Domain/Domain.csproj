@@ -8,6 +8,9 @@
     <Folder Include="Enums\" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="BouncyCastle.Crypto.dll" Version="1.8.1" />
+    <PackageReference Include="itext7" Version="8.0.4" />
+    <PackageReference Include="itext7.bouncy-castle-adapter" Version="8.0.4" />
     <PackageReference Include="NArchitecture.Core.Persistence" Version="1.0.0" />
     <PackageReference Include="NArchitecture.Core.Security" Version="1.1.1" />
   </ItemGroup>

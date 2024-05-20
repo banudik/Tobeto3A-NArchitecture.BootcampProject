@@ -15,6 +15,7 @@ public class Bootcamp : Entity<int>
     public virtual BootcampState BootcampState { get; set; }
     public virtual BootcampImage? BootcampImage { get; set; }
     public string Description { get; set; }
+    public virtual ICollection<Certificate>? Certificate { get; set; }
 
     public Bootcamp()
     {

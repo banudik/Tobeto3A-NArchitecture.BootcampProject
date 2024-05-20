@@ -31,6 +31,7 @@ using NArchitecture.Core.Security.DependencyInjection;
 using Application.Services.Chapters;
 using Application.Services.Comments;
 using Application.Services.Announcements;
+using Application.Services.Certificates;
 
 namespace Application;
 
@@ -83,6 +84,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IChapterService, ChapterManager>();
         services.AddScoped<ICommentService, CommentManager>();
         services.AddScoped<IAnnouncementService, AnnouncementManager>();
+        services.AddScoped<ICertificateService, CertificateManager>();
         return services;
     }
 

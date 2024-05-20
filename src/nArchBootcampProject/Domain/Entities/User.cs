@@ -22,4 +22,6 @@ public class User : User<Guid>
     public virtual ICollection<RefreshToken> RefreshTokens { get; set; } = default!;
     public virtual ICollection<OtpAuthenticator> OtpAuthenticators { get; set; } = default!;
     public virtual ICollection<EmailAuthenticator> EmailAuthenticators { get; set; } = default!;
+    public virtual ICollection<Certificate> Certificate { get; set; }
+
 }
