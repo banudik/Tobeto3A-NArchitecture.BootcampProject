@@ -28,7 +28,7 @@ public class UpdateBootcampCommand
     public Guid InstructorId { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
-    public IFormFile? file { get; set; }
+    public IFormFile? File { get; set; }
     public short BootcampStateId { get; set; }
     public string Description { get; set; }
 
@@ -71,9 +71,9 @@ public class UpdateBootcampCommand
             await _bootcampBusinessRules.BootcampShouldExistWhenSelected(bootcamp);
             bootcamp = _mapper.Map(request, bootcamp);
 
-            if (request.file != null)
+            if (request.File != null)
             {
-                var image = await _bootcampImageService.UpdateAsync(request.file, bootcamp.BootcampImage);
+                var image = await _bootcampImageService.UpdateAsync(request.File, bootcamp.BootcampImage);
                 
             }
 

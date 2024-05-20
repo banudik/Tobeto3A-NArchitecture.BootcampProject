@@ -21,6 +21,8 @@ public class ChapterConfiguration : IEntityTypeConfiguration<Chapter>
         builder.Property(c => c.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(c => c.DeletedDate).HasColumnName("DeletedDate");
 
+        builder.HasOne(p => p.Bootcamp);
+
         builder.HasQueryFilter(c => !c.DeletedDate.HasValue);
     }
 }
