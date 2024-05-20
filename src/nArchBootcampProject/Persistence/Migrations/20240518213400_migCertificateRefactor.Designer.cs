@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -11,9 +12,11 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    partial class BaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240518213400_migCertificateRefactor")]
+    partial class migCertificateRefactor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1503,7 +1506,7 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.Chapter", b =>
                 {
                     b.HasOne("Domain.Entities.Bootcamp", "Bootcamp")
-                        .WithMany("Chapters")
+                        .WithMany()
                         .HasForeignKey("BootcampId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -1616,8 +1619,6 @@ namespace Persistence.Migrations
                     b.Navigation("BootcampImage");
 
                     b.Navigation("Certificate");
-                    
-                    b.Navigation("Chapters");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
