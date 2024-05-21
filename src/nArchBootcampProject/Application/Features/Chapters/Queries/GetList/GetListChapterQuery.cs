@@ -10,6 +10,8 @@ using NArchitecture.Core.Persistence.Paging;
 using MediatR;
 using static Application.Features.Chapters.Constants.ChaptersOperationClaims;
 using Application.Features.Applicants.Constants;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 
 namespace Application.Features.Chapters.Queries.GetList;
 
@@ -17,7 +19,7 @@ public class GetListChapterQuery : IRequest<GetListResponse<GetListChapterListIt
 {
     public PageRequest PageRequest { get; set; }
 
-    public string[] Roles => [Admin, Read, ApplicantsOperationClaims.ApplicantRole];
+    public string[] Roles => [Admin, Read, ApplicantsOperationClaims.ApplicantRole, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public bool BypassCache { get; }
     public string? CacheKey => $"GetListChapters({PageRequest.PageIndex},{PageRequest.PageSize})";

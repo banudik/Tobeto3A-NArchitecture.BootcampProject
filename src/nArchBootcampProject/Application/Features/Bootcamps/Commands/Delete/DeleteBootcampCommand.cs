@@ -1,6 +1,8 @@
 using Application.Features.Bootcamps.Constants;
 using Application.Features.Bootcamps.Constants;
 using Application.Features.Bootcamps.Rules;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -22,7 +24,7 @@ public class DeleteBootcampCommand
 {
     public int Id { get; set; }
 
-    public string[] Roles => [Admin, Write, BootcampsOperationClaims.Delete];
+    public string[] Roles => [Admin, Write, BootcampsOperationClaims.Delete, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }

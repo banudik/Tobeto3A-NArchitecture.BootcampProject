@@ -1,3 +1,4 @@
+using Application.Features.Employees.Constants;
 using Application.Features.Instructors.Constants;
 using Application.Features.Instructors.Constants;
 using Application.Features.Instructors.Rules;
@@ -22,7 +23,7 @@ public class DeleteInstructorCommand
 {
     public Guid Id { get; set; }
 
-    public string[] Roles => [Admin, Write, InstructorsOperationClaims.Delete];
+    public string[] Roles => [Admin, Write, InstructorsOperationClaims.Delete, EmployeesOperationClaims.EmployeeRole];
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }

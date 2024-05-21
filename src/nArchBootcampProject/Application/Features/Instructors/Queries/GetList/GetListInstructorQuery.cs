@@ -1,3 +1,4 @@
+using Application.Features.Employees.Constants;
 using Application.Features.Instructors.Constants;
 using Application.Services.Repositories;
 using AutoMapper;
@@ -12,11 +13,11 @@ using static Application.Features.Instructors.Constants.InstructorsOperationClai
 
 namespace Application.Features.Instructors.Queries.GetList;
 
-public class GetListInstructorQuery : IRequest<GetListResponse<GetListInstructorListItemDto>>//, ISecuredRequest, ICachableRequest
+public class GetListInstructorQuery : IRequest<GetListResponse<GetListInstructorListItemDto>>, ICachableRequest//, ISecuredRequest
 {
     public PageRequest PageRequest { get; set; }
 
-    public string[] Roles => [Admin, Read];
+    public string[] Roles => [Admin, Read, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public bool BypassCache { get; }
     public string? CacheKey => $"GetListInstructors({PageRequest.PageIndex},{PageRequest.PageSize})";

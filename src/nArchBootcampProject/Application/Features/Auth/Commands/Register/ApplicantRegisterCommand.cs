@@ -8,15 +8,26 @@ using Application.Services.AuthService;
 using Application.Services.Repositories;
 using Domain.Entities;
 using MediatR;
+using NArchitecture.Core.Application.Pipelines.Authorization;
+using NArchitecture.Core.Application.Pipelines.Caching;
+using NArchitecture.Core.Application.Pipelines.Logging;
+using NArchitecture.Core.Application.Pipelines.Transaction;
 using NArchitecture.Core.Security.Hashing;
 using NArchitecture.Core.Security.JWT;
 
 namespace Application.Features.Auth.Commands.Register;
 
-public class ApplicantRegisterCommand : IRequest<RegisteredResponse>
+public class ApplicantRegisterCommand : IRequest<RegisteredResponse>,
+        ICacheRemoverRequest,
+        ILoggableRequest,
+        ITransactionalRequest
 {
     public ApplicantRegisterDto UserForRegisterDto { get; set; }
     public string IpAddress { get; set; }
+
+    public bool BypassCache { get; }
+    public string? CacheKey { get; }
+    public string[]? CacheGroupKey => ["GetApplicants"];
 
     public ApplicantRegisterCommand()
     {

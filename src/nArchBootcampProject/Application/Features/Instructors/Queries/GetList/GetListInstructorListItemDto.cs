@@ -12,4 +12,6 @@ public class GetListInstructorListItemDto : IDto
     public DateTime DateOfBirth { get; set; }
     public string NationalIdentity { get; set; }
     public string CompanyName { get; set; }
+    public string Email { get; set; }
+    public DateTime CreatedDate { get; set; }
 }
