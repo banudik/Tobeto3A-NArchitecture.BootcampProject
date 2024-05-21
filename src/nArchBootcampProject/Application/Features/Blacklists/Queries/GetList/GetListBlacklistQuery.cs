@@ -1,4 +1,6 @@
 using Application.Features.Blacklists.Constants;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -16,7 +18,7 @@ public class GetListBlacklistQuery : IRequest<GetListResponse<GetListBlacklistLi
 {
     public PageRequest PageRequest { get; set; }
 
-    public string[] Roles => [Admin, Read];
+    public string[] Roles => [Admin, Read, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public bool BypassCache { get; }
     public string? CacheKey => $"GetListBlacklists({PageRequest.PageIndex},{PageRequest.PageSize})";

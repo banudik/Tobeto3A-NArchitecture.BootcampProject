@@ -1,5 +1,7 @@
 using Application.Features.ApplicationInformations.Constants;
 using Application.Features.ApplicationInformations.Rules;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -20,11 +22,11 @@ public class UpdateApplicationInformationCommand
         ITransactionalRequest
 {
     public int Id { get; set; }
-    public int ApplicantId { get; set; }
-    public int BootcampId { get; set; }
+    //public int ApplicantId { get; set; }
+    //public int BootcampId { get; set; }
     public int ApplicationStateInformationId { get; set; }
 
-    public string[] Roles => [Admin, Write, ApplicationInformationsOperationClaims.Update];
+    public string[] Roles => [Admin, Write, ApplicationInformationsOperationClaims.Update, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }

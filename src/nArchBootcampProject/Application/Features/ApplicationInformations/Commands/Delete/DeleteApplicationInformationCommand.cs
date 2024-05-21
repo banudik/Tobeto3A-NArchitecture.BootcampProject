@@ -1,6 +1,8 @@
 using Application.Features.ApplicationInformations.Constants;
 using Application.Features.ApplicationInformations.Constants;
 using Application.Features.ApplicationInformations.Rules;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -22,7 +24,7 @@ public class DeleteApplicationInformationCommand
 {
     public int Id { get; set; }
 
-    public string[] Roles => [Admin, Write, ApplicationInformationsOperationClaims.Delete];
+    public string[] Roles => [Admin, Write, ApplicationInformationsOperationClaims.Delete, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }

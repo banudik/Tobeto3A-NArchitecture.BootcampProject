@@ -1,5 +1,7 @@
 using Application.Features.Applicants.Constants;
 using Application.Features.Bootcamps.Constants;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -18,7 +20,7 @@ public class GetListBootcampQuery : IRequest<GetListResponse<GetListBootcampList
 {
     public PageRequest PageRequest { get; set; }
 
-    public string[] Roles => [Admin, Read, ApplicantsOperationClaims.ApplicantRole];
+    public string[] Roles => [Admin, Read, ApplicantsOperationClaims.ApplicantRole,InstructorsOperationClaims.InstructorRole,EmployeesOperationClaims.EmployeeRole];
 
     public bool BypassCache { get; }
     public string? CacheKey => $"GetListBootcamps({PageRequest.PageIndex},{PageRequest.PageSize})";

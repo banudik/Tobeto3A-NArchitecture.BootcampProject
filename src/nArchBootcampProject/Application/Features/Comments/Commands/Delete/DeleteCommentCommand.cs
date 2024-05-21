@@ -10,6 +10,8 @@ using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.Comments.Constants.CommentsOperationClaims;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 
 namespace Application.Features.Comments.Commands.Delete;
 
@@ -17,7 +19,7 @@ public class DeleteCommentCommand : IRequest<DeletedCommentResponse>, ISecuredRe
 {
     public int Id { get; set; }
 
-    public string[] Roles => [Admin, Write, CommentsOperationClaims.Delete];
+    public string[] Roles => [Admin, Write, CommentsOperationClaims.Delete, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }

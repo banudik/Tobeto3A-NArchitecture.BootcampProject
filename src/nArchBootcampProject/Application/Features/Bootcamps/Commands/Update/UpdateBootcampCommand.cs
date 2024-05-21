@@ -1,5 +1,7 @@
 using Application.Features.Bootcamps.Constants;
 using Application.Features.Bootcamps.Rules;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 using Application.Services.BootcampImages;
 using Application.Services.ImageService;
 using Application.Services.Repositories;
@@ -32,7 +34,7 @@ public class UpdateBootcampCommand
     public short BootcampStateId { get; set; }
     public string Description { get; set; }
 
-    public string[] Roles => [Admin, Write, BootcampsOperationClaims.Update];
+    public string[] Roles => [Admin, Write, BootcampsOperationClaims.Update, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }

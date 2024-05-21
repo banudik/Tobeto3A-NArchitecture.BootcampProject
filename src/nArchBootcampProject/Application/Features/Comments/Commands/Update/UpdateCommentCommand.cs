@@ -9,6 +9,8 @@ using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.Comments.Constants.CommentsOperationClaims;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 
 namespace Application.Features.Comments.Commands.Update;
 
@@ -20,7 +22,7 @@ public class UpdateCommentCommand : IRequest<UpdatedCommentResponse>, ISecuredRe
     public Guid UserId { get; set; }
     public bool Status { get; set; }
 
-    public string[] Roles => [Admin, Write, CommentsOperationClaims.Update];
+    public string[] Roles => [Admin, Write, CommentsOperationClaims.Update, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }

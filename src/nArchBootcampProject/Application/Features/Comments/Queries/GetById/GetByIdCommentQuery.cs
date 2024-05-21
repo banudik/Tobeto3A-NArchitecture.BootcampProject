@@ -7,6 +7,8 @@ using NArchitecture.Core.Application.Pipelines.Authorization;
 using MediatR;
 using static Application.Features.Comments.Constants.CommentsOperationClaims;
 using Application.Features.Applicants.Constants;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 
 namespace Application.Features.Comments.Queries.GetById;
 
@@ -14,7 +16,7 @@ public class GetByIdCommentQuery : IRequest<GetByIdCommentResponse>, ISecuredReq
 {
     public int Id { get; set; }
 
-    public string[] Roles => [Admin, Read, ApplicantsOperationClaims.ApplicantRole];
+    public string[] Roles => [Admin, Read, ApplicantsOperationClaims.ApplicantRole, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public class GetByIdCommentQueryHandler : IRequestHandler<GetByIdCommentQuery, GetByIdCommentResponse>
     {

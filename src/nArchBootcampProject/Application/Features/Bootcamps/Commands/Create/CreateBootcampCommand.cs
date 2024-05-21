@@ -1,5 +1,7 @@
 using Application.Features.Bootcamps.Constants;
 using Application.Features.Bootcamps.Rules;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 using Application.Services.BootcampImages;
 using Application.Services.Repositories;
 using AutoMapper;
@@ -29,7 +31,7 @@ public class CreateBootcampCommand
     public IFormFile File { get; set; }
     public string Description { get; set; }
 
-    public string[] Roles => [Admin, Write, BootcampsOperationClaims.Create];
+    public string[] Roles => [Admin, Write, BootcampsOperationClaims.Create, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
