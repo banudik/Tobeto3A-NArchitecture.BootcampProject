@@ -8,6 +8,8 @@ using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Pipelines.Caching;
 using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
+using NArchitecture.Core.ElasticSearch;
+using NArchitecture.Core.ElasticSearch.Models;
 using static Application.Features.Applicants.Constants.ApplicantsOperationClaims;
 
 namespace Application.Features.Applicants.Commands.Create;
@@ -47,6 +49,7 @@ public class CreateApplicantCommand
             _mapper = mapper;
             _applicantRepository = applicantRepository;
             _applicantBusinessRules = applicantBusinessRules;
+           
         }
 
         public async Task<CreatedApplicantResponse> Handle(CreateApplicantCommand request, CancellationToken cancellationToken)
@@ -54,7 +57,7 @@ public class CreateApplicantCommand
             Applicant applicant = _mapper.Map<Applicant>(request);
 
             await _applicantRepository.AddAsync(applicant);
-
+           
             CreatedApplicantResponse response = _mapper.Map<CreatedApplicantResponse>(applicant);
             return response;
         }

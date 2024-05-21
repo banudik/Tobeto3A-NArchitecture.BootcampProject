@@ -26,6 +26,7 @@ public class BootcampConfiguration : IEntityTypeConfiguration<Bootcamp>
         builder.HasOne(p => p.BootcampState);
         builder.HasMany(p => p.ApplicationInformations);
         builder.HasOne(p => p.BootcampImage).WithOne(p => p.Bootcamp).HasForeignKey<BootcampImage>(p => p.BootcampId);
+        builder.HasMany(p => p.Chapters);
 
         builder.HasQueryFilter(b => !b.DeletedDate.HasValue);
     }

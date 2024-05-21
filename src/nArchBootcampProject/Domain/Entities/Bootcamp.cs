@@ -16,10 +16,12 @@ public class Bootcamp : Entity<int>
     public virtual BootcampImage? BootcampImage { get; set; }
     public string Description { get; set; }
     public virtual ICollection<Certificate>? Certificate { get; set; }
+    public virtual ICollection<Chapter> Chapters { get; set; }
 
     public Bootcamp()
     {
         ApplicationInformations = new HashSet<ApplicationInformation>();
+        Chapters = new HashSet<Chapter>();
     }
 
     public Bootcamp(
@@ -32,7 +34,9 @@ public class Bootcamp : Entity<int>
         ICollection<ApplicationInformation> applicationInformations,
         BootcampState bootcampState,
         BootcampImage bootcampImage,
-        int bootcampImageId
+        int bootcampImageId,
+        string description,
+        ICollection<Chapter> chapters
     )
     {
         Name = name;
@@ -45,5 +49,7 @@ public class Bootcamp : Entity<int>
         BootcampState = bootcampState;
         BootcampImage = bootcampImage;
         BootcampImageId = bootcampImageId;
+        Description = description;
+        Chapters = chapters;
     }
 }
