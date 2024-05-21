@@ -87,7 +87,6 @@ public class InstructorRegisterCommand : IRequest<RegisteredResponse>,
                     Description = request.UserForRegisterDto.Description,
                     PasswordHash = passwordHash,
                     PasswordSalt = passwordSalt,
-                    Description = request.UserForRegisterDto.Description,
                 };
             Instructor createdUser = await _instructorRepository.AddAsync(newUser);
 
