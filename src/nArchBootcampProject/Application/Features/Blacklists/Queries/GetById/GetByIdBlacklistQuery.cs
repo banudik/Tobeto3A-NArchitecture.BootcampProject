@@ -1,5 +1,7 @@
 using Application.Features.Blacklists.Constants;
 using Application.Features.Blacklists.Rules;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -13,7 +15,7 @@ public class GetByIdBlacklistQuery : IRequest<GetByIdBlacklistResponse>, ISecure
 {
     public int Id { get; set; }
 
-    public string[] Roles => [Admin, Read];
+    public string[] Roles => [Admin, Read, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public class GetByIdBlacklistQueryHandler : IRequestHandler<GetByIdBlacklistQuery, GetByIdBlacklistResponse>
     {

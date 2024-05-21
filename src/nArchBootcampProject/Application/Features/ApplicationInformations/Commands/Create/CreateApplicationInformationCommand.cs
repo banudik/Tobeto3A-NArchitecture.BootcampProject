@@ -55,6 +55,7 @@ public class CreateApplicationInformationCommand
         {
             ApplicationInformation applicationInformation = _mapper.Map<ApplicationInformation>(request);
             await _applicationInformationBusinessRules.CheckApplicationInformationDuplicate(applicationInformation.ApplicantId, applicationInformation.BootcampId);
+            await _applicationInformationBusinessRules.CheckIfApplicantIsBlacklisted(applicationInformation.ApplicantId);
             await _applicationInformationRepository.AddAsync(applicationInformation);
 
             CreatedApplicationInformationResponse response = _mapper.Map<CreatedApplicationInformationResponse>(

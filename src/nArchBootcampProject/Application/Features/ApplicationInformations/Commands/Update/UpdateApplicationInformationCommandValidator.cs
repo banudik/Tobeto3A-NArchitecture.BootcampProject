@@ -7,8 +7,8 @@ public class UpdateApplicationInformationCommandValidator : AbstractValidator<Up
     public UpdateApplicationInformationCommandValidator()
     {
         RuleFor(c => c.Id).NotEmpty();
-        RuleFor(c => c.ApplicantId).NotEmpty();
-        RuleFor(c => c.BootcampId).NotEmpty();
+        //RuleFor(c => c.ApplicantId).NotEmpty();
+        //RuleFor(c => c.BootcampId).NotEmpty();
         RuleFor(c => c.ApplicationStateInformationId).NotEmpty();
     }
 }

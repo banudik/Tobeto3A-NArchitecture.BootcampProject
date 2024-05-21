@@ -1,5 +1,7 @@
 using Application.Features.BootcampStates.Constants;
 using Application.Features.BootcampStates.Rules;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -13,7 +15,7 @@ public class GetByIdBootcampStateQuery : IRequest<GetByIdBootcampStateResponse>,
 {
     public short Id { get; set; }
 
-    public string[] Roles => [Admin, Read];
+    public string[] Roles => [Admin, Read, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public class GetByIdBootcampStateQueryHandler : IRequestHandler<GetByIdBootcampStateQuery, GetByIdBootcampStateResponse>
     {

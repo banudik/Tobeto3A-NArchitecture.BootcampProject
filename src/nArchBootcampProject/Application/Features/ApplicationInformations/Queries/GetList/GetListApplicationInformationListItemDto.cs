@@ -11,4 +11,6 @@ public class GetListApplicationInformationListItemDto : IDto
     public int BootcampId { get; set; }
     public string BootcampName { get; set; }
     public string ApplicationStateInformationName { get; set; }
+    public short ApplicationStateInformationId { get; set; }
+    public DateTime CreatedDate { get; set; }
 }

@@ -1,5 +1,7 @@
 using Application.Features.BootcampStates.Constants;
 using Application.Features.BootcampStates.Rules;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -21,7 +23,7 @@ public class CreateBootcampStateCommand
 {
     public string Name { get; set; }
 
-    public string[] Roles => [Admin, Write, BootcampStatesOperationClaims.Create];
+    public string[] Roles => [Admin, Write, BootcampStatesOperationClaims.Create, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }

@@ -1,9 +1,12 @@
 using Application.Features.ApplicationInformations.Constants;
 using Application.Features.ApplicationInformations.Rules;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using static Application.Features.ApplicationInformations.Constants.ApplicationInformationsOperationClaims;
 
@@ -13,7 +16,7 @@ public class GetByIdApplicationInformationQuery : IRequest<GetByIdApplicationInf
 {
     public int Id { get; set; }
 
-    public string[] Roles => [Admin, Read];
+    public string[] Roles => [Admin, Read, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public class GetByIdApplicationInformationQueryHandler
         : IRequestHandler<GetByIdApplicationInformationQuery, GetByIdApplicationInformationResponse>
@@ -40,7 +43,8 @@ public class GetByIdApplicationInformationQuery : IRequest<GetByIdApplicationInf
         {
             ApplicationInformation? applicationInformation = await _applicationInformationRepository.GetAsync(
                 predicate: ai => ai.Id == request.Id,
-                cancellationToken: cancellationToken
+                cancellationToken: cancellationToken,
+                include:x=>x.Include(p=>p.Bootcamp).Include(p=>p.Applicant).Include(p=>p.ApplicationStateInformation)
             );
             await _applicationInformationBusinessRules.ApplicationInformationShouldExistWhenSelected(applicationInformation);
 

@@ -10,6 +10,8 @@ using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.Chapters.Constants.ChaptersOperationClaims;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 
 namespace Application.Features.Chapters.Commands.Delete;
 
@@ -17,7 +19,7 @@ public class DeleteChapterCommand : IRequest<DeletedChapterResponse>, ISecuredRe
 {
     public int Id { get; set; }
 
-    public string[] Roles => [Admin, Write, ChaptersOperationClaims.Delete];
+    public string[] Roles => [Admin, Write, ChaptersOperationClaims.Delete, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
