@@ -1,4 +1,5 @@
 using Application.Features.Bootcamps.Constants;
+using Application.Features.Bootcamps.Queries.GetList;
 using Application.Features.Bootcamps.Rules;
 using Application.Features.Employees.Constants;
 using Application.Features.Instructors.Constants;
@@ -12,12 +13,15 @@ using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Pipelines.Caching;
 using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
+using NArchitecture.Core.ElasticSearch;
+using NArchitecture.Core.ElasticSearch.Models;
+using Nest;
 using static Application.Features.Bootcamps.Constants.BootcampsOperationClaims;
 
 namespace Application.Features.Bootcamps.Commands.Create;
 
 public class CreateBootcampCommand
-    : IRequest<CreatedBootcampResponse>,
+    : MediatR.IRequest<CreatedBootcampResponse>,
         ISecuredRequest,
         ICacheRemoverRequest,
         ILoggableRequest,
@@ -43,17 +47,19 @@ public class CreateBootcampCommand
         private readonly IBootcampRepository _bootcampRepository;
         private readonly BootcampBusinessRules _bootcampBusinessRules;
         private readonly IBootcampImageService _bootcampImageService;
+        private readonly IElasticSearch _elasticSearch;
 
         public CreateBootcampCommandHandler(
             IMapper mapper,
             IBootcampRepository bootcampRepository,
-            BootcampBusinessRules bootcampBusinessRules,IBootcampImageService bootcampImageService
+            BootcampBusinessRules bootcampBusinessRules,IBootcampImageService bootcampImageService,IElasticSearch elasticSearch
         )
         {
             _mapper = mapper;
             _bootcampRepository = bootcampRepository;
             _bootcampBusinessRules = bootcampBusinessRules;
             _bootcampImageService = bootcampImageService;
+            _elasticSearch = elasticSearch;
         }
 
         public async Task<CreatedBootcampResponse> Handle(CreateBootcampCommand request, CancellationToken cancellationToken)
@@ -71,6 +77,22 @@ public class CreateBootcampCommand
             var image = await _bootcampImageService.AddAsync(request.File, ImageToAdd);
             item.BootcampImageId = image.Id;
             await _bootcampRepository.UpdateAsync(item);
+
+            IElasticSearchResult result = await _elasticSearch.CreateNewIndexAsync(
+                new IndexModel
+                {
+                    IndexName="bootcamps",
+                    AliasName="abootcamps",
+                    NumberOfReplicas=1,
+                    NumberOfShards=1,
+                });
+            ElasticSearchInsertUpdateModel model =
+                new(1,"bootcamps",
+                     item);
+
+            await _elasticSearch.InsertAsync(model);
+            IEnumerable<IndexName> result3 = _elasticSearch.GetIndexList().Keys;
+          
 
             CreatedBootcampResponse response = _mapper.Map<CreatedBootcampResponse>(bootcamp);
             return response;
