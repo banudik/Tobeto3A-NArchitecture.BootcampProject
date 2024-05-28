@@ -1,4 +1,5 @@
 using Application.Features.Employees.Constants;
+using Application.Features.Employees.Rules;
 using Application.Features.Instructors.Constants;
 using Application.Features.Instructors.Rules;
 using Application.Services.Repositories;
@@ -9,6 +10,7 @@ using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Pipelines.Caching;
 using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
+using NArchitecture.Core.Security.Hashing;
 using static Application.Features.Instructors.Constants.InstructorsOperationClaims;
 
 namespace Application.Features.Instructors.Commands.Update;
@@ -29,6 +31,8 @@ public class UpdateInstructorCommand
     public string NationalIdentity { get; set; }
     public string CompanyName { get; set; }
     public string Email { get; set; }
+    public string? Password { get; set; }
+    public string? NewPassword { get; set; }
 
     public string[] Roles => [Admin, Write, InstructorsOperationClaims.Update, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
@@ -59,8 +63,22 @@ public class UpdateInstructorCommand
                 predicate: i => i.Id == request.Id,
                 cancellationToken: cancellationToken
             );
+
             await _instructorBusinessRules.InstructorShouldExistWhenSelected(instructor);
+            await _instructorBusinessRules.InstructorEmailShouldNotExistsWhenUpdate(instructor!.Id, instructor.Email);
             instructor = _mapper.Map(request, instructor);
+
+            if (request.NewPassword != null && !string.IsNullOrWhiteSpace(request.NewPassword))
+            {
+                //await _instructorBusinessRules.InstructorPasswordShouldBeMatched(user: instructor!, request.Password);
+                HashingHelper.CreatePasswordHash(
+                    request.NewPassword,
+                    passwordHash: out byte[] passwordHash,
+                    passwordSalt: out byte[] passwordSalt
+                );
+                instructor!.PasswordHash = passwordHash;
+                instructor!.PasswordSalt = passwordSalt;
+            }
 
             await _instructorRepository.UpdateAsync(instructor!);
 

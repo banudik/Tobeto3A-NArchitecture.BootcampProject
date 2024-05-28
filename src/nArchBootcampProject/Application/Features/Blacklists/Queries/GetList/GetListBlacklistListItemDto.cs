@@ -8,4 +8,8 @@ public class GetListBlacklistListItemDto : IDto
     public string Reason { get; set; }
     public DateTime Date { get; set; }
     public Guid ApplicantId { get; set; }
+    public string ApplicantFirstName { get; set; }
+    public string ApplicantLastName { get; set; }
+    public string ApplicantEmail { get; set; }
+    public DateTime CreatedDate { get; set; }
 }

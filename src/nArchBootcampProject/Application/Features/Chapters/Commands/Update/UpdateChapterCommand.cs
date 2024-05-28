@@ -50,6 +50,7 @@ public class UpdateChapterCommand : IRequest<UpdatedChapterResponse>, ISecuredRe
             await _chapterBusinessRules.ChapterShouldExistWhenSelected(chapter);
             chapter = _mapper.Map(request, chapter);
 
+            await _chapterBusinessRules.CheckChapterSortIfDuplicate(request.Id, request.BootcampId, request.Sort, cancellationToken);
             await _chapterRepository.UpdateAsync(chapter!);
 
             UpdatedChapterResponse response = _mapper.Map<UpdatedChapterResponse>(chapter);
