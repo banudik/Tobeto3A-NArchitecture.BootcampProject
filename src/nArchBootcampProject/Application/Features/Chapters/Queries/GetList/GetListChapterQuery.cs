@@ -12,6 +12,7 @@ using static Application.Features.Chapters.Constants.ChaptersOperationClaims;
 using Application.Features.Applicants.Constants;
 using Application.Features.Employees.Constants;
 using Application.Features.Instructors.Constants;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Chapters.Queries.GetList;
 
@@ -42,7 +43,8 @@ public class GetListChapterQuery : IRequest<GetListResponse<GetListChapterListIt
             IPaginate<Chapter> chapters = await _chapterRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize, 
-                cancellationToken: cancellationToken
+                cancellationToken: cancellationToken,
+                include: p => p.Include(x => x.Bootcamp)
             );
 
             GetListResponse<GetListChapterListItemDto> response = _mapper.Map<GetListResponse<GetListChapterListItemDto>>(chapters);

@@ -1,9 +1,11 @@
 using Application.Features.Instructors.Constants;
+using Application.Features.Users.Constants;
 using Application.Services.Repositories;
 using Domain.Entities;
 using NArchitecture.Core.Application.Rules;
 using NArchitecture.Core.CrossCuttingConcerns.Exception.Types;
 using NArchitecture.Core.Localization.Abstraction;
+using NArchitecture.Core.Security.Hashing;
 
 namespace Application.Features.Instructors.Rules;
 
@@ -38,5 +40,18 @@ public class InstructorBusinessRules : BaseBusinessRules
             cancellationToken: cancellationToken
         );
         await InstructorShouldExistWhenSelected(instructor);
+    }
+
+    public async Task InstructorPasswordShouldBeMatched(User user, string password)
+    {
+        if (!HashingHelper.VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+            await throwBusinessException(UsersMessages.PasswordDontMatch);
+    }
+
+    public async Task InstructorEmailShouldNotExistsWhenUpdate(Guid id, string email)
+    {
+        bool doesExists = await _instructorRepository.AnyAsync(predicate: u => u.Id != id && u.Email == email);
+        if (doesExists)
+            await throwBusinessException(UsersMessages.UserMailAlreadyExists);
     }
 }

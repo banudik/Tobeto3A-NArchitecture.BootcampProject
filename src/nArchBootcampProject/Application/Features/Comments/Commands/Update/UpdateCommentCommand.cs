@@ -17,9 +17,9 @@ namespace Application.Features.Comments.Commands.Update;
 public class UpdateCommentCommand : IRequest<UpdatedCommentResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public int Id { get; set; }
-    public string Context { get; set; }
-    public int BootcampChapterId { get; set; }
-    public Guid UserId { get; set; }
+    //public string Context { get; set; }
+    //public int ChapterId { get; set; }
+    //public Guid UserId { get; set; }
     public bool Status { get; set; }
 
     public string[] Roles => [Admin, Write, CommentsOperationClaims.Update, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];

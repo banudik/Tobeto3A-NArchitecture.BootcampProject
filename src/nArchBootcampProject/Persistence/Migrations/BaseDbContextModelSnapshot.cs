@@ -272,6 +272,52 @@ namespace Persistence.Migrations
                     b.ToTable("BootcampImages", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Entities.BootcampLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BootcampId")
+                        .HasColumnType("int")
+                        .HasColumnName("BootcampId");
+
+                    b.Property<int>("ChapterId")
+                        .HasColumnType("int")
+                        .HasColumnName("ChapterId");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreatedDate");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletedDate");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit")
+                        .HasColumnName("Status");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("UpdatedDate");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BootcampId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("BootcampLogs", (string)null);
+                });
+
             modelBuilder.Entity("Domain.Entities.BootcampState", b =>
                 {
                     b.Property<short>("Id")
@@ -402,12 +448,9 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BootcampChapterId")
-                        .HasColumnType("int")
-                        .HasColumnName("BootcampChapterId");
-
                     b.Property<int>("ChapterId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("ChapterId");
 
                     b.Property<string>("Context")
                         .IsRequired()
@@ -1141,6 +1184,42 @@ namespace Persistence.Migrations
                             Id = 104,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Certificates.Delete"
+                        },
+                        new
+                        {
+                            Id = 105,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "BootcampLogs.Admin"
+                        },
+                        new
+                        {
+                            Id = 106,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "BootcampLogs.Read"
+                        },
+                        new
+                        {
+                            Id = 107,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "BootcampLogs.Write"
+                        },
+                        new
+                        {
+                            Id = 108,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "BootcampLogs.Create"
+                        },
+                        new
+                        {
+                            Id = 109,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "BootcampLogs.Update"
+                        },
+                        new
+                        {
+                            Id = 110,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "BootcampLogs.Delete"
                         });
                 });
 
@@ -1314,16 +1393,16 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f47bb1e9-77e4-4404-b580-526036c76723"),
+                            Id = new Guid("72edc281-8a58-46d1-9f66-7d71a45d4161"),
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfBirth = new DateTime(2024, 5, 21, 14, 55, 15, 461, DateTimeKind.Local).AddTicks(491),
+                            DateOfBirth = new DateTime(2024, 5, 27, 17, 35, 50, 180, DateTimeKind.Local).AddTicks(284),
                             Email = "pair6@pair6.com",
                             FirstName = "Banu",
                             LastName = "Dik",
                             NationalIdentity = "TC1246",
-                            PasswordHash = new byte[] { 237, 171, 210, 176, 88, 248, 88, 184, 69, 117, 164, 136, 84, 111, 131, 2, 54, 80, 85, 0, 248, 49, 56, 6, 174, 248, 17, 70, 24, 65, 228, 109, 85, 2, 127, 18, 216, 115, 31, 199, 159, 97, 166, 103, 236, 34, 98, 42, 80, 81, 57, 206, 190, 120, 50, 78, 179, 241, 224, 44, 68, 79, 154, 16 },
-                            PasswordSalt = new byte[] { 28, 62, 237, 76, 212, 95, 224, 67, 233, 180, 193, 161, 69, 116, 87, 146, 175, 214, 143, 153, 214, 215, 214, 199, 192, 50, 142, 79, 76, 202, 224, 233, 38, 187, 28, 113, 89, 190, 28, 87, 161, 34, 214, 183, 237, 21, 164, 113, 100, 219, 17, 148, 69, 188, 245, 6, 187, 237, 111, 24, 210, 159, 18, 106, 5, 168, 234, 129, 128, 232, 99, 241, 167, 197, 113, 45, 152, 24, 240, 27, 107, 185, 233, 140, 32, 9, 13, 6, 17, 7, 69, 241, 130, 93, 39, 176, 238, 245, 212, 153, 209, 221, 176, 4, 184, 225, 195, 167, 55, 88, 196, 143, 63, 105, 68, 204, 61, 160, 139, 58, 172, 117, 198, 177, 82, 149, 179, 78 },
+                            PasswordHash = new byte[] { 203, 45, 250, 182, 198, 7, 73, 15, 149, 181, 40, 47, 43, 248, 221, 41, 193, 28, 113, 162, 208, 211, 141, 123, 180, 177, 61, 185, 11, 219, 53, 216, 102, 25, 52, 191, 156, 176, 200, 109, 235, 254, 10, 164, 82, 179, 190, 139, 77, 69, 10, 24, 148, 150, 186, 29, 188, 54, 221, 131, 142, 86, 37, 63 },
+                            PasswordSalt = new byte[] { 206, 85, 122, 70, 211, 75, 58, 74, 69, 81, 59, 125, 239, 209, 57, 42, 137, 179, 116, 244, 25, 127, 82, 149, 168, 171, 69, 122, 84, 216, 100, 17, 71, 58, 88, 117, 36, 248, 226, 25, 122, 58, 72, 243, 212, 232, 164, 193, 43, 46, 120, 86, 72, 78, 136, 110, 223, 37, 236, 23, 252, 254, 3, 35, 1, 56, 86, 155, 77, 43, 187, 169, 49, 59, 168, 58, 71, 71, 196, 62, 0, 80, 182, 183, 85, 8, 221, 188, 132, 243, 251, 213, 208, 212, 14, 138, 218, 154, 234, 65, 213, 148, 39, 188, 96, 78, 95, 133, 82, 170, 61, 152, 56, 60, 205, 1, 177, 200, 213, 183, 131, 13, 236, 127, 168, 85, 127, 83 },
                             UserName = "banudik"
                         });
                 });
@@ -1366,10 +1445,10 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("340ae187-a773-482e-ba85-254e22483fc7"),
+                            Id = new Guid("86c84114-a52f-4d63-be4e-e560e6ac6e57"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OperationClaimId = 1,
-                            UserId = new Guid("f47bb1e9-77e4-4404-b580-526036c76723")
+                            UserId = new Guid("72edc281-8a58-46d1-9f66-7d71a45d4161")
                         });
                 });
 
@@ -1479,6 +1558,25 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Bootcamp");
+                });
+
+            modelBuilder.Entity("Domain.Entities.BootcampLog", b =>
+                {
+                    b.HasOne("Domain.Entities.Bootcamp", "Bootcamp")
+                        .WithMany("BootcampLogs")
+                        .HasForeignKey("BootcampId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Bootcamp");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.Certificate", b =>
@@ -1614,6 +1712,8 @@ namespace Persistence.Migrations
                     b.Navigation("ApplicationInformations");
 
                     b.Navigation("BootcampImage");
+
+                    b.Navigation("BootcampLogs");
 
                     b.Navigation("Certificate");
 
