@@ -54,14 +54,16 @@ public class ForgotPasswordCommand : IRequest
             await _authBusinessRules.UserShouldBeExistsWhenSelected(user); //Böyle bir user var mı kontrol ediyor
 
             var emailAuthenticator = await _emailAuthenticatorRepository.GetAsync(e => e.UserId == user.Id);
+            await _authBusinessRules.PasswordResetRequestBeExists(emailAuthenticator);
 
-
-            AccessToken createdAccessToken = await _authService.CreateAccessToken(user);//userin tokenini oluşturur
-            createdAccessToken.ExpirationDate = DateTime.Now.AddMinutes(15);
+            //Link üzerine eklenecek AccessTokeni oluşturur, AccessToken JTW türünde olduğu için üzerinde Expiration süresi taşır
+            AccessToken createdAccessToken = await _authService.CreateAccessToken(user);
+            createdAccessToken.ExpirationDate = DateTime.Now.AddMinutes(10); 
 
 
             //EmailAuthenticator tablosundaki şifremi unuttum için oluşturulan token ve süresini tabloya atıyoruz
-            emailAuthenticator.ResetPasswordToken = createdAccessToken.Token;
+            //emailAuthenticator.ResetPasswordToken = createdAccessToken.Token;
+            emailAuthenticator.ResetPasswordToken = true;
             emailAuthenticator.ResetPasswordTokenExpiry = createdAccessToken.ExpirationDate;
             await _emailAuthenticatorRepository.UpdateAsync(emailAuthenticator);
 

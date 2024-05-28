@@ -91,6 +91,7 @@ if (app.Environment.IsDevelopment())
     {
         opt.DocExpansion(DocExpansion.None);
     });
+    app.ConfigureCustomExceptionMiddleware();
 }
 
 if (app.Environment.IsProduction())
