@@ -19,6 +19,7 @@ using Application.Features.Chapters.Constants;
 using Application.Features.Comments.Constants;
 using Application.Features.Announcements.Constants;
 using Application.Features.Certificates.Constants;
+using Application.Features.BootcampLogs.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -291,6 +292,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = CertificatesOperationClaims.Create },
                 new() { Id = ++lastId, Name = CertificatesOperationClaims.Update },
                 new() { Id = ++lastId, Name = CertificatesOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region BootcampLogs
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = BootcampLogsOperationClaims.Admin },
+                new() { Id = ++lastId, Name = BootcampLogsOperationClaims.Read },
+                new() { Id = ++lastId, Name = BootcampLogsOperationClaims.Write },
+                new() { Id = ++lastId, Name = BootcampLogsOperationClaims.Create },
+                new() { Id = ++lastId, Name = BootcampLogsOperationClaims.Update },
+                new() { Id = ++lastId, Name = BootcampLogsOperationClaims.Delete },
             ]
         );
         #endregion

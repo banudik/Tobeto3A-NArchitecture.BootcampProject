@@ -32,6 +32,7 @@ using Application.Services.Chapters;
 using Application.Services.Comments;
 using Application.Services.Announcements;
 using Application.Services.Certificates;
+using Application.Services.BootcampLogs;
 
 namespace Application;
 
@@ -85,6 +86,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ICommentService, CommentManager>();
         services.AddScoped<IAnnouncementService, AnnouncementManager>();
         services.AddScoped<ICertificateService, CertificateManager>();
+        services.AddScoped<IBootcampLogService, BootcampLogManager>();
         return services;
     }
 
