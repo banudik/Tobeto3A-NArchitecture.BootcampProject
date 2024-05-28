@@ -2,6 +2,7 @@
 using Application.Features.Applicants.Constants;
 using Application.Features.Applicants.Rules;
 using Application.Features.Auth.Commands.ForgotPassword;
+using Application.Features.Auth.Constants;
 using Application.Features.Auth.Rules;
 using Application.Features.Users.Commands.Update;
 using Application.Features.Users.Constants;
@@ -63,20 +64,22 @@ public class ResetPasswordCommand : IRequest , ISecuredRequest
 
         public async Task Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
         {
+            //Gelen istek üzerindek UserId ile eşleşen account'u getirir
             User? user = await _userService.GetAsync(
                 predicate: u => u.Id == request.UserId,
                 cancellationToken: cancellationToken
             );
+            //Eşleşen kullanıcı var mı kontrol eder (User == null)
             await _authBusinessRules.UserShouldBeExistsWhenSelected(user);
-            //await _authBusinessRules.UserShouldNotBeHaveAuthenticator(user!);
 
-            var emailAuthenticator = await _emailAuthenticatorRepository.GetAsync(e => e.UserId == request.UserId);
+            //Eski şifre ile aynı olmaması için kontrol ediyoruz ( şuan exception mesajını göstermiyor...)
+            await _authBusinessRules.PasswordShouldNotBeSameAsOld(request.ResetPasswordDtos.Password, user);
 
-            if (emailAuthenticator.ResetPasswordTokenExpiry < DateTime.UtcNow)
-            {
-                throw new Exception("Süre aşımına uğradı");
-            }
+            //şifre sıfırlama isteği oluşturulmuş mu kontrolu, aynı link üzerinten tekrar şifre değiştirmeyi de engeller
+            var emailAuthenticator = await _emailAuthenticatorRepository.GetAsync(e => e.UserId == user.Id);
+            await _authBusinessRules.PasswordResetRequestBeExists(emailAuthenticator);
 
+            //Yeni şifrenin encrypt edilmesi
             HashingHelper.CreatePasswordHash(
                 request.ResetPasswordDtos.Password,
                 passwordHash: out byte[] passwordHash,
@@ -85,13 +88,10 @@ public class ResetPasswordCommand : IRequest , ISecuredRequest
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
 
-
-            if (emailAuthenticator != null)
-            {
-                emailAuthenticator.ResetPasswordToken = null;
-                emailAuthenticator.ResetPasswordTokenExpiry = null;
-                await _emailAuthenticatorRepository.UpdateAsync(emailAuthenticator);
-            }
+            //Kullanıcının Şifre sıfırlama isteğini kaldırıyoruz, aynı link üzerinden tekrar şifre sıfırlamak isterse engel olmak için
+            emailAuthenticator.ResetPasswordToken = false;
+            emailAuthenticator.ResetPasswordTokenExpiry = null;
+            await _emailAuthenticatorRepository.UpdateAsync(emailAuthenticator);
 
             await _userRepository.UpdateAsync(user!);
 

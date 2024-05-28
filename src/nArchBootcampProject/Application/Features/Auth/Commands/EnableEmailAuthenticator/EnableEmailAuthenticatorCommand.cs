@@ -70,7 +70,10 @@ public class EnableEmailAuthenticatorCommand : IRequest, ISecuredRequest
 
             var toEmailList = new List<MailboxAddress> { new(name: user.Email, user.Email) };
 
-            string VerifyLink = $"{request.VerifyEmailUrlPrefix}?ActivationKey={HttpUtility.UrlEncode(addedEmailAuthenticator.ActivationKey)}";
+            //string VerifyLink = $"{request.VerifyEmailUrlPrefix}?ActivationKey={HttpUtility.UrlEncode(addedEmailAuthenticator.ActivationKey)}";
+
+            string VerifyLink = $"http://localhost:4200/welcome?ActivationKey={HttpUtility.UrlEncode(addedEmailAuthenticator.ActivationKey)}";
+
 
             string htmlFilePath = Path.Combine("wwwroot", "emails", "EmailVerify.html");
 

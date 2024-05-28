@@ -77,22 +77,6 @@ public class CreateBootcampCommand
             var image = await _bootcampImageService.AddAsync(request.File, ImageToAdd);
             item.BootcampImageId = image.Id;
             await _bootcampRepository.UpdateAsync(item);
-            /*
-            IElasticSearchResult result = await _elasticSearch.CreateNewIndexAsync(
-                new IndexModel
-                {
-                    IndexName="bootcamps",
-                    AliasName="abootcamps",
-                    NumberOfReplicas=1,
-                    NumberOfShards=1,
-                });
-            ElasticSearchInsertUpdateModel model =
-                new(1,"bootcamps",
-                     item);
-
-            await _elasticSearch.InsertAsync(model);
-            IEnumerable<IndexName> result3 = _elasticSearch.GetIndexList().Keys;
-          */
 
             CreatedBootcampResponse response = _mapper.Map<CreatedBootcampResponse>(bootcamp);
             return response;
