@@ -9,6 +9,8 @@ using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.Announcements.Constants.AnnouncementsOperationClaims;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 
 namespace Application.Features.Announcements.Commands.Update;
 
@@ -18,7 +20,7 @@ public class UpdateAnnouncementCommand : IRequest<UpdatedAnnouncementResponse>, 
     public required string Header { get; set; }
     public required string Description { get; set; }
 
-    public string[] Roles => [Admin, Write, AnnouncementsOperationClaims.Update];
+    public string[] Roles => [Admin, Write, AnnouncementsOperationClaims.Update, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }

@@ -1,3 +1,4 @@
+using Application.Features.Employees.Constants;
 using Application.Features.Instructors.Constants;
 using Application.Features.Instructors.Rules;
 using Application.Services.Repositories;
@@ -27,8 +28,9 @@ public class UpdateInstructorCommand
     public string Description { get; set; }
     public string NationalIdentity { get; set; }
     public string CompanyName { get; set; }
+    public string Email { get; set; }
 
-    public string[] Roles => [Admin, Write, InstructorsOperationClaims.Update , InstructorsOperationClaims.InstructorRole];
+    public string[] Roles => [Admin, Write, InstructorsOperationClaims.Update, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }

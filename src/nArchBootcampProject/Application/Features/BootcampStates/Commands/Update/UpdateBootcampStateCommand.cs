@@ -1,5 +1,7 @@
 using Application.Features.BootcampStates.Constants;
 using Application.Features.BootcampStates.Rules;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -22,7 +24,7 @@ public class UpdateBootcampStateCommand
     public short Id { get; set; }
     public string Name { get; set; }
 
-    public string[] Roles => [Admin, Write, BootcampStatesOperationClaims.Update];
+    public string[] Roles => [Admin, Write, BootcampStatesOperationClaims.Update, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }

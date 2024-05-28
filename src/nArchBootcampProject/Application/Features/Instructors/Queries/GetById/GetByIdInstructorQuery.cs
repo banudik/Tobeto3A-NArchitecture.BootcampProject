@@ -1,3 +1,4 @@
+using Application.Features.Employees.Constants;
 using Application.Features.Instructors.Constants;
 using Application.Features.Instructors.Rules;
 using Application.Services.Repositories;
@@ -13,7 +14,7 @@ public class GetByIdInstructorQuery : IRequest<GetByIdInstructorResponse>, ISecu
 {
     public Guid Id { get; set; }
 
-    public string[] Roles => [Admin, Read, InstructorsOperationClaims.InstructorRole];
+    public string[] Roles => [Admin, Read, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public class GetByIdInstructorQueryHandler : IRequestHandler<GetByIdInstructorQuery, GetByIdInstructorResponse>
     {

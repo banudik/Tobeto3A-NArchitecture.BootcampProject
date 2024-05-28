@@ -10,6 +10,8 @@ using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.Announcements.Constants.AnnouncementsOperationClaims;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 
 namespace Application.Features.Announcements.Commands.Delete;
 
@@ -17,7 +19,7 @@ public class DeleteAnnouncementCommand : IRequest<DeletedAnnouncementResponse>, 
 {
     public int Id { get; set; }
 
-    public string[] Roles => [Admin, Write, AnnouncementsOperationClaims.Delete];
+    public string[] Roles => [Admin, Write, AnnouncementsOperationClaims.Delete, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }

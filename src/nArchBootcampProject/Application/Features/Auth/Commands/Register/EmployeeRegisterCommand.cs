@@ -1,17 +1,33 @@
 ﻿using Application.Features.Auth.Rules;
+using Application.Features.Employees.Constants;
 using Application.Services.AuthService;
 using Application.Services.Repositories;
 using Domain.Entities;
 using MediatR;
+using NArchitecture.Core.Application.Pipelines.Authorization;
+using NArchitecture.Core.Application.Pipelines.Caching;
+using NArchitecture.Core.Application.Pipelines.Logging;
+using NArchitecture.Core.Application.Pipelines.Transaction;
 using NArchitecture.Core.Security.Hashing;
 using NArchitecture.Core.Security.JWT;
+using System.ComponentModel;
 
 namespace Application.Features.Auth.Commands.Register;
 
-public class EmployeeRegisterCommand : IRequest<RegisteredResponse>
+public class EmployeeRegisterCommand : IRequest<RegisteredResponse>,
+        ISecuredRequest,
+        ICacheRemoverRequest,
+        ILoggableRequest,
+        ITransactionalRequest
 {
     public EmployeeRegisterDto UserForRegisterDto { get; set; }
     public string IpAddress { get; set; }
+
+    public string[] Roles => [EmployeesOperationClaims.Admin, EmployeesOperationClaims.Write, EmployeesOperationClaims.Create];
+
+    public bool BypassCache { get; }
+    public string? CacheKey { get; }
+    public string[]? CacheGroupKey => ["GetEmployees"];
 
     public EmployeeRegisterCommand()
     {

@@ -1,5 +1,7 @@
 using Application.Features.Bootcamps.Constants;
 using Application.Features.Bootcamps.Rules;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 using Application.Services.BootcampImages;
 using Application.Services.ImageService;
 using Application.Services.Repositories;
@@ -28,11 +30,11 @@ public class UpdateBootcampCommand
     public Guid InstructorId { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
-    public IFormFile? file { get; set; }
+    public IFormFile? File { get; set; }
     public short BootcampStateId { get; set; }
     public string Description { get; set; }
 
-    public string[] Roles => [Admin, Write, BootcampsOperationClaims.Update];
+    public string[] Roles => [Admin, Write, BootcampsOperationClaims.Update, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
@@ -71,9 +73,9 @@ public class UpdateBootcampCommand
             await _bootcampBusinessRules.BootcampShouldExistWhenSelected(bootcamp);
             bootcamp = _mapper.Map(request, bootcamp);
 
-            if (request.file != null)
+            if (request.File != null)
             {
-                var image = await _bootcampImageService.UpdateAsync(request.file, bootcamp.BootcampImage);
+                var image = await _bootcampImageService.UpdateAsync(request.File, bootcamp.BootcampImage);
                 
             }
 

@@ -1,8 +1,11 @@
 using Application.Features.ApplicationInformations.Constants;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Pipelines.Caching;
 using NArchitecture.Core.Application.Requests;
@@ -19,7 +22,7 @@ public class GetListApplicationInformationQuery
 {
     public PageRequest PageRequest { get; set; }
 
-    public string[] Roles => [Admin, Read];
+    public string[] Roles => [Admin, Read, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public bool BypassCache { get; }
     public string? CacheKey => $"GetListApplicationInformations({PageRequest.PageIndex},{PageRequest.PageSize})";
@@ -49,7 +52,8 @@ public class GetListApplicationInformationQuery
             IPaginate<ApplicationInformation> applicationInformations = await _applicationInformationRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize,
-                cancellationToken: cancellationToken
+                cancellationToken: cancellationToken,
+                include:x=>x.Include(p=>p.Bootcamp).Include(p=>p.Applicant).Include(p=>p.ApplicationStateInformation)
             );
 
             GetListResponse<GetListApplicationInformationListItemDto> response = _mapper.Map<

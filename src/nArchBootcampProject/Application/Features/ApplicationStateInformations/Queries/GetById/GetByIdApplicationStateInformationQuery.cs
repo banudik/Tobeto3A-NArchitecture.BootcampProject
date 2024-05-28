@@ -1,5 +1,7 @@
 using Application.Features.ApplicationStateInformations.Constants;
 using Application.Features.ApplicationStateInformations.Rules;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -13,7 +15,7 @@ public class GetByIdApplicationStateInformationQuery : IRequest<GetByIdApplicati
 {
     public short Id { get; set; }
 
-    public string[] Roles => [Admin, Read];
+    public string[] Roles => [Admin, Read, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public class GetByIdApplicationStateInformationQueryHandler
         : IRequestHandler<GetByIdApplicationStateInformationQuery, GetByIdApplicationStateInformationResponse>

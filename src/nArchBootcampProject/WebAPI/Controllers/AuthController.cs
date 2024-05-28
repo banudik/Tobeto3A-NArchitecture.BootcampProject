@@ -1,12 +1,16 @@
-﻿using Application.Features.Auth.Commands.EnableEmailAuthenticator;
+﻿using Application.Features.Applicants.Commands.Update;
+using Application.Features.Auth.Commands.EnableEmailAuthenticator;
 using Application.Features.Auth.Commands.EnableOtpAuthenticator;
+using Application.Features.Auth.Commands.ForgotPassword;
 using Application.Features.Auth.Commands.Login;
 using Application.Features.Auth.Commands.RefreshToken;
 using Application.Features.Auth.Commands.Register;
+using Application.Features.Auth.Commands.ResetPassword;
 using Application.Features.Auth.Commands.RevokeToken;
 using Application.Features.Auth.Commands.VerifyEmailAuthenticator;
 using Application.Features.Auth.Commands.VerifyOtpAuthenticator;
 using Domain.Entities;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using NArchitecture.Core.Application.Dtos;
@@ -66,6 +70,32 @@ public class AuthController : BaseController
         return Created(uri: "", result.AccessToken);
     }
 
+    [HttpPost("ForgotPassword")]
+    public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDto forgotPasswordDto)
+    {
+       
+        ForgotPasswordCommand forgotPasswordCommand = new() { ForgotPasswordDto = forgotPasswordDto,IpAddress = getIpAddress() };
+        await Mediator.Send(forgotPasswordCommand);
+        return Ok("mail gönderildi");
+    }
+
+    [HttpPost("ResetPassword")]
+    public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
+    {
+       
+        ResetPasswordCommand resetPasswordCommand = new()
+            {
+                UserId = getUserIdFromRequest(),
+                ResetPasswordDtos = resetPasswordDto
+            };
+
+        await Mediator.Send(resetPasswordCommand);
+
+        return Ok();
+    }
+
+
+
     [HttpGet("RefreshToken")]
     public async Task<IActionResult> RefreshToken()
     {
@@ -84,6 +114,7 @@ public class AuthController : BaseController
         RevokedTokenResponse result = await Mediator.Send(revokeTokenCommand);
         return Ok(result);
     }
+
 
     [HttpGet("EnableEmailAuthenticator")]
     public async Task<IActionResult> EnableEmailAuthenticator()

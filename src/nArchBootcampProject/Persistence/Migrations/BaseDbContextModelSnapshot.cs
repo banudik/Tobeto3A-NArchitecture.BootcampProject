@@ -303,6 +303,42 @@ namespace Persistence.Migrations
                     b.ToTable("BootcampStates", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Entities.Certificate", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Id");
+
+                    b.Property<int>("BootcampId")
+                        .HasColumnType("int")
+                        .HasColumnName("BootcampId");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreatedDate");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletedDate");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("UpdatedDate");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("ApplicantId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BootcampId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Certificates", (string)null);
+                });
+
             modelBuilder.Entity("Domain.Entities.Chapter", b =>
                 {
                     b.Property<int>("Id")
@@ -429,6 +465,12 @@ namespace Persistence.Migrations
                     b.Property<bool>("IsVerified")
                         .HasColumnType("bit")
                         .HasColumnName("IsVerified");
+
+                    b.Property<string>("ResetPasswordToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ResetPasswordTokenExpiry")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2")
@@ -1063,6 +1105,42 @@ namespace Persistence.Migrations
                             Id = 98,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Announcements.Delete"
+                        },
+                        new
+                        {
+                            Id = 99,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Certificates.Admin"
+                        },
+                        new
+                        {
+                            Id = 100,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Certificates.Read"
+                        },
+                        new
+                        {
+                            Id = 101,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Certificates.Write"
+                        },
+                        new
+                        {
+                            Id = 102,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Certificates.Create"
+                        },
+                        new
+                        {
+                            Id = 103,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Certificates.Update"
+                        },
+                        new
+                        {
+                            Id = 104,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Certificates.Delete"
                         });
                 });
 
@@ -1236,16 +1314,16 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a19eb723-158a-4444-ba01-8deeed57720f"),
+                            Id = new Guid("c0f27fe8-6047-4a13-befc-5ca7d301969a"),
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfBirth = new DateTime(2024, 4, 25, 13, 54, 59, 545, DateTimeKind.Local).AddTicks(9907),
+                            DateOfBirth = new DateTime(2024, 5, 19, 0, 33, 59, 993, DateTimeKind.Local).AddTicks(6475),
                             Email = "pair6@pair6.com",
                             FirstName = "Banu",
                             LastName = "Dik",
                             NationalIdentity = "TC1246",
-                            PasswordHash = new byte[] { 239, 218, 203, 150, 116, 81, 185, 143, 60, 254, 206, 63, 237, 73, 179, 96, 80, 140, 41, 160, 182, 29, 185, 210, 141, 86, 197, 231, 93, 196, 162, 203, 193, 159, 56, 223, 95, 84, 67, 210, 250, 231, 137, 220, 95, 145, 197, 54, 102, 236, 62, 207, 193, 9, 50, 37, 70, 214, 172, 132, 87, 208, 117, 46 },
-                            PasswordSalt = new byte[] { 67, 34, 14, 74, 168, 152, 73, 25, 179, 28, 132, 182, 126, 40, 9, 45, 198, 243, 112, 135, 252, 159, 67, 100, 183, 136, 148, 154, 231, 186, 238, 159, 198, 103, 242, 74, 184, 244, 238, 209, 210, 185, 114, 187, 201, 241, 84, 153, 168, 1, 176, 90, 45, 155, 63, 248, 78, 17, 224, 101, 9, 201, 179, 2, 237, 15, 116, 104, 242, 96, 7, 82, 41, 161, 31, 118, 232, 88, 118, 251, 189, 217, 84, 203, 236, 191, 99, 119, 160, 170, 105, 142, 124, 216, 148, 218, 202, 170, 213, 46, 30, 0, 73, 34, 191, 137, 188, 107, 134, 100, 88, 102, 244, 156, 79, 192, 133, 243, 130, 105, 32, 163, 166, 138, 200, 104, 7, 102 },
+                            PasswordHash = new byte[] { 78, 16, 245, 24, 34, 227, 83, 124, 114, 134, 111, 13, 162, 245, 179, 92, 103, 247, 168, 0, 118, 86, 58, 93, 136, 218, 45, 42, 156, 136, 190, 154, 26, 150, 86, 218, 65, 197, 80, 222, 124, 250, 190, 251, 5, 214, 231, 92, 246, 1, 7, 204, 180, 141, 154, 21, 108, 219, 20, 6, 203, 86, 85, 178 },
+                            PasswordSalt = new byte[] { 63, 133, 190, 230, 69, 217, 137, 225, 68, 226, 218, 169, 135, 47, 127, 128, 112, 159, 94, 138, 116, 210, 79, 241, 168, 47, 139, 211, 166, 196, 246, 210, 57, 184, 10, 34, 139, 130, 164, 201, 114, 164, 252, 81, 202, 157, 110, 46, 205, 227, 103, 225, 123, 31, 60, 90, 167, 83, 137, 204, 124, 106, 15, 17, 133, 228, 162, 177, 114, 182, 151, 231, 251, 175, 208, 168, 147, 230, 83, 125, 28, 17, 197, 229, 227, 141, 21, 97, 29, 113, 135, 49, 194, 63, 139, 143, 237, 33, 89, 213, 42, 87, 119, 223, 16, 205, 24, 188, 234, 91, 252, 41, 112, 41, 207, 46, 204, 217, 142, 250, 23, 222, 139, 169, 169, 219, 249, 128 },
                             UserName = "banudik"
                         });
                 });
@@ -1288,10 +1366,10 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("90e0542e-baa0-48fb-889f-4a80f487d782"),
+                            Id = new Guid("26b68322-ded4-48e1-89b4-98e9aefa0342"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OperationClaimId = 1,
-                            UserId = new Guid("a19eb723-158a-4444-ba01-8deeed57720f")
+                            UserId = new Guid("c0f27fe8-6047-4a13-befc-5ca7d301969a")
                         });
                 });
 
@@ -1403,10 +1481,29 @@ namespace Persistence.Migrations
                     b.Navigation("Bootcamp");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Certificate", b =>
+                {
+                    b.HasOne("Domain.Entities.Bootcamp", "Bootcamp")
+                        .WithMany("Certificate")
+                        .HasForeignKey("BootcampId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.User", "User")
+                        .WithMany("Certificate")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Bootcamp");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Domain.Entities.Chapter", b =>
                 {
                     b.HasOne("Domain.Entities.Bootcamp", "Bootcamp")
-                        .WithMany()
+                        .WithMany("Chapters")
                         .HasForeignKey("BootcampId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -1517,10 +1614,16 @@ namespace Persistence.Migrations
                     b.Navigation("ApplicationInformations");
 
                     b.Navigation("BootcampImage");
+
+                    b.Navigation("Certificate");
+                    
+                    b.Navigation("Chapters");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
                 {
+                    b.Navigation("Certificate");
+
                     b.Navigation("EmailAuthenticators");
 
                     b.Navigation("OtpAuthenticators");

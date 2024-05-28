@@ -1,17 +1,34 @@
 ﻿using Application.Features.Auth.Rules;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 using Application.Services.AuthService;
 using Application.Services.Repositories;
 using Domain.Entities;
 using MediatR;
+using NArchitecture.Core.Application.Pipelines.Authorization;
+using NArchitecture.Core.Application.Pipelines.Caching;
+using NArchitecture.Core.Application.Pipelines.Logging;
+using NArchitecture.Core.Application.Pipelines.Transaction;
 using NArchitecture.Core.Security.Hashing;
 using NArchitecture.Core.Security.JWT;
+using System.ComponentModel;
 
 namespace Application.Features.Auth.Commands.Register;
 
-public class InstructorRegisterCommand : IRequest<RegisteredResponse>
+public class InstructorRegisterCommand : IRequest<RegisteredResponse>,
+        ISecuredRequest,
+        ICacheRemoverRequest,
+        ILoggableRequest,
+        ITransactionalRequest
 {
     public InstructorRegisterDto UserForRegisterDto { get; set; }
     public string IpAddress { get; set; }
+
+    public string[] Roles => [InstructorsOperationClaims.Admin, InstructorsOperationClaims.Write, InstructorsOperationClaims.Create, EmployeesOperationClaims.EmployeeRole];
+
+    public bool BypassCache { get; }
+    public string? CacheKey { get; }
+    public string[]? CacheGroupKey => ["GetInstructors"];
 
     public InstructorRegisterCommand()
     {
@@ -67,8 +84,10 @@ public class InstructorRegisterCommand : IRequest<RegisteredResponse>
                     CompanyName = request.UserForRegisterDto.CompanyName,
                     UserName = request.UserForRegisterDto.UserName,
                     Email = request.UserForRegisterDto.Email,
+                    Description = request.UserForRegisterDto.Description,
                     PasswordHash = passwordHash,
                     PasswordSalt = passwordSalt,
+                    Description = request.UserForRegisterDto.Description,
                 };
             Instructor createdUser = await _instructorRepository.AddAsync(newUser);
 

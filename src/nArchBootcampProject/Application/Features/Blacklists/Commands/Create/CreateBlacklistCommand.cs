@@ -1,5 +1,7 @@
 using Application.Features.Blacklists.Constants;
 using Application.Features.Blacklists.Rules;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -21,9 +23,9 @@ public class CreateBlacklistCommand
 {
     public string Reason { get; set; }
     public DateTime Date { get; set; }
-    public int ApplicantId { get; set; }
+    public Guid ApplicantId { get; set; }
 
-    public string[] Roles => [Admin, Write, BlacklistsOperationClaims.Create];
+    public string[] Roles => [Admin, Write, BlacklistsOperationClaims.Create, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }

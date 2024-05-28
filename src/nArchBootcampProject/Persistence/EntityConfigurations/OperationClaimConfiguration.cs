@@ -18,6 +18,7 @@ using NArchitecture.Core.Security.Constants;
 using Application.Features.Chapters.Constants;
 using Application.Features.Comments.Constants;
 using Application.Features.Announcements.Constants;
+using Application.Features.Certificates.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -276,6 +277,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = AnnouncementsOperationClaims.Create },
                 new() { Id = ++lastId, Name = AnnouncementsOperationClaims.Update },
                 new() { Id = ++lastId, Name = AnnouncementsOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region Certificates CRUD
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = CertificatesOperationClaims.Admin },
+                new() { Id = ++lastId, Name = CertificatesOperationClaims.Read },
+                new() { Id = ++lastId, Name = CertificatesOperationClaims.Write },
+                new() { Id = ++lastId, Name = CertificatesOperationClaims.Create },
+                new() { Id = ++lastId, Name = CertificatesOperationClaims.Update },
+                new() { Id = ++lastId, Name = CertificatesOperationClaims.Delete },
             ]
         );
         #endregion

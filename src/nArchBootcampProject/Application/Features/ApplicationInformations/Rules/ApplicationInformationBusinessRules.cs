@@ -12,15 +12,17 @@ public class ApplicationInformationBusinessRules : BaseBusinessRules
     private readonly IApplicationInformationRepository _applicationInformationRepository;
     private readonly ILocalizationService _localizationService;
     private readonly IApplicantRepository _applicantRepository;
+    private readonly IBlacklistRepository _blacklistRepository;
 
     public ApplicationInformationBusinessRules(
         IApplicationInformationRepository applicationInformationRepository,
         ILocalizationService localizationService, IApplicantRepository applicantRepository
-    )
+, IBlacklistRepository blacklistRepository)
     {
         _applicationInformationRepository = applicationInformationRepository;
         _localizationService = localizationService;
         _applicantRepository = applicantRepository;
+        _blacklistRepository = blacklistRepository;
     }
 
     private async Task throwBusinessException(string messageKey)
@@ -62,6 +64,15 @@ public class ApplicationInformationBusinessRules : BaseBusinessRules
         if (item == null)
         {
             throw new BusinessException("You are not an applicant!");
+        }
+    }
+
+    public async Task CheckIfApplicantIsBlacklisted(Guid applicantId)
+    {
+        var item = await _blacklistRepository.GetAsync(predicate:p=>p.ApplicantId==applicantId);
+        if(item != null)
+        {
+            throw new BusinessException(ApplicationInformationsBusinessMessages.ApplicantIsBlacklisted);
         }
     }
 }
