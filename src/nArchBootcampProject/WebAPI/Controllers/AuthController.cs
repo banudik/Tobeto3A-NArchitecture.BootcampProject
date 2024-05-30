@@ -44,6 +44,7 @@ public class AuthController : BaseController
         return Ok(result.ToHttpResponse());
     }
 
+    //Ogrenci kayıtol
     [HttpPost("RegisterApplicant")]
     public async Task<IActionResult> Register([FromBody] ApplicantRegisterDto userForRegisterDto)
     {
@@ -53,6 +54,7 @@ public class AuthController : BaseController
         return Created(uri: "", result.AccessToken);
     }
 
+    //Calisan/Admin kayıtol
     [HttpPost("RegisterEmployee")]
     public async Task<IActionResult> Register([FromBody] EmployeeRegisterDto userForRegisterDto)
     {
@@ -62,6 +64,7 @@ public class AuthController : BaseController
         return Created(uri: "", result.AccessToken);
     }
 
+    //Egitmen kayıtol
     [HttpPost("RegisterInstructor")]
     public async Task<IActionResult> Register([FromBody] InstructorRegisterDto userForRegisterDto)
     {
@@ -144,7 +147,8 @@ public class AuthController : BaseController
         return Ok(result);
     }
 
-    //Email doğrulama postası üzerindeki kod ile mail onaylanır
+    //EnableEmailAuthenticator endpointinin oluşturduğu kodu doğrular,User tablosunda EmailVerify kısmını true'ya çevirir
+
     [HttpGet("VerifyEmailAuthenticator")]
     public async Task<IActionResult> VerifyEmailAuthenticator(
         [FromQuery] VerifyEmailAuthenticatorCommand verifyEmailAuthenticatorCommand
