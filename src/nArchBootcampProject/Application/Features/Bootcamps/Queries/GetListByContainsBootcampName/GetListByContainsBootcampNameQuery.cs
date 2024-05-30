@@ -17,7 +17,7 @@ using static Application.Features.Bootcamps.Constants.BootcampsOperationClaims;
 
 namespace Application.Features.Bootcamps.Queries.GetList;
 
-public class GetListByContainsBootcampNameQuery : IRequest<GetListResponse<GetListBootcampListItemDto>>, ISecuredRequest
+public class GetListByContainsBootcampNameQuery : IRequest<GetListResponse<GetListBootcampListItemDto>>//, ISecuredRequest
 {
     public PageRequest PageRequest { get; set; }
     public string? Search { get; set; }
