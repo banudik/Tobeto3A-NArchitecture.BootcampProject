@@ -46,7 +46,7 @@ public class CreateChapterCommand : IRequest<CreatedChapterResponse>, ISecuredRe
         public async Task<CreatedChapterResponse> Handle(CreateChapterCommand request, CancellationToken cancellationToken)
         {
             Chapter chapter = _mapper.Map<Chapter>(request);
-
+            await _chapterBusinessRules.CheckChapterSortIfDuplicate(null, request.BootcampId, request.Sort,cancellationToken);
             await _chapterRepository.AddAsync(chapter);
 
             CreatedChapterResponse response = _mapper.Map<CreatedChapterResponse>(chapter);

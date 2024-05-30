@@ -43,8 +43,16 @@ public class DeleteChapterCommand : IRequest<DeletedChapterResponse>, ISecuredRe
         {
             Chapter? chapter = await _chapterRepository.GetAsync(predicate: c => c.Id == request.Id, cancellationToken: cancellationToken);
             await _chapterBusinessRules.ChapterShouldExistWhenSelected(chapter);
+            try
+            {
+                await _chapterRepository.DeleteAsync(chapter,permanent:true);
+            }
+            catch (Exception e)
+            {
 
-            await _chapterRepository.DeleteAsync(chapter!);
+                throw e;
+            }
+            
 
             DeletedChapterResponse response = _mapper.Map<DeletedChapterResponse>(chapter);
             return response;

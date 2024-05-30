@@ -9,6 +9,7 @@ using static Application.Features.Chapters.Constants.ChaptersOperationClaims;
 using Application.Features.Applicants.Constants;
 using Application.Features.Employees.Constants;
 using Application.Features.Instructors.Constants;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Chapters.Queries.GetById;
 
@@ -33,7 +34,7 @@ public class GetByIdChapterQuery : IRequest<GetByIdChapterResponse>, ISecuredReq
 
         public async Task<GetByIdChapterResponse> Handle(GetByIdChapterQuery request, CancellationToken cancellationToken)
         {
-            Chapter? chapter = await _chapterRepository.GetAsync(predicate: c => c.Id == request.Id, cancellationToken: cancellationToken);
+            Chapter? chapter = await _chapterRepository.GetAsync(predicate: c => c.Id == request.Id, cancellationToken: cancellationToken,include:p=>p.Include(x=>x.Bootcamp));
             await _chapterBusinessRules.ChapterShouldExistWhenSelected(chapter);
 
             GetByIdChapterResponse response = _mapper.Map<GetByIdChapterResponse>(chapter);

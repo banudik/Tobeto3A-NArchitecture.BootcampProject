@@ -1,5 +1,6 @@
 using Application.Features.Employees.Constants;
 using Application.Features.Employees.Rules;
+using Application.Features.Users.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -8,6 +9,8 @@ using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Pipelines.Caching;
 using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
+using NArchitecture.Core.Security.Entities;
+using NArchitecture.Core.Security.Hashing;
 using static Application.Features.Employees.Constants.EmployeesOperationClaims;
 
 namespace Application.Features.Employees.Commands.Update;
@@ -26,6 +29,8 @@ public class UpdateEmployeeCommand
     public DateTime DateOfBirth { get; set; }
     public string NationalIdentity { get; set; }
     public string Position { get; set; }
+    public string? Password { get; set; }
+    public string? NewPassword { get; set; }
 
     public string[] Roles => [Admin, Write, EmployeesOperationClaims.Update];
 
@@ -57,7 +62,21 @@ public class UpdateEmployeeCommand
                 cancellationToken: cancellationToken
             );
             await _employeeBusinessRules.EmployeeShouldExistWhenSelected(employee);
+            await _employeeBusinessRules.EmployeeEmailShouldNotExistsWhenUpdate(employee!.Id, employee.Email);
+            
             employee = _mapper.Map(request, employee);
+
+            if (request.NewPassword != null && !string.IsNullOrWhiteSpace(request.NewPassword))
+            {
+                await _employeeBusinessRules.EmployeePasswordShouldBeMatched(user: employee!, request.Password);
+                HashingHelper.CreatePasswordHash(
+                    request.NewPassword,
+                    passwordHash: out byte[] passwordHash,
+                    passwordSalt: out byte[] passwordSalt
+                );
+                employee!.PasswordHash = passwordHash;
+                employee!.PasswordSalt = passwordSalt;
+            }
 
             await _employeeRepository.UpdateAsync(employee!);
 
