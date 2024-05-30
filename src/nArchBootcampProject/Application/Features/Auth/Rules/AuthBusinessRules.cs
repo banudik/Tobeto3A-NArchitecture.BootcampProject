@@ -37,7 +37,7 @@ public class AuthBusinessRules : BaseBusinessRules
     {
         if (emailAuthenticator.ResetPasswordToken is false && emailAuthenticator.ResetPasswordTokenExpiry < DateTime.UtcNow)
         {
-            throw new Exception(AuthMessages.PasswordResetRequestExpired);
+            await throwBusinessException(AuthMessages.PasswordResetRequestExpired);
         }
 
     }
@@ -47,7 +47,7 @@ public class AuthBusinessRules : BaseBusinessRules
         bool isSame = HashingHelper.VerifyPasswordHash(newPassword, user.PasswordHash, user.PasswordSalt);
         if (isSame)
         {
-            throw new Exception("Yeni þifre, eski þifre ile ayný olamaz.");
+            await throwBusinessException("Yeni þifre, eski þifre ile ayný olamaz.");
         }
     }
 
