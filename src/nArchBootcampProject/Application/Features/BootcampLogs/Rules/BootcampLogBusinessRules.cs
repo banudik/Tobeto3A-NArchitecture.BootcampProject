@@ -39,4 +39,19 @@ public class BootcampLogBusinessRules : BaseBusinessRules
         );
         await BootcampLogShouldExistWhenSelected(bootcampLog);
     }
+
+    public async Task CheckIfLogAlreadyExist(Guid UserId,int bootcampId,int chapterId, CancellationToken cancellationToken)
+    {
+        BootcampLog? bootcampLog = await _bootcampLogRepository.GetAsync(
+            predicate: bl => bl.UserId == UserId && bl.BootcampId == bootcampId && bl.ChapterId == chapterId,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+
+        if (bootcampLog != null)
+        {
+            throw new BusinessException("Log already exist!");
+        }
+            
+    }
 }
