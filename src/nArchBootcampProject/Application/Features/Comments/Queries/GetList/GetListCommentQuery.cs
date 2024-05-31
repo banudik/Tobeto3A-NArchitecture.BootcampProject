@@ -44,7 +44,7 @@ public class GetListCommentQuery : IRequest<GetListResponse<GetListCommentListIt
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize, 
                 cancellationToken: cancellationToken,
-                include: x => x.Include(p => p.Chapter.Bootcamp).Include(p => p.User).Include(p => p.Chapter)
+                include: x => x.Include(p => p.Bootcamp).Include(p => p.User)
             );
 
             GetListResponse<GetListCommentListItemDto> response = _mapper.Map<GetListResponse<GetListCommentListItemDto>>(comments);

@@ -45,4 +45,18 @@ public class ApplicationStateInformationBusinessRules : BaseBusinessRules
         );
         await ApplicationStateInformationShouldExistWhenSelected(applicationStateInformation);
     }
+
+    public async Task CheckIfDefaultState(short id, CancellationToken cancellationToken)
+    {
+        var state = await _applicationStateInformationRepository.GetAsync(
+            predicate: x => x.Id == id,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+            );
+
+        if(id == 1 || id == 2 || id == 3 || id == 4)    //default states
+        {
+            throw new BusinessException("You can not edit default states!");
+        }
+    }
 }

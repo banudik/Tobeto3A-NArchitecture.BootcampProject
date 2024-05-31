@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -11,9 +12,11 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    partial class BaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240529210802_may30")]
+    partial class may30
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,27 +138,27 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = (short)1,
-                            CreatedDate = new DateTime(2024, 5, 31, 13, 7, 21, 686, DateTimeKind.Utc).AddTicks(6445),
-                            Name = "Not Started"
-                        },
-                        new
-                        {
                             Id = (short)2,
-                            CreatedDate = new DateTime(2024, 5, 31, 13, 7, 21, 686, DateTimeKind.Utc).AddTicks(6447),
-                            Name = "Started"
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Received"
                         },
                         new
                         {
                             Id = (short)3,
-                            CreatedDate = new DateTime(2024, 5, 31, 13, 7, 21, 686, DateTimeKind.Utc).AddTicks(6448),
-                            Name = "On Hold"
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Approved"
                         },
                         new
                         {
                             Id = (short)4,
-                            CreatedDate = new DateTime(2024, 5, 31, 13, 7, 21, 686, DateTimeKind.Utc).AddTicks(6449),
-                            Name = "Finished"
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Un Approved"
+                        },
+                        new
+                        {
+                            Id = (short)5,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Cancelled"
                         });
                 });
 
@@ -378,25 +381,25 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = (short)1,
-                            CreatedDate = new DateTime(2024, 5, 31, 13, 7, 21, 688, DateTimeKind.Utc).AddTicks(4198),
+                            CreatedDate = new DateTime(2024, 5, 29, 21, 8, 2, 246, DateTimeKind.Utc).AddTicks(2571),
                             Name = "Not Started"
                         },
                         new
                         {
                             Id = (short)2,
-                            CreatedDate = new DateTime(2024, 5, 31, 13, 7, 21, 688, DateTimeKind.Utc).AddTicks(4199),
+                            CreatedDate = new DateTime(2024, 5, 29, 21, 8, 2, 246, DateTimeKind.Utc).AddTicks(2574),
                             Name = "Started"
                         },
                         new
                         {
                             Id = (short)3,
-                            CreatedDate = new DateTime(2024, 5, 31, 13, 7, 21, 688, DateTimeKind.Utc).AddTicks(4200),
+                            CreatedDate = new DateTime(2024, 5, 29, 21, 8, 2, 246, DateTimeKind.Utc).AddTicks(2576),
                             Name = "On Hold"
                         },
                         new
                         {
                             Id = (short)4,
-                            CreatedDate = new DateTime(2024, 5, 31, 13, 7, 21, 688, DateTimeKind.Utc).AddTicks(4201),
+                            CreatedDate = new DateTime(2024, 5, 29, 21, 8, 2, 246, DateTimeKind.Utc).AddTicks(2577),
                             Name = "Finished"
                         });
                 });
@@ -500,9 +503,9 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BootcampId")
+                    b.Property<int>("ChapterId")
                         .HasColumnType("int")
-                        .HasColumnName("BootcampId");
+                        .HasColumnName("ChapterId");
 
                     b.Property<string>("Context")
                         .IsRequired()
@@ -531,7 +534,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BootcampId");
+                    b.HasIndex("ChapterId");
 
                     b.HasIndex("UserId");
 
@@ -1445,16 +1448,16 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f9a0e49e-2cfe-436b-aa43-0365de283a09"),
+                            Id = new Guid("b3c25812-4065-49df-b45c-18a94f242b6a"),
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfBirth = new DateTime(2024, 5, 31, 16, 7, 21, 691, DateTimeKind.Local).AddTicks(4723),
+                            DateOfBirth = new DateTime(2024, 5, 30, 0, 8, 2, 249, DateTimeKind.Local).AddTicks(6975),
                             Email = "pair6@pair6.com",
                             FirstName = "Banu",
                             LastName = "Dik",
                             NationalIdentity = "TC1246",
-                            PasswordHash = new byte[] { 124, 37, 194, 75, 20, 12, 66, 141, 19, 48, 19, 111, 148, 247, 175, 192, 37, 36, 122, 178, 14, 5, 184, 185, 79, 105, 17, 113, 223, 168, 239, 143, 200, 174, 29, 239, 233, 52, 93, 125, 139, 15, 252, 140, 140, 81, 233, 215, 81, 126, 246, 159, 170, 6, 157, 170, 226, 74, 95, 91, 98, 84, 80, 169 },
-                            PasswordSalt = new byte[] { 250, 97, 132, 210, 203, 16, 184, 25, 237, 208, 66, 214, 46, 10, 199, 72, 84, 85, 3, 128, 82, 239, 213, 34, 135, 8, 175, 123, 252, 182, 210, 141, 172, 242, 65, 220, 226, 18, 24, 77, 101, 178, 161, 118, 2, 175, 134, 156, 99, 192, 118, 82, 230, 132, 139, 29, 168, 100, 251, 188, 105, 176, 184, 211, 110, 47, 35, 55, 72, 99, 6, 95, 193, 41, 103, 129, 111, 227, 14, 54, 250, 69, 117, 15, 188, 82, 17, 218, 33, 222, 18, 9, 65, 25, 28, 57, 231, 218, 198, 123, 2, 240, 203, 61, 215, 107, 192, 70, 58, 215, 20, 25, 12, 235, 220, 61, 67, 85, 255, 115, 149, 84, 203, 126, 159, 188, 102, 91 },
+                            PasswordHash = new byte[] { 151, 163, 212, 14, 215, 173, 128, 42, 88, 242, 134, 78, 123, 26, 2, 14, 196, 222, 22, 98, 102, 24, 132, 42, 49, 179, 15, 53, 251, 199, 167, 213, 180, 28, 137, 15, 58, 135, 166, 7, 148, 133, 202, 187, 182, 106, 240, 66, 165, 196, 221, 226, 82, 35, 218, 194, 98, 195, 24, 57, 172, 147, 195, 79 },
+                            PasswordSalt = new byte[] { 110, 0, 148, 186, 12, 146, 140, 14, 67, 136, 121, 28, 101, 200, 142, 192, 120, 165, 194, 89, 83, 91, 137, 59, 91, 202, 194, 213, 173, 85, 92, 45, 54, 102, 92, 94, 86, 68, 83, 176, 134, 14, 137, 178, 45, 26, 29, 201, 201, 214, 238, 223, 60, 5, 226, 213, 101, 111, 140, 200, 149, 155, 149, 162, 218, 128, 229, 57, 6, 19, 101, 145, 148, 242, 235, 41, 111, 192, 207, 182, 78, 91, 43, 91, 189, 206, 66, 61, 36, 51, 252, 78, 120, 12, 229, 80, 216, 109, 249, 137, 124, 187, 165, 172, 249, 65, 198, 188, 88, 235, 46, 197, 203, 90, 189, 72, 70, 56, 67, 235, 108, 171, 169, 226, 213, 79, 230, 79 },
                             UserName = "banudik"
                         });
                 });
@@ -1497,10 +1500,10 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0359ebdc-7434-49fe-9b4a-36324d41e688"),
+                            Id = new Guid("66117390-2807-4909-8909-96559b00178e"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OperationClaimId = 1,
-                            UserId = new Guid("f9a0e49e-2cfe-436b-aa43-0365de283a09")
+                            UserId = new Guid("b3c25812-4065-49df-b45c-18a94f242b6a")
                         });
                 });
 
@@ -1663,9 +1666,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Comment", b =>
                 {
-                    b.HasOne("Domain.Entities.Bootcamp", "Bootcamp")
+                    b.HasOne("Domain.Entities.Chapter", "Chapter")
                         .WithMany()
-                        .HasForeignKey("BootcampId")
+                        .HasForeignKey("ChapterId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -1675,7 +1678,7 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Bootcamp");
+                    b.Navigation("Chapter");
 
                     b.Navigation("User");
                 });

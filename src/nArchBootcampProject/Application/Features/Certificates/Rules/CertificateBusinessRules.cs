@@ -39,4 +39,19 @@ public class CertificateBusinessRules : BaseBusinessRules
         );
         await CertificateShouldExistWhenSelected(certificate);
     }
+
+    public async Task CheckIfCertificateAlreadyCreated(Guid id,int bootcampId, CancellationToken cancellationToken)
+    {
+
+        Certificate? certificate = await _certificateRepository.GetAsync(
+            predicate: c=>c.UserId == id && c.BootcampId == bootcampId,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+        if(certificate != null)
+        {
+            throw new BusinessException("You Already Created This Certificate!");
+        }
+
+    }
 }
