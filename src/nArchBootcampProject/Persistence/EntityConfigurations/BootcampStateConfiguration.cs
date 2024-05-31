@@ -19,8 +19,6 @@ public class BootcampStateConfiguration : IEntityTypeConfiguration<BootcampState
         builder.Property(bs => bs.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(bs => !bs.DeletedDate.HasValue);
-
-        builder.HasData(_seeds);
     }
 
     public static short AdminId => 1;
@@ -53,5 +51,16 @@ public class BootcampStateConfiguration : IEntityTypeConfiguration<BootcampState
         );
 
         return featureOperationClaims;
+    }
+
+    private static BootcampState[] GetSeeds()
+    {
+        return
+        [
+                new BootcampState { Id = 1, Name = "Not Started", CreatedDate = DateTime.UtcNow },
+                new BootcampState { Id = 2, Name = "Started", CreatedDate = DateTime.UtcNow },
+                new BootcampState { Id = 3, Name = "On Hold", CreatedDate = DateTime.UtcNow },
+                new BootcampState { Id = 4, Name = "Finished", CreatedDate = DateTime.UtcNow }
+        ];
     }
 }

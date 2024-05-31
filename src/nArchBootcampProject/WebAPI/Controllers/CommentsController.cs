@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Application.Features.Bootcamps.Queries.GetList;
 using Application.Features.Bootcamps.Queries.getListDynamic;
 using NArchitecture.Core.Persistence.Dynamic;
+using Application.Features.Comments.Queries.GetListByBootcampId;
 
 namespace WebAPI.Controllers;
 
@@ -52,6 +53,14 @@ public class CommentsController : BaseController
     {
         GetListCommentQuery getListCommentQuery = new() { PageRequest = pageRequest };
         GetListResponse<GetListCommentListItemDto> response = await Mediator.Send(getListCommentQuery);
+        return Ok(response);
+    }
+
+    [HttpGet("getlistbybootcampid")]
+    public async Task<IActionResult> GetListByBootcampId([FromQuery] PageRequest pageRequest,int bootcampId)
+    {
+        GetListCommentByBootcampIdQuery getListCommentQuery = new() { PageRequest = pageRequest ,BootcampId = bootcampId };
+        GetListResponse<GetListCommentListByBootcampIdItemDto> response = await Mediator.Send(getListCommentQuery);
         return Ok(response);
     }
 
