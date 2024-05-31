@@ -10,7 +10,7 @@ using static Application.Features.Instructors.Constants.InstructorsOperationClai
 
 namespace Application.Features.Instructors.Queries.GetById;
 
-public class GetByIdInstructorQuery : IRequest<GetByIdInstructorResponse>, ISecuredRequest
+public class GetByIdInstructorQuery : IRequest<GetByIdInstructorResponse>//, ISecuredRequest
 {
     public Guid Id { get; set; }
 
