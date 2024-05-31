@@ -31,6 +31,7 @@ public class AuthController : BaseController
             ?? throw new NullReferenceException($"\"{configurationSection}\" section cannot found in configuration.");
     }
 
+    //Tüm kullanıcı tipleri için Giriş
     [HttpPost("Login")]
     public async Task<IActionResult> Login([FromBody] UserForLoginDto userForLoginDto)
     {
@@ -43,6 +44,7 @@ public class AuthController : BaseController
         return Ok(result.ToHttpResponse());
     }
 
+    //Ogrenci kayıtol
     [HttpPost("RegisterApplicant")]
     public async Task<IActionResult> Register([FromBody] ApplicantRegisterDto userForRegisterDto)
     {
@@ -52,6 +54,7 @@ public class AuthController : BaseController
         return Created(uri: "", result.AccessToken);
     }
 
+    //Calisan/Admin kayıtol
     [HttpPost("RegisterEmployee")]
     public async Task<IActionResult> Register([FromBody] EmployeeRegisterDto userForRegisterDto)
     {
@@ -61,6 +64,7 @@ public class AuthController : BaseController
         return Created(uri: "", result.AccessToken);
     }
 
+    //Egitmen kayıtol
     [HttpPost("RegisterInstructor")]
     public async Task<IActionResult> Register([FromBody] InstructorRegisterDto userForRegisterDto)
     {
@@ -70,6 +74,7 @@ public class AuthController : BaseController
         return Created(uri: "", result.AccessToken);
     }
 
+    //Şifre Sıfırlama maili gönderir, Kullanıcıyı şifre sıfırlama isteği yaptığı için işaretler
     [HttpPost("ForgotPassword")]
     public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDto forgotPasswordDto)
     {
@@ -79,6 +84,7 @@ public class AuthController : BaseController
         return Ok("mail gönderildi");
     }
 
+    //Yeni gelen şifreyi salt/hash leyip kayıt eder, Kullanıcıyı şifre sıfırlama isteği işaretini kaldırır
     [HttpPost("ResetPassword")]
     public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
     {
@@ -94,8 +100,7 @@ public class AuthController : BaseController
         return Ok();
     }
 
-
-
+    //Geçerli refreshToken ile yeni bir AccessToken alır
     [HttpGet("RefreshToken")]
     public async Task<IActionResult> RefreshToken()
     {
@@ -106,7 +111,8 @@ public class AuthController : BaseController
         return Created(uri: "", result.AccessToken);
     }
 
-    [HttpPut("RevokeToken")]
+    //İsteğin üzerindeki refreshTokeni alıp Revoke eder
+    [HttpGet("RevokeToken")]
     public async Task<IActionResult> RevokeToken([FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)] string? refreshToken)
     {
         RevokeTokenCommand revokeTokenCommand =
@@ -115,7 +121,7 @@ public class AuthController : BaseController
         return Ok(result);
     }
 
-
+    //Token üzerindeki UserId'yi alır ve kullanıcıya email doğrulama postası gönderir
     [HttpGet("EnableEmailAuthenticator")]
     public async Task<IActionResult> EnableEmailAuthenticator()
     {
@@ -130,6 +136,8 @@ public class AuthController : BaseController
         return Ok();
     }
 
+
+    //İsteği yapan User için Tek kullanımlık kod oluşturur
     [HttpGet("EnableOtpAuthenticator")]
     public async Task<IActionResult> EnableOtpAuthenticator()
     {
@@ -138,6 +146,8 @@ public class AuthController : BaseController
 
         return Ok(result);
     }
+
+    //EnableEmailAuthenticator endpointinin oluşturduğu kodu doğrular,User tablosunda EmailVerify kısmını true'ya çevirir
 
     [HttpGet("VerifyEmailAuthenticator")]
     public async Task<IActionResult> VerifyEmailAuthenticator(
@@ -148,6 +158,7 @@ public class AuthController : BaseController
         return Ok();
     }
 
+    //Tek kullanımlık kodu doğrular
     [HttpPost("VerifyOtpAuthenticator")]
     public async Task<IActionResult> VerifyOtpAuthenticator([FromBody] string authenticatorCode)
     {
@@ -158,11 +169,13 @@ public class AuthController : BaseController
         return Ok();
     }
 
+    //İstek üzerindeki refreshTokeni alır
     private string getRefreshTokenFromCookies()
     {
         return Request.Cookies["refreshToken"] ?? throw new ArgumentException("Refresh token is not found in request cookies.");
     }
 
+    //Login olduktan sonra verilecek RefreshTokenı oluşturur
     private void setRefreshTokenToCookie(RefreshToken refreshToken)
     {
         CookieOptions cookieOptions = new() { HttpOnly = true, Expires = DateTime.UtcNow.AddDays(7) };

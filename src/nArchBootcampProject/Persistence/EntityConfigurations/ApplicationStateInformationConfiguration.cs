@@ -17,5 +17,50 @@ public class ApplicationStateInformationConfiguration : IEntityTypeConfiguration
         builder.Property(asi => asi.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(asi => !asi.DeletedDate.HasValue);
+
+        builder.HasData(GetSeeds());
+    }
+
+    public static short AdminId => 1;
+    private IEnumerable<ApplicationStateInformation> _seeds
+    {
+        get
+        {
+            //yield return new() { Id = AdminId, Name = GeneralOperationClaims.Admin };
+
+            IEnumerable<ApplicationStateInformation> featureOperationClaims = getFeaturBootcampStates(AdminId);
+            foreach (ApplicationStateInformation claim in featureOperationClaims)
+                yield return claim;
+        }
+    }
+
+#pragma warning disable S1854 // Unused assignments should be removed
+    private IEnumerable<ApplicationStateInformation> getFeaturBootcampStates(short initialId)
+    {
+        short lastId = initialId;
+        List<ApplicationStateInformation> featureOperationClaims = new();
+
+
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = "Received" },
+                new() { Id = ++lastId, Name = "Approved" },
+                new() { Id = ++lastId, Name = "Un Approved" },
+                new() { Id = ++lastId, Name = "Cancelled" }
+            ]
+        );
+
+        return featureOperationClaims;
+    }
+
+    private static ApplicationStateInformation[] GetSeeds()
+    {
+        return
+        [
+            new ApplicationStateInformation { Id = 1, Name = "Not Started", CreatedDate = DateTime.UtcNow },
+            new ApplicationStateInformation { Id = 2, Name = "Started", CreatedDate = DateTime.UtcNow },
+            new ApplicationStateInformation { Id = 3, Name = "On Hold", CreatedDate = DateTime.UtcNow },
+            new ApplicationStateInformation { Id = 4, Name = "Finished", CreatedDate = DateTime.UtcNow }
+        ];
     }
 }

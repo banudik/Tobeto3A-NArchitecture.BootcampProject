@@ -18,9 +18,9 @@ namespace Application.Features.Comments.Commands.Create;
 public class CreateCommentCommand : IRequest<CreatedCommentResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public string Context { get; set; }
-    public int BootcampChapterId { get; set; }
+    public int BootcampId { get; set; }
     public Guid UserId { get; set; }
-    public bool Status { get; set; }
+    public bool? Status { get; set; }
 
     public string[] Roles => [Admin, Write, CommentsOperationClaims.Create, ApplicantsOperationClaims.ApplicantRole, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
@@ -45,7 +45,7 @@ public class CreateCommentCommand : IRequest<CreatedCommentResponse>, ISecuredRe
         public async Task<CreatedCommentResponse> Handle(CreateCommentCommand request, CancellationToken cancellationToken)
         {
             Comment comment = _mapper.Map<Comment>(request);
-
+            comment.Status = false; //comment needs approval
             await _commentRepository.AddAsync(comment);
 
             CreatedCommentResponse response = _mapper.Map<CreatedCommentResponse>(comment);

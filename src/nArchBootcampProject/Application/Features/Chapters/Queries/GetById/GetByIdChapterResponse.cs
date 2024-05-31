@@ -10,5 +10,7 @@ public class GetByIdChapterResponse : IResponse
     public string? Description { get; set; }
     public string Link { get; set; }
     public int BootcampId { get; set; }
+    public string BootcampName { get; set; }
     public int Time { get; set; }
+    public DateTime CreatedDate { get; set; }
 }

@@ -1,5 +1,8 @@
-﻿using Application.Features.Auth.Constants;
+﻿using Application.Features.Applicants.Constants;
+using Application.Features.Auth.Constants;
 using Application.Features.Auth.Rules;
+using Application.Features.Employees.Constants;
+using Application.Features.Instructors.Constants;
 using Application.Services.AuthService;
 using AutoMapper;
 using MediatR;
@@ -13,7 +16,8 @@ public class RevokeTokenCommand : IRequest<RevokedTokenResponse>, ISecuredReques
     public string Token { get; set; }
     public string IpAddress { get; set; }
 
-    public string[] Roles => [Admin, AuthOperationClaims.RevokeToken];
+    public string[] Roles => [Admin, AuthOperationClaims.RevokeToken,ApplicantsOperationClaims.ApplicantRole,
+        InstructorsOperationClaims.InstructorRole,EmployeesOperationClaims.EmployeeRole];
 
     public RevokeTokenCommand()
     {

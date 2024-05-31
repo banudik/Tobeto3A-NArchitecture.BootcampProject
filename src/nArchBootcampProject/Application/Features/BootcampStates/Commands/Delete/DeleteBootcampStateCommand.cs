@@ -57,7 +57,7 @@ public class DeleteBootcampStateCommand
                 cancellationToken: cancellationToken
             );
             await _bootcampStateBusinessRules.BootcampStateShouldExistWhenSelected(bootcampState);
-
+            _bootcampStateBusinessRules.CheckDefaultStates(request.Id);
             await _bootcampStateRepository.DeleteAsync(bootcampState!);
 
             DeletedBootcampStateResponse response = _mapper.Map<DeletedBootcampStateResponse>(bootcampState);

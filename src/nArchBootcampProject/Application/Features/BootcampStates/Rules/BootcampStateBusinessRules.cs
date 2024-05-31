@@ -39,4 +39,12 @@ public class BootcampStateBusinessRules : BaseBusinessRules
         );
         await BootcampStateShouldExistWhenSelected(bootcampState);
     }
+
+    public void CheckDefaultStates(short id)
+    {
+        if(id ==1 || id == 2 || id == 3 || id == 4)
+        {
+            throw new BusinessException("You can not edit default states!");
+        }
+    }
 }

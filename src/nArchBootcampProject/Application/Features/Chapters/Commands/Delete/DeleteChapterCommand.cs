@@ -30,21 +30,40 @@ public class DeleteChapterCommand : IRequest<DeletedChapterResponse>, ISecuredRe
         private readonly IMapper _mapper;
         private readonly IChapterRepository _chapterRepository;
         private readonly ChapterBusinessRules _chapterBusinessRules;
+        private readonly IBootcampLogRepository _bootcampLogRepository;
 
         public DeleteChapterCommandHandler(IMapper mapper, IChapterRepository chapterRepository,
-                                         ChapterBusinessRules chapterBusinessRules)
+                                         ChapterBusinessRules chapterBusinessRules, IBootcampLogRepository bootcampLogRepository)
         {
             _mapper = mapper;
             _chapterRepository = chapterRepository;
             _chapterBusinessRules = chapterBusinessRules;
+            _bootcampLogRepository = bootcampLogRepository;
         }
 
         public async Task<DeletedChapterResponse> Handle(DeleteChapterCommand request, CancellationToken cancellationToken)
         {
             Chapter? chapter = await _chapterRepository.GetAsync(predicate: c => c.Id == request.Id, cancellationToken: cancellationToken);
             await _chapterBusinessRules.ChapterShouldExistWhenSelected(chapter);
+            try
+            {
+                await _chapterRepository.DeleteAsync(chapter, permanent: true);
 
-            await _chapterRepository.DeleteAsync(chapter!);
+                //Delete logs
+                var logs = await _bootcampLogRepository.GetListAsync(
+                    index: 0,
+                    size: 1000,
+                    predicate: p => p.ChapterId == request.Id
+                    );
+                await _bootcampLogRepository.DeleteRangeAsync(logs.Items, permanent: true);
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+
 
             DeletedChapterResponse response = _mapper.Map<DeletedChapterResponse>(chapter);
             return response;

@@ -17,6 +17,7 @@ public class Bootcamp : Entity<int>
     public string Description { get; set; }
     public virtual ICollection<Certificate>? Certificate { get; set; }
     public virtual ICollection<Chapter> Chapters { get; set; }
+    public virtual ICollection<BootcampLog> BootcampLogs { get; set; }
 
     public Bootcamp()
     {

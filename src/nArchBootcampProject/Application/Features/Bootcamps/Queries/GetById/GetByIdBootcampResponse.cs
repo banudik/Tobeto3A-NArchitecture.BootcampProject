@@ -12,6 +12,7 @@ public class GetByIdBootcampResponse : IResponse
     public short BootcampStateId { get; set; }
     public string InstructorFirstName { get; set; }
     public string InstructorLastName { get; set; }
+    public string InstructorDescription { get; set; }
     public string BootcampStateName { get; set; }
     public string BootcampImageImagePath { get; set; }
     public string Description { get; set; }

@@ -6,6 +6,7 @@ using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using static Application.Features.Blacklists.Constants.BlacklistsOperationClaims;
 
@@ -38,7 +39,8 @@ public class GetByIdBlacklistQuery : IRequest<GetByIdBlacklistResponse>, ISecure
         {
             Blacklist? blacklist = await _blacklistRepository.GetAsync(
                 predicate: b => b.Id == request.Id,
-                cancellationToken: cancellationToken
+                cancellationToken: cancellationToken,
+                include: p => p.Include(x => x.Applicant)
             );
             await _blacklistBusinessRules.BlacklistShouldExistWhenSelected(blacklist);
 

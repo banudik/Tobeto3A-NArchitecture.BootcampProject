@@ -39,4 +39,35 @@ public class ChapterBusinessRules : BaseBusinessRules
         );
         await ChapterShouldExistWhenSelected(chapter);
     }
+
+    public async Task CheckChapterSortIfDuplicate(int? id, int bootcampId, int sort, CancellationToken cancellationToken)
+    {
+
+        if (id == null)
+        {
+            var item = await _chapterRepository.GetAsync(
+            predicate: c => c.BootcampId == bootcampId && c.Sort == sort,
+            cancellationToken: cancellationToken
+            );
+
+            if (item != null)
+            {
+                throw new BusinessException("Chapter With this Sort Already Exist!");
+            }
+        }
+        else
+        {
+            var item = await _chapterRepository.GetAsync(
+            predicate: c => c.Id != id && c.BootcampId == bootcampId && c.Sort == sort,
+            cancellationToken: cancellationToken
+            );
+
+            if (item != null)
+            {
+                throw new BusinessException("Chapter With this Sort Already Exist!");
+            }
+        }
+
+
+    }
 }

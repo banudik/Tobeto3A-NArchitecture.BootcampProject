@@ -9,6 +9,7 @@ using static Application.Features.Comments.Constants.CommentsOperationClaims;
 using Application.Features.Applicants.Constants;
 using Application.Features.Employees.Constants;
 using Application.Features.Instructors.Constants;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Comments.Queries.GetById;
 
@@ -33,7 +34,11 @@ public class GetByIdCommentQuery : IRequest<GetByIdCommentResponse>, ISecuredReq
 
         public async Task<GetByIdCommentResponse> Handle(GetByIdCommentQuery request, CancellationToken cancellationToken)
         {
-            Comment? comment = await _commentRepository.GetAsync(predicate: c => c.Id == request.Id, cancellationToken: cancellationToken);
+            Comment? comment = await _commentRepository.GetAsync(
+                predicate: c => c.Id == request.Id,
+                cancellationToken: cancellationToken,
+                include:x=>x.Include(p=>p.Bootcamp).Include(p=>p.User)
+                );
             await _commentBusinessRules.CommentShouldExistWhenSelected(comment);
 
             GetByIdCommentResponse response = _mapper.Map<GetByIdCommentResponse>(comment);

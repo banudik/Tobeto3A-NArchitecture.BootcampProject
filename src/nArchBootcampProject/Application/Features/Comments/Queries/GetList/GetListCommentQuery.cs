@@ -12,6 +12,7 @@ using static Application.Features.Comments.Constants.CommentsOperationClaims;
 using Application.Features.Applicants.Constants;
 using Application.Features.Employees.Constants;
 using Application.Features.Instructors.Constants;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Comments.Queries.GetList;
 
@@ -42,7 +43,8 @@ public class GetListCommentQuery : IRequest<GetListResponse<GetListCommentListIt
             IPaginate<Comment> comments = await _commentRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize, 
-                cancellationToken: cancellationToken
+                cancellationToken: cancellationToken,
+                include: x => x.Include(p => p.Bootcamp).Include(p => p.User)
             );
 
             GetListResponse<GetListCommentListItemDto> response = _mapper.Map<GetListResponse<GetListCommentListItemDto>>(comments);
