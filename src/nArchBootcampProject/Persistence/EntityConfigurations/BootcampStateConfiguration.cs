@@ -19,6 +19,8 @@ public class BootcampStateConfiguration : IEntityTypeConfiguration<BootcampState
         builder.Property(bs => bs.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(bs => !bs.DeletedDate.HasValue);
+
+        builder.HasData(_seeds);
     }
 
     public static short AdminId => 1;

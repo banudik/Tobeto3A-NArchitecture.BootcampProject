@@ -17,6 +17,8 @@ public class ApplicationStateInformationConfiguration : IEntityTypeConfiguration
         builder.Property(asi => asi.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(asi => !asi.DeletedDate.HasValue);
+
+        builder.HasData(_seeds);
     }
 
     public static short AdminId => 1;
