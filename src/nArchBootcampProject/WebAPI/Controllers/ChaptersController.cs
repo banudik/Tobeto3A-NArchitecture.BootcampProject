@@ -7,6 +7,7 @@ using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Application.Features.Chapters.Queries.GetListByBootcampId;
+using Application.Features.Chapters.Queries.GetByBootcampIdAndSort;
 
 namespace WebAPI.Controllers;
 
@@ -42,6 +43,13 @@ public class ChaptersController : BaseController
     public async Task<IActionResult> GetById([FromRoute] int id)
     {
         GetByIdChapterResponse response = await Mediator.Send(new GetByIdChapterQuery { Id = id });
+        return Ok(response);
+    }
+
+    [HttpGet("getbybootcampIdAndSort/{BootcampId}/{Sort}")]
+    public async Task<IActionResult> GetByBootcampIdAndSort(int BootcampId, int Sort)
+    {
+        GetByIdChapterResponse response = await Mediator.Send(new GetByBootcampIdAndSortChapterQuery { bootcampId = BootcampId, Sort = Sort });
         return Ok(response);
     }
 

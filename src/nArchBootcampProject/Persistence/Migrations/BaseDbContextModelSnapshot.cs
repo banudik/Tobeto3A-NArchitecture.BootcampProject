@@ -136,25 +136,25 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = (short)1,
-                            CreatedDate = new DateTime(2024, 5, 31, 13, 7, 21, 686, DateTimeKind.Utc).AddTicks(6445),
+                            CreatedDate = new DateTime(2024, 5, 31, 17, 46, 45, 218, DateTimeKind.Utc).AddTicks(3738),
                             Name = "Not Started"
                         },
                         new
                         {
                             Id = (short)2,
-                            CreatedDate = new DateTime(2024, 5, 31, 13, 7, 21, 686, DateTimeKind.Utc).AddTicks(6447),
+                            CreatedDate = new DateTime(2024, 5, 31, 17, 46, 45, 218, DateTimeKind.Utc).AddTicks(3749),
                             Name = "Started"
                         },
                         new
                         {
                             Id = (short)3,
-                            CreatedDate = new DateTime(2024, 5, 31, 13, 7, 21, 686, DateTimeKind.Utc).AddTicks(6448),
+                            CreatedDate = new DateTime(2024, 5, 31, 17, 46, 45, 218, DateTimeKind.Utc).AddTicks(3750),
                             Name = "On Hold"
                         },
                         new
                         {
                             Id = (short)4,
-                            CreatedDate = new DateTime(2024, 5, 31, 13, 7, 21, 686, DateTimeKind.Utc).AddTicks(6449),
+                            CreatedDate = new DateTime(2024, 5, 31, 17, 46, 45, 218, DateTimeKind.Utc).AddTicks(3751),
                             Name = "Finished"
                         });
                 });
@@ -378,25 +378,25 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = (short)1,
-                            CreatedDate = new DateTime(2024, 5, 31, 13, 7, 21, 688, DateTimeKind.Utc).AddTicks(4198),
+                            CreatedDate = new DateTime(2024, 5, 31, 17, 46, 45, 221, DateTimeKind.Utc).AddTicks(6467),
                             Name = "Not Started"
                         },
                         new
                         {
                             Id = (short)2,
-                            CreatedDate = new DateTime(2024, 5, 31, 13, 7, 21, 688, DateTimeKind.Utc).AddTicks(4199),
+                            CreatedDate = new DateTime(2024, 5, 31, 17, 46, 45, 221, DateTimeKind.Utc).AddTicks(6470),
                             Name = "Started"
                         },
                         new
                         {
                             Id = (short)3,
-                            CreatedDate = new DateTime(2024, 5, 31, 13, 7, 21, 688, DateTimeKind.Utc).AddTicks(4200),
+                            CreatedDate = new DateTime(2024, 5, 31, 17, 46, 45, 221, DateTimeKind.Utc).AddTicks(6471),
                             Name = "On Hold"
                         },
                         new
                         {
                             Id = (short)4,
-                            CreatedDate = new DateTime(2024, 5, 31, 13, 7, 21, 688, DateTimeKind.Utc).AddTicks(4201),
+                            CreatedDate = new DateTime(2024, 5, 31, 17, 46, 45, 221, DateTimeKind.Utc).AddTicks(6472),
                             Name = "Finished"
                         });
                 });
@@ -1445,16 +1445,16 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f9a0e49e-2cfe-436b-aa43-0365de283a09"),
+                            Id = new Guid("dbed80c8-ddf5-47b4-af05-52066abec1e0"),
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfBirth = new DateTime(2024, 5, 31, 16, 7, 21, 691, DateTimeKind.Local).AddTicks(4723),
+                            DateOfBirth = new DateTime(2024, 5, 31, 20, 46, 45, 224, DateTimeKind.Local).AddTicks(6655),
                             Email = "pair6@pair6.com",
                             FirstName = "Banu",
                             LastName = "Dik",
                             NationalIdentity = "TC1246",
-                            PasswordHash = new byte[] { 124, 37, 194, 75, 20, 12, 66, 141, 19, 48, 19, 111, 148, 247, 175, 192, 37, 36, 122, 178, 14, 5, 184, 185, 79, 105, 17, 113, 223, 168, 239, 143, 200, 174, 29, 239, 233, 52, 93, 125, 139, 15, 252, 140, 140, 81, 233, 215, 81, 126, 246, 159, 170, 6, 157, 170, 226, 74, 95, 91, 98, 84, 80, 169 },
-                            PasswordSalt = new byte[] { 250, 97, 132, 210, 203, 16, 184, 25, 237, 208, 66, 214, 46, 10, 199, 72, 84, 85, 3, 128, 82, 239, 213, 34, 135, 8, 175, 123, 252, 182, 210, 141, 172, 242, 65, 220, 226, 18, 24, 77, 101, 178, 161, 118, 2, 175, 134, 156, 99, 192, 118, 82, 230, 132, 139, 29, 168, 100, 251, 188, 105, 176, 184, 211, 110, 47, 35, 55, 72, 99, 6, 95, 193, 41, 103, 129, 111, 227, 14, 54, 250, 69, 117, 15, 188, 82, 17, 218, 33, 222, 18, 9, 65, 25, 28, 57, 231, 218, 198, 123, 2, 240, 203, 61, 215, 107, 192, 70, 58, 215, 20, 25, 12, 235, 220, 61, 67, 85, 255, 115, 149, 84, 203, 126, 159, 188, 102, 91 },
+                            PasswordHash = new byte[] { 0, 22, 79, 123, 97, 245, 184, 72, 24, 146, 86, 57, 58, 34, 237, 255, 252, 3, 195, 237, 154, 11, 162, 123, 223, 1, 142, 236, 88, 92, 107, 167, 181, 95, 116, 5, 123, 224, 166, 29, 209, 123, 59, 93, 89, 40, 47, 199, 25, 14, 251, 145, 173, 155, 152, 54, 30, 65, 32, 175, 186, 213, 205, 208 },
+                            PasswordSalt = new byte[] { 105, 99, 138, 62, 40, 5, 194, 128, 241, 244, 246, 218, 151, 120, 141, 108, 138, 192, 162, 147, 231, 125, 14, 194, 236, 82, 151, 53, 157, 5, 220, 165, 209, 161, 190, 111, 110, 159, 69, 215, 52, 61, 112, 171, 126, 0, 129, 5, 182, 51, 147, 154, 144, 237, 146, 78, 217, 133, 238, 32, 123, 137, 94, 22, 201, 18, 128, 5, 16, 16, 228, 166, 213, 230, 37, 129, 164, 171, 143, 158, 223, 220, 240, 163, 221, 190, 248, 49, 166, 61, 245, 74, 235, 127, 239, 215, 162, 138, 142, 254, 14, 59, 209, 36, 29, 131, 106, 144, 17, 198, 214, 93, 156, 18, 48, 192, 154, 188, 195, 69, 247, 77, 12, 219, 202, 11, 40, 203 },
                             UserName = "banudik"
                         });
                 });
@@ -1497,10 +1497,10 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0359ebdc-7434-49fe-9b4a-36324d41e688"),
+                            Id = new Guid("7f244fa0-d67b-4406-8af7-2897878098dd"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OperationClaimId = 1,
-                            UserId = new Guid("f9a0e49e-2cfe-436b-aa43-0365de283a09")
+                            UserId = new Guid("dbed80c8-ddf5-47b4-af05-52066abec1e0")
                         });
                 });
 
