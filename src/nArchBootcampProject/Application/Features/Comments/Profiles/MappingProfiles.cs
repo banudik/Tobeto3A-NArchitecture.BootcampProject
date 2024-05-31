@@ -7,6 +7,7 @@ using AutoMapper;
 using NArchitecture.Core.Application.Responses;
 using Domain.Entities;
 using NArchitecture.Core.Persistence.Paging;
+using Application.Features.Comments.Queries.GetListByBootcampId;
 
 namespace Application.Features.Comments.Profiles;
 
@@ -22,6 +23,8 @@ public class MappingProfiles : Profile
         CreateMap<Comment, DeletedCommentResponse>().ReverseMap();
         CreateMap<Comment, GetByIdCommentResponse>().ReverseMap();
         CreateMap<Comment, GetListCommentListItemDto>().ReverseMap();
+        CreateMap<Comment, GetListCommentListByBootcampIdItemDto>().ReverseMap();
         CreateMap<IPaginate<Comment>, GetListResponse<GetListCommentListItemDto>>().ReverseMap();
+        CreateMap<IPaginate<Comment>, GetListResponse<GetListCommentListByBootcampIdItemDto>>().ReverseMap();
     }
 }

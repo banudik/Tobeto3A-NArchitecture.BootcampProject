@@ -57,6 +57,7 @@ public class UpdateBootcampStateCommand
                 cancellationToken: cancellationToken
             );
             await _bootcampStateBusinessRules.BootcampStateShouldExistWhenSelected(bootcampState);
+            _bootcampStateBusinessRules.CheckDefaultStates(request.Id);
             bootcampState = _mapper.Map(request, bootcampState);
 
             await _bootcampStateRepository.UpdateAsync(bootcampState!);
