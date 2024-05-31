@@ -6,6 +6,7 @@ using Application.Features.Chapters.Queries.GetList;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
+using Application.Features.Chapters.Queries.GetListByBootcampId;
 
 namespace WebAPI.Controllers;
 
@@ -48,6 +49,14 @@ public class ChaptersController : BaseController
     public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListChapterQuery getListChapterQuery = new() { PageRequest = pageRequest };
+        GetListResponse<GetListChapterListItemDto> response = await Mediator.Send(getListChapterQuery);
+        return Ok(response);
+    }
+
+    [HttpGet("getlistbybootcampid")]
+    public async Task<IActionResult> GetListByBootcampId([FromQuery] PageRequest pageRequest,int bootcampId)
+    {
+        GetListChapterByBootcampIdQuery getListChapterQuery = new() { PageRequest = pageRequest ,BootcampId = bootcampId};
         GetListResponse<GetListChapterListItemDto> response = await Mediator.Send(getListChapterQuery);
         return Ok(response);
     }
