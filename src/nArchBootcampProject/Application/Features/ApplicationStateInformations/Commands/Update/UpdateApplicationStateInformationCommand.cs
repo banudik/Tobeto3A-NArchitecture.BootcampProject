@@ -60,7 +60,7 @@ public class UpdateApplicationStateInformationCommand
             await _applicationStateInformationBusinessRules.ApplicationStateInformationShouldExistWhenSelected(
                 applicationStateInformation
             );
-            await _applicationStateInformationBusinessRules.CheckIfDefaultState(request.Id,cancellationToken);
+            //await _applicationStateInformationBusinessRules.CheckIfDefaultState(request.Id,cancellationToken);
             applicationStateInformation = _mapper.Map(request, applicationStateInformation);
 
             await _applicationStateInformationRepository.UpdateAsync(applicationStateInformation!);

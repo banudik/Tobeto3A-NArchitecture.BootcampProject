@@ -27,7 +27,7 @@ public class GetListByApplicationQuery : IRequest<GetListResponse<GetListBootcam
     public string[] Roles => [BootcampsOperationClaims.Admin, BootcampsOperationClaims.Read, ApplicantsOperationClaims.ApplicantRole, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public bool BypassCache { get; }
-    public string? CacheKey => $"GetListBootcamps({PageRequest.PageIndex},{PageRequest.PageSize})";
+    public string? CacheKey => $"GetListBootcampsByApprovedApplication({PageRequest.PageIndex},{PageRequest.PageSize})";
     public string? CacheGroupKey => "GetBootcamps";
     public TimeSpan? SlidingExpiration { get; }
 
