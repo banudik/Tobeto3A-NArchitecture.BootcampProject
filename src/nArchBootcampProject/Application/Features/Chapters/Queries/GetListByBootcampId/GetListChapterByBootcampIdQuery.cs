@@ -20,7 +20,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Features.Chapters.Queries.GetListByBootcampId;
-public class GetListChapterByBootcampIdQuery : IRequest<GetListResponse<GetListChapterListItemDto>>, ISecuredRequest, ICachableRequest
+public class GetListChapterByBootcampIdQuery : IRequest<GetListResponse<GetListChapterListItemDto>>//, ICachableRequest
 {
     public PageRequest PageRequest { get; set; }
     public int BootcampId { get; set; }

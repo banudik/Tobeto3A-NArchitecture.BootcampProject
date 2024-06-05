@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Comments.Queries.GetListByBootcampId;
 
-public class GetListCommentByBootcampIdQuery : IRequest<GetListResponse<GetListCommentListByBootcampIdItemDto>>,  ICachableRequest
+public class GetListCommentByBootcampIdQuery : IRequest<GetListResponse<GetListCommentListByBootcampIdItemDto>>
 {
     public int BootcampId { get; set; }
     public PageRequest PageRequest { get; set; }
