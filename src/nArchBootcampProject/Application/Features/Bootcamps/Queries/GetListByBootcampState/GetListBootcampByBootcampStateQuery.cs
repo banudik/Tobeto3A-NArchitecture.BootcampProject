@@ -23,7 +23,7 @@ public class GetListBootcampByBootcampStateQuery : IRequest<GetListResponse<GetL
     public string[] Roles => [Admin, Read, ApplicantsOperationClaims.ApplicantRole, InstructorsOperationClaims.InstructorRole, EmployeesOperationClaims.EmployeeRole];
 
     public bool BypassCache { get; }
-    public string? CacheKey => $"GetListBootcamps({PageRequest.PageIndex},{PageRequest.PageSize})";
+    public string? CacheKey => $"GetListBootcampsByBootcampState({PageRequest.PageIndex},{PageRequest.PageSize})";
     public string? CacheGroupKey => "GetBootcamps";
     public TimeSpan? SlidingExpiration { get; }
 

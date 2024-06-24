@@ -16,7 +16,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Chapters.Queries.GetList;
 
-public class GetListChapterQuery : IRequest<GetListResponse<GetListChapterListItemDto>>, ISecuredRequest, ICachableRequest
+public class GetListChapterQuery : IRequest<GetListResponse<GetListChapterListItemDto>>, ISecuredRequest//, ICachableRequest
 {
     public PageRequest PageRequest { get; set; }
 
