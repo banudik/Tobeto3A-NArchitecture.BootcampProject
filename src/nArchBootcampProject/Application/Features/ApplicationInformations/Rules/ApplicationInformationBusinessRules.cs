@@ -56,7 +56,7 @@ public class ApplicationInformationBusinessRules : BaseBusinessRules
         var item = await _applicationInformationRepository.GetAsync(predicate: p => p.ApplicantId == ApplicantId && p.BootcampId == BootcampId);
         if (item != null)
         {
-            throw new BusinessException("You alread applied to this bootcamp!");
+            throw new BusinessException("You already applied to this bootcamp!");
         }
     }
 
@@ -74,7 +74,7 @@ public class ApplicationInformationBusinessRules : BaseBusinessRules
         var item = await _blacklistRepository.GetAsync(predicate:p=>p.ApplicantId==applicantId);
         if(item != null)
         {
-            throw new BusinessException(ApplicationInformationsBusinessMessages.ApplicantIsBlacklisted);
+            throw new BusinessException("You can not apply to this bootcamp!");
         }
     }
 
