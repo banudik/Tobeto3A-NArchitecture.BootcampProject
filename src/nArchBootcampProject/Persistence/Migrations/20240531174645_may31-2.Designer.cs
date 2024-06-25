@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -11,9 +12,16 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    partial class BaseDbContextModelSnapshot : ModelSnapshot
+<<<<<<<< HEAD:src/nArchBootcampProject/Persistence/Migrations/20240531161724_yenimig.Designer.cs
+    [Migration("20240531161724_yenimig")]
+    partial class yenimig
+========
+    [Migration("20240531174645_may31-2")]
+    partial class may312
+>>>>>>>> ec2c02d1fd7a59626fccd9ea312d304a05eba586:src/nArchBootcampProject/Persistence/Migrations/20240531174645_may31-2.Designer.cs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -136,25 +144,41 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = (short)1,
+<<<<<<<< HEAD:src/nArchBootcampProject/Persistence/Migrations/20240531161724_yenimig.Designer.cs
+                            CreatedDate = new DateTime(2024, 5, 31, 16, 17, 24, 142, DateTimeKind.Utc).AddTicks(1594),
+========
                             CreatedDate = new DateTime(2024, 5, 31, 17, 46, 45, 218, DateTimeKind.Utc).AddTicks(3738),
+>>>>>>>> ec2c02d1fd7a59626fccd9ea312d304a05eba586:src/nArchBootcampProject/Persistence/Migrations/20240531174645_may31-2.Designer.cs
                             Name = "Not Started"
                         },
                         new
                         {
                             Id = (short)2,
+<<<<<<<< HEAD:src/nArchBootcampProject/Persistence/Migrations/20240531161724_yenimig.Designer.cs
+                            CreatedDate = new DateTime(2024, 5, 31, 16, 17, 24, 142, DateTimeKind.Utc).AddTicks(1596),
+========
                             CreatedDate = new DateTime(2024, 5, 31, 17, 46, 45, 218, DateTimeKind.Utc).AddTicks(3749),
+>>>>>>>> ec2c02d1fd7a59626fccd9ea312d304a05eba586:src/nArchBootcampProject/Persistence/Migrations/20240531174645_may31-2.Designer.cs
                             Name = "Started"
                         },
                         new
                         {
                             Id = (short)3,
+<<<<<<<< HEAD:src/nArchBootcampProject/Persistence/Migrations/20240531161724_yenimig.Designer.cs
+                            CreatedDate = new DateTime(2024, 5, 31, 16, 17, 24, 142, DateTimeKind.Utc).AddTicks(1597),
+========
                             CreatedDate = new DateTime(2024, 5, 31, 17, 46, 45, 218, DateTimeKind.Utc).AddTicks(3750),
+>>>>>>>> ec2c02d1fd7a59626fccd9ea312d304a05eba586:src/nArchBootcampProject/Persistence/Migrations/20240531174645_may31-2.Designer.cs
                             Name = "On Hold"
                         },
                         new
                         {
                             Id = (short)4,
+<<<<<<<< HEAD:src/nArchBootcampProject/Persistence/Migrations/20240531161724_yenimig.Designer.cs
+                            CreatedDate = new DateTime(2024, 5, 31, 16, 17, 24, 142, DateTimeKind.Utc).AddTicks(1598),
+========
                             CreatedDate = new DateTime(2024, 5, 31, 17, 46, 45, 218, DateTimeKind.Utc).AddTicks(3751),
+>>>>>>>> ec2c02d1fd7a59626fccd9ea312d304a05eba586:src/nArchBootcampProject/Persistence/Migrations/20240531174645_may31-2.Designer.cs
                             Name = "Finished"
                         });
                 });
@@ -378,25 +402,41 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = (short)1,
+<<<<<<<< HEAD:src/nArchBootcampProject/Persistence/Migrations/20240531161724_yenimig.Designer.cs
+                            CreatedDate = new DateTime(2024, 5, 31, 16, 17, 24, 143, DateTimeKind.Utc).AddTicks(5366),
+========
                             CreatedDate = new DateTime(2024, 5, 31, 17, 46, 45, 221, DateTimeKind.Utc).AddTicks(6467),
+>>>>>>>> ec2c02d1fd7a59626fccd9ea312d304a05eba586:src/nArchBootcampProject/Persistence/Migrations/20240531174645_may31-2.Designer.cs
                             Name = "Not Started"
                         },
                         new
                         {
                             Id = (short)2,
+<<<<<<<< HEAD:src/nArchBootcampProject/Persistence/Migrations/20240531161724_yenimig.Designer.cs
+                            CreatedDate = new DateTime(2024, 5, 31, 16, 17, 24, 143, DateTimeKind.Utc).AddTicks(5367),
+========
                             CreatedDate = new DateTime(2024, 5, 31, 17, 46, 45, 221, DateTimeKind.Utc).AddTicks(6470),
+>>>>>>>> ec2c02d1fd7a59626fccd9ea312d304a05eba586:src/nArchBootcampProject/Persistence/Migrations/20240531174645_may31-2.Designer.cs
                             Name = "Started"
                         },
                         new
                         {
                             Id = (short)3,
+<<<<<<<< HEAD:src/nArchBootcampProject/Persistence/Migrations/20240531161724_yenimig.Designer.cs
+                            CreatedDate = new DateTime(2024, 5, 31, 16, 17, 24, 143, DateTimeKind.Utc).AddTicks(5368),
+========
                             CreatedDate = new DateTime(2024, 5, 31, 17, 46, 45, 221, DateTimeKind.Utc).AddTicks(6471),
+>>>>>>>> ec2c02d1fd7a59626fccd9ea312d304a05eba586:src/nArchBootcampProject/Persistence/Migrations/20240531174645_may31-2.Designer.cs
                             Name = "On Hold"
                         },
                         new
                         {
                             Id = (short)4,
+<<<<<<<< HEAD:src/nArchBootcampProject/Persistence/Migrations/20240531161724_yenimig.Designer.cs
+                            CreatedDate = new DateTime(2024, 5, 31, 16, 17, 24, 143, DateTimeKind.Utc).AddTicks(5369),
+========
                             CreatedDate = new DateTime(2024, 5, 31, 17, 46, 45, 221, DateTimeKind.Utc).AddTicks(6472),
+>>>>>>>> ec2c02d1fd7a59626fccd9ea312d304a05eba586:src/nArchBootcampProject/Persistence/Migrations/20240531174645_may31-2.Designer.cs
                             Name = "Finished"
                         });
                 });
@@ -1445,16 +1485,28 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<<< HEAD:src/nArchBootcampProject/Persistence/Migrations/20240531161724_yenimig.Designer.cs
+                            Id = new Guid("9a9dfda4-f50e-41f5-ba89-f0f85d09de6d"),
+                            AuthenticatorType = 0,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfBirth = new DateTime(2024, 5, 31, 19, 17, 24, 145, DateTimeKind.Local).AddTicks(7373),
+========
                             Id = new Guid("dbed80c8-ddf5-47b4-af05-52066abec1e0"),
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOfBirth = new DateTime(2024, 5, 31, 20, 46, 45, 224, DateTimeKind.Local).AddTicks(6655),
+>>>>>>>> ec2c02d1fd7a59626fccd9ea312d304a05eba586:src/nArchBootcampProject/Persistence/Migrations/20240531174645_may31-2.Designer.cs
                             Email = "pair6@pair6.com",
                             FirstName = "Banu",
                             LastName = "Dik",
                             NationalIdentity = "TC1246",
+<<<<<<<< HEAD:src/nArchBootcampProject/Persistence/Migrations/20240531161724_yenimig.Designer.cs
+                            PasswordHash = new byte[] { 179, 129, 171, 95, 126, 162, 222, 134, 38, 219, 183, 104, 228, 84, 2, 165, 101, 207, 235, 226, 66, 36, 194, 96, 126, 231, 146, 194, 182, 145, 238, 127, 180, 237, 240, 145, 163, 247, 251, 245, 234, 9, 228, 181, 162, 58, 136, 191, 194, 219, 80, 201, 213, 232, 187, 146, 245, 101, 230, 229, 60, 15, 233, 24 },
+                            PasswordSalt = new byte[] { 212, 208, 103, 194, 44, 71, 66, 101, 115, 153, 155, 128, 153, 38, 108, 255, 24, 236, 77, 196, 212, 150, 31, 51, 156, 187, 166, 238, 158, 119, 8, 248, 230, 119, 63, 80, 49, 48, 179, 198, 189, 2, 204, 172, 243, 91, 3, 81, 44, 255, 177, 133, 58, 15, 71, 218, 191, 70, 237, 170, 129, 21, 119, 130, 47, 158, 118, 51, 170, 93, 131, 18, 45, 235, 144, 185, 110, 81, 168, 87, 181, 229, 252, 201, 185, 181, 39, 226, 39, 156, 144, 51, 147, 100, 53, 57, 251, 135, 81, 51, 166, 164, 95, 1, 156, 214, 22, 93, 48, 125, 138, 220, 158, 99, 145, 200, 170, 124, 169, 86, 148, 77, 223, 6, 199, 151, 153, 143 },
+========
                             PasswordHash = new byte[] { 0, 22, 79, 123, 97, 245, 184, 72, 24, 146, 86, 57, 58, 34, 237, 255, 252, 3, 195, 237, 154, 11, 162, 123, 223, 1, 142, 236, 88, 92, 107, 167, 181, 95, 116, 5, 123, 224, 166, 29, 209, 123, 59, 93, 89, 40, 47, 199, 25, 14, 251, 145, 173, 155, 152, 54, 30, 65, 32, 175, 186, 213, 205, 208 },
                             PasswordSalt = new byte[] { 105, 99, 138, 62, 40, 5, 194, 128, 241, 244, 246, 218, 151, 120, 141, 108, 138, 192, 162, 147, 231, 125, 14, 194, 236, 82, 151, 53, 157, 5, 220, 165, 209, 161, 190, 111, 110, 159, 69, 215, 52, 61, 112, 171, 126, 0, 129, 5, 182, 51, 147, 154, 144, 237, 146, 78, 217, 133, 238, 32, 123, 137, 94, 22, 201, 18, 128, 5, 16, 16, 228, 166, 213, 230, 37, 129, 164, 171, 143, 158, 223, 220, 240, 163, 221, 190, 248, 49, 166, 61, 245, 74, 235, 127, 239, 215, 162, 138, 142, 254, 14, 59, 209, 36, 29, 131, 106, 144, 17, 198, 214, 93, 156, 18, 48, 192, 154, 188, 195, 69, 247, 77, 12, 219, 202, 11, 40, 203 },
+>>>>>>>> ec2c02d1fd7a59626fccd9ea312d304a05eba586:src/nArchBootcampProject/Persistence/Migrations/20240531174645_may31-2.Designer.cs
                             UserName = "banudik"
                         });
                 });
@@ -1497,10 +1549,17 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<<< HEAD:src/nArchBootcampProject/Persistence/Migrations/20240531161724_yenimig.Designer.cs
+                            Id = new Guid("8f3446f3-5745-4fad-ba35-d59e63ae4843"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            OperationClaimId = 1,
+                            UserId = new Guid("9a9dfda4-f50e-41f5-ba89-f0f85d09de6d")
+========
                             Id = new Guid("7f244fa0-d67b-4406-8af7-2897878098dd"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OperationClaimId = 1,
                             UserId = new Guid("dbed80c8-ddf5-47b4-af05-52066abec1e0")
+>>>>>>>> ec2c02d1fd7a59626fccd9ea312d304a05eba586:src/nArchBootcampProject/Persistence/Migrations/20240531174645_may31-2.Designer.cs
                         });
                 });
 

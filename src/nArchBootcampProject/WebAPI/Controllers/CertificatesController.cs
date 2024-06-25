@@ -7,6 +7,7 @@ using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Application.Features.Auth.Commands.ResetPassword;
+using Domain.Entities;
 
 namespace WebAPI.Controllers;
 
@@ -41,9 +42,9 @@ public class CertificatesController : BaseController
     //}
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<GetByIdCertificateResponse>> GetCertificate([FromRoute] Guid id)
+    public async Task<ActionResult<GetByIdCertificateResponse>> GetCertificate([FromRoute] Guid id, int bootcampId)
     {
-        GetByIdCertificateQuery query = new() { Id = id };
+        GetByIdCertificateQuery query = new() { Id = id, BootcampId = bootcampId };
 
         GetByIdCertificateResponse response = await Mediator.Send(query);
 
@@ -74,6 +75,27 @@ public class CertificatesController : BaseController
         await Mediator.Send(createCertificateCommand);
 
         return Ok();
+    }
+
+    [HttpPost("createanddownloadcertificate")]
+    public async Task<IActionResult> CreateAndDownloadCertificate(CreateCertificateDto createCertificateDto)
+    {
+        CreateCertificateCommand createCertificateCommand = new()
+        {
+            UserId = getUserIdFromRequest(),
+            CreateCertificateDto = createCertificateDto
+        };
+        CreatedCertificateResponse response = await Mediator.Send(createCertificateCommand);
+
+
+        //GetByIdCertificateQuery query = new() { Id = createCertificateCommand.UserId, BootcampId = createCertificateDto.BootcampId };
+
+        //GetByIdCertificateResponse response2 = await Mediator.Send(query);
+
+        var pdfPath = Path.Combine("GeneratedCertificates", $"{response.Id}.pdf");
+        var pdfFileStream = new FileStream(pdfPath, FileMode.Open, FileAccess.Read);
+        return File(pdfFileStream, "application/pdf", $"{response.Id}.pdf");
+
     }
 
     //[HttpGet("{id}")]

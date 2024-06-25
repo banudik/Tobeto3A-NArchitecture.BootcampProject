@@ -37,7 +37,7 @@ public class GetByIdCommentQuery : IRequest<GetByIdCommentResponse>, ISecuredReq
             Comment? comment = await _commentRepository.GetAsync(
                 predicate: c => c.Id == request.Id,
                 cancellationToken: cancellationToken,
-                include:x=>x.Include(p=>p.Chapter.Bootcamp).Include(p=>p.User).Include(p=>p.Chapter)
+                include:x=>x.Include(p=>p.Bootcamp).Include(p=>p.User)
                 );
             await _commentBusinessRules.CommentShouldExistWhenSelected(comment);
 

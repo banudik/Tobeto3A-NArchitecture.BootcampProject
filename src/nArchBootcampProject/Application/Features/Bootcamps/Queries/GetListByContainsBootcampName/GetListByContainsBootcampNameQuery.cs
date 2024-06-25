@@ -46,7 +46,7 @@ public class GetListByContainsBootcampNameQuery : IRequest<GetListResponse<GetLi
                     cancellationToken: cancellationToken,
                     include: x => x.Include(x => x.Instructor).Include(x => x.BootcampState).Include(x => x.BootcampImage)
 
-);
+            );
 
                 GetListResponse<GetListBootcampListItemDto> response = _mapper.Map<GetListResponse<GetListBootcampListItemDto>>(bootcamps);
                 return response;

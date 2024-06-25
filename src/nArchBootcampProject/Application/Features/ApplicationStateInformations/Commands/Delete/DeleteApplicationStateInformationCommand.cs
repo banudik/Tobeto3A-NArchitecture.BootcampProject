@@ -60,7 +60,7 @@ public class DeleteApplicationStateInformationCommand
             await _applicationStateInformationBusinessRules.ApplicationStateInformationShouldExistWhenSelected(
                 applicationStateInformation
             );
-
+            await _applicationStateInformationBusinessRules.CheckIfDefaultState(request.Id, cancellationToken);
             await _applicationStateInformationRepository.DeleteAsync(applicationStateInformation!);
 
             DeletedApplicationStateInformationResponse response = _mapper.Map<DeletedApplicationStateInformationResponse>(

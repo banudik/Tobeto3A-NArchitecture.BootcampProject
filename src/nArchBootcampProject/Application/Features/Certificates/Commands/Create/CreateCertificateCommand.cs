@@ -58,27 +58,35 @@ public class CreateCertificateCommand : IRequest<CreatedCertificateResponse>//, 
             //    predicate: u => u.Id == request.UserId,
             //    cancellationToken: cancellationToken
             //);
-
-
-            //await _authBusinessRules.UserShouldBeExistsWhenSelected(user);
-            //böyle bir bootcamp var mý kontrol et ilave olarak
-
-            var certificate = new Certificate
+            Certificate? certificateControl = await _certificateRepository.GetAsync(
+                predicate: c => c.UserId == request.UserId && c.BootcampId == request.CreateCertificateDto.BootcampId,
+                enableTracking: false,
+                cancellationToken: cancellationToken
+                );
+            if (certificateControl == null)
             {
-                Id = Guid.NewGuid(),
-                UserId = request.UserId,
-                BootcampId = request.CreateCertificateDto.BootcampId,
-            };
 
-            await _certificateRepository.AddAsync(certificate);
+                //await _authBusinessRules.UserShouldBeExistsWhenSelected(user);
+                //böyle bir bootcamp var mý kontrol et ilave olarak
+                //await _certificateBusinessRules.CheckIfCertificateAlreadyCreated(request.UserId, request);
+                var certificate = new Certificate
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = request.UserId,
+                    BootcampId = request.CreateCertificateDto.BootcampId,
+                };
 
-            //await _certificateRepository.UpdateAsync(cancellationToken);
+                await _certificateRepository.AddAsync(certificate);
 
-            await _certificateService.GenerateCertificatePdf(certificate);
+                //await _certificateRepository.UpdateAsync(cancellationToken);
 
-            CreatedCertificateResponse response = _mapper.Map<CreatedCertificateResponse>(certificate);
-            return response;
+                await _certificateService.GenerateCertificatePdf(certificate);
 
+                CreatedCertificateResponse response = _mapper.Map<CreatedCertificateResponse>(certificate);
+                return response;
+            }
+            CreatedCertificateResponse responseExist = _mapper.Map<CreatedCertificateResponse>(certificateControl);
+            return responseExist;
 
             //CreatedCertificateResponse createdCertificateResponse = certificate.Id;
             //return certificate.Id;

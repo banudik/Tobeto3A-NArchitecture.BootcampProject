@@ -6,6 +6,8 @@ using Application.Features.Chapters.Queries.GetList;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
+using Application.Features.Chapters.Queries.GetListByBootcampId;
+using Application.Features.Chapters.Queries.GetByBootcampIdAndSort;
 
 namespace WebAPI.Controllers;
 
@@ -44,10 +46,25 @@ public class ChaptersController : BaseController
         return Ok(response);
     }
 
+    [HttpGet("getbybootcampIdAndSort/{BootcampId}/{Sort}")]
+    public async Task<IActionResult> GetByBootcampIdAndSort(int BootcampId, int Sort)
+    {
+        GetByIdChapterResponse response = await Mediator.Send(new GetByBootcampIdAndSortChapterQuery { bootcampId = BootcampId, Sort = Sort });
+        return Ok(response);
+    }
+
     [HttpGet]
     public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListChapterQuery getListChapterQuery = new() { PageRequest = pageRequest };
+        GetListResponse<GetListChapterListItemDto> response = await Mediator.Send(getListChapterQuery);
+        return Ok(response);
+    }
+
+    [HttpGet("getlistbybootcampid")]
+    public async Task<IActionResult> GetListByBootcampId([FromQuery] PageRequest pageRequest,int bootcampId)
+    {
+        GetListChapterByBootcampIdQuery getListChapterQuery = new() { PageRequest = pageRequest ,BootcampId = bootcampId};
         GetListResponse<GetListChapterListItemDto> response = await Mediator.Send(getListChapterQuery);
         return Ok(response);
     }

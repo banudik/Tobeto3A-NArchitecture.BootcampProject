@@ -13,16 +13,18 @@ public class ApplicationInformationBusinessRules : BaseBusinessRules
     private readonly ILocalizationService _localizationService;
     private readonly IApplicantRepository _applicantRepository;
     private readonly IBlacklistRepository _blacklistRepository;
+    private readonly IBootcampRepository _bootcampRepository;
 
     public ApplicationInformationBusinessRules(
         IApplicationInformationRepository applicationInformationRepository,
         ILocalizationService localizationService, IApplicantRepository applicantRepository
-, IBlacklistRepository blacklistRepository)
+, IBlacklistRepository blacklistRepository, IBootcampRepository bootcampRepository)
     {
         _applicationInformationRepository = applicationInformationRepository;
         _localizationService = localizationService;
         _applicantRepository = applicantRepository;
         _blacklistRepository = blacklistRepository;
+        _bootcampRepository = bootcampRepository;
     }
 
     private async Task throwBusinessException(string messageKey)
@@ -54,7 +56,7 @@ public class ApplicationInformationBusinessRules : BaseBusinessRules
         var item = await _applicationInformationRepository.GetAsync(predicate: p => p.ApplicantId == ApplicantId && p.BootcampId == BootcampId);
         if (item != null)
         {
-            throw new BusinessException("You alread applied to this bootcamp!");
+            throw new BusinessException("You already applied to this bootcamp!");
         }
     }
 
@@ -72,7 +74,20 @@ public class ApplicationInformationBusinessRules : BaseBusinessRules
         var item = await _blacklistRepository.GetAsync(predicate:p=>p.ApplicantId==applicantId);
         if(item != null)
         {
-            throw new BusinessException(ApplicationInformationsBusinessMessages.ApplicantIsBlacklisted);
+            throw new BusinessException("You can not apply to this bootcamp!");
+        }
+    }
+
+    public async Task CheckIfBootcampIsActive(int bootcampId)
+    {
+        var item = await _bootcampRepository.GetAsync(predicate: p => p.Id == bootcampId);
+        if (item == null)
+        {
+            throw new BusinessException("Bootcamp does not exist!");
+        }
+        if(item.BootcampStateId != 1)
+        {
+            throw new BusinessException("Bootcamp application closed");
         }
     }
 }

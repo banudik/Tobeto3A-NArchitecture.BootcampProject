@@ -12,6 +12,7 @@ namespace Application.Features.Certificates.Queries.GetById;
 public class GetByIdCertificateQuery : IRequest<GetByIdCertificateResponse>, ISecuredRequest
 {
     public Guid Id { get; set; }
+    public int BootcampId { get; set; }
 
     public string[] Roles => [Admin, Read];
 
@@ -30,7 +31,7 @@ public class GetByIdCertificateQuery : IRequest<GetByIdCertificateResponse>, ISe
 
         public async Task<GetByIdCertificateResponse> Handle(GetByIdCertificateQuery request, CancellationToken cancellationToken)
         {
-            Certificate? certificate = await _certificateRepository.GetAsync(predicate: c => c.Id == request.Id, cancellationToken: cancellationToken);
+            Certificate? certificate = await _certificateRepository.GetAsync(predicate: c => c.Id == request.Id && c.BootcampId == request.BootcampId, cancellationToken: cancellationToken);
             await _certificateBusinessRules.CertificateShouldExistWhenSelected(certificate);
 
             GetByIdCertificateResponse response = _mapper.Map<GetByIdCertificateResponse>(certificate);
