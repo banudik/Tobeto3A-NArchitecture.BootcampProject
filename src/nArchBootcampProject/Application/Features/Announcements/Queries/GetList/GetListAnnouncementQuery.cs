@@ -12,7 +12,7 @@ using static Application.Features.Announcements.Constants.AnnouncementsOperation
 
 namespace Application.Features.Announcements.Queries.GetList;
 
-public class GetListAnnouncementQuery : IRequest<GetListResponse<GetListAnnouncementListItemDto>>//, ISecuredRequest, ICachableRequest
+public class GetListAnnouncementQuery : IRequest<GetListResponse<GetListAnnouncementListItemDto>>, ICachableRequest
 {
     public PageRequest PageRequest { get; set; }
 
@@ -38,7 +38,8 @@ public class GetListAnnouncementQuery : IRequest<GetListResponse<GetListAnnounce
         {
             IPaginate<Announcement> announcements = await _announcementRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
-                size: request.PageRequest.PageSize, 
+                size: request.PageRequest.PageSize,
+                orderBy: query => query.OrderBy(a => a.CreatedDate),
                 cancellationToken: cancellationToken
             );
 
