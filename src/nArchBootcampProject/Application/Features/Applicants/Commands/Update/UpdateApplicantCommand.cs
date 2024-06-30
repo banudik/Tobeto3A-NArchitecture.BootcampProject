@@ -1,5 +1,6 @@
 using Application.Features.Applicants.Constants;
 using Application.Features.Applicants.Rules;
+using Application.Features.Employees.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -8,6 +9,7 @@ using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Pipelines.Caching;
 using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
+using NArchitecture.Core.Security.Hashing;
 using static Application.Features.Applicants.Constants.ApplicantsOperationClaims;
 
 namespace Application.Features.Applicants.Commands.Update;
@@ -26,6 +28,8 @@ public class UpdateApplicantCommand
     public DateTime DateOfBirth { get; set; }
     public string NationalIdentity { get; set; }
     public string About { get; set; }
+    public string? Password { get; set; }
+    public string? NewPassword { get; set; }
 
     public string[] Roles => [Admin, Write, ApplicantsOperationClaims.Update, ApplicantRole];
 
@@ -58,6 +62,19 @@ public class UpdateApplicantCommand
             );
             await _applicantBusinessRules.ApplicantShouldExistWhenSelected(applicant);
             applicant = _mapper.Map(request, applicant);
+
+
+            if (request.NewPassword != null && !string.IsNullOrWhiteSpace(request.NewPassword))
+            {
+                await _applicantBusinessRules.ApplicantPasswordShouldBeMatched(user: applicant!, request.Password);
+                HashingHelper.CreatePasswordHash(
+                    request.NewPassword,
+                    passwordHash: out byte[] passwordHash,
+                    passwordSalt: out byte[] passwordSalt
+                );
+                applicant!.PasswordHash = passwordHash;
+                applicant!.PasswordSalt = passwordSalt;
+            }
 
             await _applicantRepository.UpdateAsync(applicant!);
 
