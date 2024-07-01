@@ -1,9 +1,11 @@
 using Application.Features.Applicants.Constants;
+using Application.Features.Users.Constants;
 using Application.Services.Repositories;
 using Domain.Entities;
 using NArchitecture.Core.Application.Rules;
 using NArchitecture.Core.CrossCuttingConcerns.Exception.Types;
 using NArchitecture.Core.Localization.Abstraction;
+using NArchitecture.Core.Security.Hashing;
 
 namespace Application.Features.Applicants.Rules;
 
@@ -38,5 +40,11 @@ public class ApplicantBusinessRules : BaseBusinessRules
             cancellationToken: cancellationToken
         );
         await ApplicantShouldExistWhenSelected(applicant);
+    }
+
+    public async Task ApplicantPasswordShouldBeMatched(User user, string password)
+    {
+        if (!HashingHelper.VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+            await throwBusinessException(UsersMessages.PasswordDontMatch);
     }
 }

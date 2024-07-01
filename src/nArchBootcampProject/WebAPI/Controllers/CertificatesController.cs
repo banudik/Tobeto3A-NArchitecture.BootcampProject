@@ -44,7 +44,7 @@ public class CertificatesController : BaseController
     [HttpGet("{id}")]
     public async Task<ActionResult<GetByIdCertificateResponse>> GetCertificate([FromRoute] Guid id, int bootcampId)
     {
-        GetByIdCertificateQuery query = new() { Id = id, BootcampId = bootcampId };
+        GetByIdCertificateQuery query = new() { Id = id };
 
         GetByIdCertificateResponse response = await Mediator.Send(query);
 
