@@ -1,9 +1,9 @@
 <p align="center">
-  <a href="https://github.com/berkerertan/Tobeto3A-NArchitecture.BootcampProject/graphs/contributors"><img src="https://img.shields.io/github/contributors/berkerertan/Tobeto3A-NArchitecture.BootcampProject.svg?style=for-the-badge"></a>
-  <a href="https://github.com/berkerertan/Tobeto3A-NArchitecture.BootcampProject/network/members"><img src="https://img.shields.io/github/forks/berkerertan/Tobeto3A-NArchitecture.BootcampProject.svg?style=for-the-badge"></a>
-  <a href="https://github.com/berkerertan/Tobeto3A-NArchitecture.BootcampProject/stargazers"><img src="https://img.shields.io/github/stars/berkerertan/Tobeto3A-NArchitecture.BootcampProject.svg?style=for-the-badge"></a>
-  <a href="https://github.com/berkerertan/Tobeto3A-NArchitecture.BootcampProject/issues"><img src="https://img.shields.io/github/issues/berkerertan/Tobeto3A-NArchitecture.BootcampProject.svg?style=for-the-badge"></a>
-  <a href="https://github.com/berkerertan/Tobeto3A-NArchitecture.BootcampProject/blob/master/LICENSE"><img src="https://img.shields.io/github/license/berkerertan/Tobeto3A-NArchitecture.BootcampProject.svg?style=for-the-badge"></a>
+  <a href="https://github.com/banudik/Tobeto3A-NArchitecture.BootcampProject/graphs/contributors"><img src="https://img.shields.io/github/contributors/banudik/Tobeto3A-NArchitecture.BootcampProject.svg?style=for-the-badge"></a>
+  <a href="https://github.com/banudik/Tobeto3A-NArchitecture.BootcampProject/network/members"><img src="https://img.shields.io/github/forks/banudik/Tobeto3A-NArchitecture.BootcampProject.svg?style=for-the-badge"></a>
+  <a href="https://github.com/banudik/Tobeto3A-NArchitecture.BootcampProject/stargazers"><img src="https://img.shields.io/github/stars/banudik/Tobeto3A-NArchitecture.BootcampProject.svg?style=for-the-badge"></a>
+  <a href="https://github.com/banudik/Tobeto3A-NArchitecture.BootcampProject/issues"><img src="https://img.shields.io/github/issues/banudik/Tobeto3A-NArchitecture.BootcampProject.svg?style=for-the-badge"></a>
+  <a href="https://github.com/banudik/Tobeto3A-NArchitecture.BootcampProject/blob/master/LICENSE"><img src="https://img.shields.io/github/license/banudik/Tobeto3A-NArchitecture.BootcampProject.svg?style=for-the-badge"></a>
 </p><br />
 
 # CodeStorm Educational Platform Backend API (.NET)
